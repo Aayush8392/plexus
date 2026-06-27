@@ -1,3 +1,7 @@
+# Session context — local only, never push
+plexus_master_context.md
+plexus_pipeline.md
+
 # Data files — stay local only
 data/
 
