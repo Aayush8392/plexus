@@ -1,6 +1,10 @@
 # Session context — local only, never push
 plexus_master_context.md
 plexus_pipeline.md
+plexus_frontend.md
+
+# Reviews — local only, never push
+reviews/
 
 # Data files — stay local only
 data/
@@ -28,3 +32,8 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Frontend — generated / local only
+frontend/node_modules/
+frontend/dist/
+frontend/public/data/
