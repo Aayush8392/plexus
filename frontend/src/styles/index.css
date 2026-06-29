@@ -16,8 +16,8 @@ ul, ol { list-style: none; }
 
   /* Text */
   --text-primary:   #e6edf3;
-  --text-secondary: #8b949e;
-  --text-muted:     #484f58;
+  --text-secondary: #b0bac4;
+  --text-muted:     #6e7681;
   --text-accent:    #58a6ff;
 
   /* Stratum */
@@ -89,7 +89,7 @@ ul, ol { list-style: none; }
   --role-database_administrator:    hsl(30,  80%, 58%);
   --role-database_architect:        hsl(15,  75%, 58%);
   --role-devops_sre:                hsl(120, 60%, 52%);
-  --role-dot_net_developer:         hsl(255, 88%, 76%);
+  --role-net_developer:             hsl(255, 88%, 76%);
   --role-eng_manager_tech_lead:     hsl(0,   70%, 62%);
   --role-frontend_developer:        hsl(195, 80%, 58%);
   --role-full_stack_developer:      hsl(160, 65%, 52%);

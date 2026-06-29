@@ -145,7 +145,7 @@ function SectionSeniority({ drawerData }) {
                 border: '1px solid rgba(255,255,255,0.10)',
                 borderRadius: 6,
                 fontSize: 11,
-                color: 'var(--text-secondary)',
+                color: 'var(--text-primary)',
               }}
               formatter={(v) => [v, 'postings']}
             />
@@ -466,6 +466,11 @@ export default function Drawer({ nodeId, layoutData, onClose, onNavigate, select
 
   return (
     <aside className="drawer" aria-label="Role details">
+
+      {/* Drag handle — visible on mobile only */}
+      <div className="drawer-drag-handle" aria-hidden="true">
+        <div className="drawer-drag-handle-pill" />
+      </div>
 
       {/* Close button */}
       <button className="drawer-close" onClick={onClose} aria-label="Close drawer">

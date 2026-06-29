@@ -263,6 +263,12 @@ for nid in node_ids:
     flag = "  ← ISOLATED" if nodes[nid]["low_connectivity"] else ""
     print(f"  {nid:<45}  degree={nodes[nid]['degree']}{flag}")
 
+# solution_tech_architect_gcc has degree=3 but all edges are cross-stratum.
+# Module 06 identifies it as the 6th practical isolate (zero within-stratum doors).
+# Override here so the force layout pins it at the periphery like the other isolates.
+nodes["solution_tech_architect_gcc"]["low_connectivity"] = True
+print("  solution_tech_architect_gcc  ← ISOLATED (override: cross-stratum edges only)")
+
 
 # ── MDS layout ────────────────────────────────────────────────────────────────
 
@@ -282,19 +288,26 @@ print(f"MDS stress: {mds.stress_:.4f}  (probe variance explained: 24.8%)")
 isolated_idx   = [node_ids.index(nid) for nid in node_ids if nodes[nid]["low_connectivity"]]
 connected_idx  = [i for i in range(n_nodes) if i not in isolated_idx]
 
-ISOLATE_STRIP  = 100   # px reserved at bottom for isolated nodes
 x_scaled = rescale(coords[:, 0], PADDING, CANVAS_W - PADDING)
-y_scaled = rescale(coords[:, 1], PADDING, CANVAS_H - PADDING - ISOLATE_STRIP)
+y_scaled = rescale(coords[:, 1], PADDING, CANVAS_H - PADDING)
 
-# Place isolated nodes in a spaced row in the bottom strip
+# Place isolated nodes at periphery near their nearest connected neighbour.
+# Positions chosen to sit outside the connected cluster (x=80-1120, y=169-565)
+# while remaining visually proximate to the nearest neighbour.
+ISOLATE_POSITIONS = {
+    "security_engineer_services":       (593,  90),   # above cluster — nearest SE_General_gcc
+    "mobile_developer_services":        (200, 380),   # left of cluster — nearest Frontend_services
+    "network_sys_admin_services":       (480, 665),   # below-left — nearest SE_General_services
+    "database_administrator_services":  (750, 665),   # below-right — nearest SE_General_services
+    "ux_ui_designer_services":          (320, 665),   # below-left — nearest Product_Manager_gcc
+    "solution_tech_architect_gcc":      (1000, 500),  # right of cluster — nearest Solution_Arch_services
+}
 if isolated_idx:
-    n_iso   = len(isolated_idx)
-    iso_y   = CANVAS_H - ISOLATE_STRIP / 2
-    iso_xs  = np.linspace(PADDING + 80, CANVAS_W - PADDING - 80, n_iso)
-    for k, i in enumerate(isolated_idx):
-        x_scaled[i] = iso_xs[k]
-        y_scaled[i] = iso_y
-    print(f"Isolated nodes pre-placed in bottom strip (y={iso_y:.0f}px)")
+    for i in isolated_idx:
+        nid = node_ids[i]
+        if nid in ISOLATE_POSITIONS:
+            x_scaled[i], y_scaled[i] = ISOLATE_POSITIONS[nid]
+    print(f"Isolated nodes placed at periphery near nearest neighbours")
 
 
 # ── Minimum distance nudge — connected nodes only ────────────────────────────
@@ -327,7 +340,7 @@ for it in range(MAX_NUDGE_ITER):
     positions += nudge
     # clamp to canvas so boundary nodes don't cascade violations
     positions[:, 0] = np.clip(positions[:, 0], PADDING, CANVAS_W - PADDING)
-    positions[:, 1] = np.clip(positions[:, 1], PADDING, CANVAS_H - PADDING - ISOLATE_STRIP)
+    positions[:, 1] = np.clip(positions[:, 1], PADDING, CANVAS_H - PADDING)
 else:
     nudge_iters = MAX_NUDGE_ITER
 

@@ -223,6 +223,7 @@ function PlexusNode({ id, data }) {
           transform: 'translateX(-50%)',
           marginTop: 7,
           fontSize: '11px',
+          fontWeight: 600,
           lineHeight: 1.25,
           textAlign: 'center',
           whiteSpace: 'nowrap',
@@ -241,6 +242,8 @@ function PlexusNode({ id, data }) {
           </>
         ) : label}
       </div>
+
+
     </div>
   )
 }
