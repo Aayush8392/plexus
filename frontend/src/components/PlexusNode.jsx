@@ -124,15 +124,16 @@ function PlexusNode({ id, data }) {
         position: 'relative',
       }}
     >
-      {/* Hidden react-flow handles (needed for edge connections, visually invisible) */}
-      <Handle type="target" position={Position.Left}  style={{ opacity: 0, pointerEvents: 'none' }} />
-      <Handle type="source" position={Position.Right} style={{ opacity: 0, pointerEvents: 'none' }} />
+      {/* Centered handles — edges radiate from node center, not left/right sides */}
+      <Handle type="target" position={Position.Left}  style={{ opacity: 0, pointerEvents: 'none', top: '50%', left: '50%' }} />
+      <Handle type="source" position={Position.Right} style={{ opacity: 0, pointerEvents: 'none', top: '50%', left: '50%' }} />
 
       {/* Circle + icon SVG */}
       <svg
         width={diameter}
         height={diameter}
         viewBox={`0 0 ${diameter} ${diameter}`}
+        className={isPinned ? 'plexus-node-svg--pinned' : undefined}
         style={{ overflow: 'visible', display: 'block' }}
       >
         {/* Main circle */}
@@ -150,12 +151,13 @@ function PlexusNode({ id, data }) {
         {/* Pinned: white-hot ring */}
         {isPinned && (
           <circle
+            className="plexus-pinned-ring"
             cx={radius}
             cy={radius}
-            r={radius + 3}
+            r={radius + 6}
             fill="none"
-            stroke="rgba(255,255,255,0.55)"
-            strokeWidth="1.5"
+            stroke="hsl(38, 92%, 58%)"
+            strokeWidth="2"
           />
         )}
 

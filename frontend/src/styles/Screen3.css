@@ -180,6 +180,19 @@
   to { transform: rotate(360deg); }
 }
 
+/* ── Pinned node pulse ──────────────────────────────────────────────────────── */
+@keyframes plexus-node-pulse {
+  0%, 100% { transform: scale(1);    opacity: 1; }
+  50%      { transform: scale(1.22); opacity: 0.75; }
+}
+
+.plexus-node-svg--pinned {
+  animation: plexus-node-pulse 1.8s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+
+
 /* ── react-flow overrides ───────────────────────────────────────────────────── */
 
 /* Hide default minimap + controls (not in spec) */
@@ -188,7 +201,8 @@
   display: none;
 }
 
-/* Edge hover cursor */
+/* Consistent cursor across pane and edges — eliminates grab/pointer flicker at zoom-out */
+.react-flow__pane,
 .react-flow__edge {
   cursor: default;
 }

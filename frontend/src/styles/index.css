@@ -89,7 +89,7 @@ ul, ol { list-style: none; }
   --role-database_administrator:    hsl(30,  80%, 58%);
   --role-database_architect:        hsl(15,  75%, 58%);
   --role-devops_sre:                hsl(120, 60%, 52%);
-  --role-dot_net_developer:         hsl(235, 70%, 68%);
+  --role-dot_net_developer:         hsl(255, 88%, 76%);
   --role-eng_manager_tech_lead:     hsl(0,   70%, 62%);
   --role-frontend_developer:        hsl(195, 80%, 58%);
   --role-full_stack_developer:      hsl(160, 65%, 52%);

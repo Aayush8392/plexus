@@ -155,7 +155,7 @@ function SectionSeniority({ drawerData }) {
 }
 
 // ── Section 4 — Your doors ────────────────────────────────────────────────────
-function SectionDoors({ pf, onNavigate }) {
+function SectionDoors({ pf, onSelectEdge, nodeId }) {
   const [expanded, setExpanded] = useState(false)
   const allDoors  = pf.doors_full  ?? []
   const top5      = pf.doors_top5  ?? []
@@ -192,7 +192,7 @@ function SectionDoors({ pf, onNavigate }) {
           <li key={door.node_id} className="drawer-door-item">
             <button
               className="drawer-door-btn"
-              onClick={() => onNavigate(door.node_id)}
+              onClick={() => onSelectEdge({ sourceId: nodeId, targetId: door.node_id })}
               style={{ '--door-color': `var(--role-${roleSlug(door.node_id)})` }}
             >
               <span className="drawer-door-name">{door.label}</span>
@@ -344,11 +344,62 @@ function SectionTwoDialects({ pf, layoutNodes }) {
   )
 }
 
+// ── Edge detail view ─────────────────────────────────────────────────────────
+function EdgeDetail({ pf, selectedEdge, onNavigate, onClearEdge }) {
+  const door = pf?.doors_full?.find(d => d.node_id === selectedEdge.targetId)
+  if (!door) return null
+
+  const sourceColor = `var(--role-${roleSlug(pf.node_id)})`
+  const targetColor = `var(--role-${roleSlug(selectedEdge.targetId)})`
+
+  return (
+    <div className="drawer-content">
+      <div className="drawer-edge-detail">
+        <button className="drawer-edge-back" onClick={onClearEdge}>
+          ← {pf.label}
+        </button>
+        <div className="drawer-edge-header">
+          <span style={{ color: sourceColor }}>{pf.label}</span>
+          <span className="drawer-edge-arrow">→</span>
+          <span style={{ color: targetColor }}>{door.label}</span>
+        </div>
+        <div className="drawer-edge-meta">
+          <ProximityTag tag={door.proximity_tag} />
+          <span className="drawer-proxy-caveat" style={{ marginBottom: 0 }}>
+            Skill overlap — a proxy for reachability, not a guarantee.
+          </span>
+        </div>
+        {door.bridge_skills?.length > 0 ? (
+          <div className="drawer-edge-skills-section">
+            <div className="drawer-section-title">Bridge skills</div>
+            <div className="drawer-bridge-skills">
+              {door.bridge_skills.map(s => (
+                <span key={s} className="chip">{s}</span>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <p className="drawer-edge-empty">
+            This move requires seniority and breadth typical of {door.label} — see full skill profile.
+          </p>
+        )}
+        <button
+          className="drawer-edge-explore"
+          style={{ '--explore-color': targetColor }}
+          onClick={() => onNavigate(selectedEdge.targetId)}
+        >
+          Explore {door.label} →
+        </button>
+      </div>
+    </div>
+  )
+}
+
 // ═══════════════════════════════════════════════════════════════════════════════
 // Drawer — main component
 // ═══════════════════════════════════════════════════════════════════════════════
 
-export default function Drawer({ nodeId, layoutData, onClose, onNavigate }) {
+export default function Drawer({ nodeId, layoutData, onClose, onNavigate, selectedEdge, onSelectEdge }) {
   const [pf, setPf]               = useState(null)
   const [drawerData, setDrawerData] = useState(null)
   const [loading, setLoading]       = useState(true)
@@ -414,8 +465,18 @@ export default function Drawer({ nodeId, layoutData, onClose, onNavigate }) {
         </div>
       )}
 
-      {/* Content */}
-      {!loading && !error && pf && (
+      {/* Edge detail view */}
+      {!loading && !error && pf && selectedEdge && (
+        <EdgeDetail
+          pf={pf}
+          selectedEdge={selectedEdge}
+          onNavigate={handleNavigate}
+          onClearEdge={() => onSelectEdge(null)}
+        />
+      )}
+
+      {/* Full node content */}
+      {!loading && !error && pf && !selectedEdge && (
         <div className="drawer-content">
           <SectionRoleHeader pf={pf} />
           <div className="divider" />
@@ -423,7 +484,7 @@ export default function Drawer({ nodeId, layoutData, onClose, onNavigate }) {
           {drawerData && <div className="divider" />}
           <SectionSeniority drawerData={drawerData} />
           {drawerData && <div className="divider" />}
-          <SectionDoors pf={pf} onNavigate={handleNavigate} />
+          <SectionDoors pf={pf} onSelectEdge={onSelectEdge} nodeId={nodeId} />
           <div className="divider" />
           <SectionOnward pf={pf} onNavigate={handleNavigate} />
           {(pf.onward_region?.length > 0 || pf.is_hub) && <div className="divider" />}

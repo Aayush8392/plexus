@@ -8,10 +8,10 @@ import { getBezierPath, EdgeLabelRenderer } from 'reactflow'
 
 // ── Opacity by edge state ─────────────────────────────────────────────────────
 const STATE_OPACITY = {
-  default:   0.55,
+  default:   0.25,
   active:    0.90,
-  secondary: 0.45,
-  faded:     0.10,
+  secondary: 0.40,
+  faded:     0.08,
 }
 
 // ── Stroke width from cosine ──────────────────────────────────────────────────
@@ -47,6 +47,7 @@ function PlexusEdge({
   const [edgePath, labelX, labelY] = getBezierPath({
     sourceX, sourceY, sourcePosition,
     targetX, targetY, targetPosition,
+    curvature: 0.55,
   })
 
   const opacity  = STATE_OPACITY[edgeState] ?? 0.55

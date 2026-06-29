@@ -4,7 +4,7 @@
 // Pinned state: node clicked → drawer opens, visual rings applied.
 // confirmedRole: resolved from _services → _gcc → cold fallback.
 
-import { useState, useEffect, useCallback, useMemo } from 'react'
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import ReactFlow, {
   Background,
   useNodesState,
@@ -26,6 +26,11 @@ const EDGE_TYPES = { plexusEdge: PlexusEdge }
 
 // ── Volume bucket → radius (px) ──────────────────────────────────────────────
 const BUCKET_RADIUS = { v1: 10, v2: 14, v3: 18, v4: 22 }
+
+// ── Coordinate spread ─────────────────────────────────────────────────────────
+const COORD_SCALE  = 2.8   // MDS coords are tight — scale up for legibility
+const GCC_OFFSET_X = 20    // nudge GCC twins right so labels don't collide
+const GCC_OFFSET_Y = -15   // nudge GCC twins up
 
 // ── Role slug → CSS hue variable ─────────────────────────────────────────────
 function roleSlug(nodeId) {
@@ -61,10 +66,13 @@ function GraphCanvas({
   showCrossStratum,
   adjacentIds,
   onwardIds,
+  selectedEdge,
+  onSelectEdge,
 }) {
   const [nodes, setNodes, onNodesChange] = useNodesState([])
   const [edges, setEdges, onEdgesChange] = useEdgesState([])
-  const { fitView } = useReactFlow()
+  const { fitView, setCenter, getZoom, getNode } = useReactFlow()
+  const hoverTimer = useRef(null)
 
   // Build nodes with visual states
   useEffect(() => {
@@ -78,7 +86,11 @@ function GraphCanvas({
       const color = `var(--role-${slug})`
 
       let visualState = 'default'
-      if (pinnedId) {
+      if (pinnedId && selectedEdge) {
+        if (n.id === selectedEdge.sourceId) visualState = 'pinned'
+        else if (n.id === selectedEdge.targetId) visualState = 'door'
+        else visualState = 'faded'
+      } else if (pinnedId) {
         if (n.id === pinnedId) visualState = 'pinned'
         else if (adjacentIds.has(n.id)) {
           visualState = onwardIds.has(n.id) ? 'onward' : 'door'
@@ -89,10 +101,14 @@ function GraphCanvas({
         else visualState = 'dimmed'
       }
 
+      const isGcc = n.stratum === 'gcc'
       return {
         id: n.id,
         type: 'plexusNode',
-        position: { x: n.x, y: n.y },
+        position: {
+          x: n.x * COORD_SCALE + (isGcc ? GCC_OFFSET_X : 0),
+          y: n.y * COORD_SCALE + (isGcc ? GCC_OFFSET_Y : 0),
+        },
         draggable: false,
         selectable: true,
         data: {
@@ -117,7 +133,12 @@ function GraphCanvas({
         const tgtColor = `var(--role-${roleSlug(e.target)})`
 
         let edgeState = 'default'
-        if (pinnedId) {
+        if (selectedEdge) {
+          const isSelected =
+            (e.source === selectedEdge.sourceId && e.target === selectedEdge.targetId) ||
+            (e.source === selectedEdge.targetId && e.target === selectedEdge.sourceId)
+          edgeState = isSelected ? 'active' : 'faded'
+        } else if (pinnedId) {
           const touchesPinned = e.source === pinnedId || e.target === pinnedId
           const bothAdjacent = adjacentIds.has(e.source) && adjacentIds.has(e.target)
           if (touchesPinned) edgeState = 'active'
@@ -145,7 +166,7 @@ function GraphCanvas({
 
     setNodes(rfNodes)
     setEdges(rfEdges)
-  }, [layoutData, pinnedId, hoveredId, showCrossStratum, adjacentIds, onwardIds])
+  }, [layoutData, pinnedId, hoveredId, showCrossStratum, adjacentIds, onwardIds, selectedEdge])
 
   // Fit view on initial load
   useEffect(() => {
@@ -154,26 +175,57 @@ function GraphCanvas({
     }
   }, [layoutData])
 
+  // Pan to pinned node
+  useEffect(() => {
+    if (!pinnedId) return
+    setTimeout(() => {
+      const node = getNode(pinnedId)
+      if (!node) return
+      const r = BUCKET_RADIUS[node.data.volumeBucket] ?? 14
+      setCenter(node.position.x + r, node.position.y + r, {
+        zoom: Math.max(getZoom(), 1.0),
+        duration: 600,
+      })
+    }, 120)
+  }, [pinnedId])
+
   const onNodeClick = useCallback((_, node) => {
     if (node.id === pinnedId) {
-      setPinnedId(null) // click pinned → unpin → cold
+      setPinnedId(null)
     } else {
       setPinnedId(node.id)
+      onSelectEdge(null)
     }
-  }, [pinnedId, setPinnedId])
+  }, [pinnedId, setPinnedId, onSelectEdge])
 
   const onNodeMouseEnter = useCallback((_, node) => {
-    if (!pinnedId) setHoveredId(node.id)
+    if (pinnedId) return
+    clearTimeout(hoverTimer.current)
+    hoverTimer.current = setTimeout(() => setHoveredId(node.id), 80)
   }, [pinnedId, setHoveredId])
 
   const onNodeMouseLeave = useCallback(() => {
-    setHoveredId(null)
+    clearTimeout(hoverTimer.current)
+    hoverTimer.current = setTimeout(() => setHoveredId(null), 80)
   }, [setHoveredId])
 
   const onPaneClick = useCallback(() => {
-    // Click on empty canvas = unpin
     setPinnedId(null)
-  }, [setPinnedId])
+    onSelectEdge(null)
+  }, [setPinnedId, onSelectEdge])
+
+  const onEdgeClick = useCallback((_, edge) => {
+    let sourceId, targetId
+    if (pinnedId === edge.source || pinnedId === edge.target) {
+      sourceId = pinnedId
+      targetId = pinnedId === edge.source ? edge.target : edge.source
+    } else {
+      sourceId = edge.source
+      targetId = edge.target
+      setPinnedId(sourceId)
+    }
+    onSelectEdge({ sourceId, targetId })
+  }, [pinnedId, setPinnedId, onSelectEdge])
 
   return (
     <ReactFlow
@@ -182,6 +234,7 @@ function GraphCanvas({
       onNodesChange={onNodesChange}
       onEdgesChange={onEdgesChange}
       onNodeClick={onNodeClick}
+      onEdgeClick={onEdgeClick}
       onNodeMouseEnter={onNodeMouseEnter}
       onNodeMouseLeave={onNodeMouseLeave}
       onPaneClick={onPaneClick}
@@ -212,6 +265,7 @@ export default function Screen3({ nav, confirmedRole, cvData }) {
   const [showCrossStratum, setShowCrossStratum] = useState(false)
   const [ghostDismissed, setGhostDismissed]     = useState(false)
   const [drawerOpen, setDrawerOpen]       = useState(false)
+  const [selectedEdge, setSelectedEdge]   = useState(null)
 
   // Load layout data
   useEffect(() => {
@@ -320,6 +374,8 @@ export default function Screen3({ nav, confirmedRole, cvData }) {
             showCrossStratum={showCrossStratum}
             adjacentIds={adjacentIds}
             onwardIds={onwardIds}
+            selectedEdge={selectedEdge}
+            onSelectEdge={setSelectedEdge}
           />
         </ReactFlowProvider>
       </div>
@@ -359,8 +415,10 @@ export default function Screen3({ nav, confirmedRole, cvData }) {
         <Drawer
           nodeId={pinnedId}
           layoutData={layoutData}
-          onClose={() => setPinnedId(null)}
-          onNavigate={setPinnedId}
+          onClose={() => { setPinnedId(null); setSelectedEdge(null) }}
+          onNavigate={(id) => { setPinnedId(id); setSelectedEdge(null) }}
+          selectedEdge={selectedEdge}
+          onSelectEdge={setSelectedEdge}
         />
       )}
 
