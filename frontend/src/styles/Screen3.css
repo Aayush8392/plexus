@@ -50,38 +50,6 @@
   z-index: 1;
 }
 
-/* ── Ghost prompt ───────────────────────────────────────────────────────────── */
-.s3-ghost-prompt {
-  position: absolute;
-  bottom: clamp(48px, 8vh, 72px);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  font-size: var(--text-sm);
-  color: var(--text-secondary);
-  font-style: italic;
-  letter-spacing: 0.03em;
-  background: rgba(13, 17, 23, 0.72);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  padding: var(--space-sm) var(--space-lg);
-  border-radius: var(--radius-pill);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  cursor: pointer;
-  white-space: nowrap;
-  animation: s3-ghost-fade-in 0.6s ease both;
-  transition: opacity var(--transition-base);
-  pointer-events: auto;
-}
-
-.s3-ghost-prompt:hover {
-  opacity: 0.6;
-}
-
-@keyframes s3-ghost-fade-in {
-  from { opacity: 0; transform: translateX(-50%) translateY(8px); }
-  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
-}
 
 /* ── Annotation bar ─────────────────────────────────────────────────────────── */
 .s3-annotation {
@@ -137,6 +105,66 @@
   border-color: rgba(255, 255, 255, 0.22);
 }
 
+/* ── Info button (extends .s3-nav-btn) ─────────────────────────────────────── */
+.s3-info-btn.active {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+/* ── Info panel ─────────────────────────────────────────────────────────────── */
+.s3-info-panel {
+  position: absolute;
+  top: calc(var(--space-md) + 36px + var(--space-sm));
+  left: var(--space-md);
+  z-index: 20;
+  width: 320px;
+  max-height: 70vh;
+  overflow-y: auto;
+  background: rgba(13, 17, 23, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.s3-info-close {
+  position: absolute;
+  top: var(--space-sm);
+  right: var(--space-sm);
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 12px;
+  padding: 4px;
+  transition: color var(--transition-fast);
+}
+
+.s3-info-close:hover {
+  color: var(--text-primary);
+}
+
+.s3-info-heading {
+  font-size: var(--text-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.s3-info-body {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin: 0;
+}
+
+
+
 /* ── Cross-stratum toggle ───────────────────────────────────────────────────── */
 .s3-cross-toggle {
   position: absolute;
@@ -171,8 +199,9 @@
   background: rgba(210, 153, 34, 0.08);
 }
 
-/* Shift toggle left when drawer is open */
-.screen-3.drawer-open .s3-cross-toggle {
+/* Shift toggle + legend left when drawer is open */
+.screen-3.drawer-open .s3-cross-toggle,
+.screen-3.drawer-open .graph-legend {
   right: calc(380px + var(--space-md));
 }
 
@@ -250,9 +279,8 @@
 /* ── Canvas legend ───────────────────────────────────────────────────────────── */
 .graph-legend {
   position: absolute;
-  top: var(--space-md);
-  left: 50%;
-  transform: translateX(-50%);
+  top: calc(var(--space-md) + 40px + var(--space-sm));
+  right: var(--space-md);
   z-index: 20;
   display: flex;
   gap: var(--space-sm);
@@ -262,6 +290,7 @@
   padding: 5px 12px;
   backdrop-filter: blur(6px);
   pointer-events: none;
+  transform: none;
 }
 
 .graph-legend-item {
@@ -329,10 +358,6 @@
     right: var(--space-md);
   }
 
-  .screen-3.drawer-open .s3-cross-toggle {
-    right: var(--space-md);
-  }
-
   .s3-annotation {
     font-size: 0.6rem;
     flex-direction: column;
@@ -345,17 +370,24 @@
   }
 
   .map-controls {
+    display: none;
+  }
+
+  /* When drawer open on mobile, float GCC toggle above the sheet */
+  .screen-3.drawer-open .s3-cross-toggle {
+    top: auto;
+    bottom: calc(45dvh + var(--space-md));
     right: var(--space-md);
-    bottom: 56px;
+    z-index: 110;
   }
 
-  .map-ctrl-btn {
-    width: 26px;
-    height: 26px;
-    font-size: 11px;
+  /* Also hide legend on mobile — too cramped */
+  .graph-legend {
+    display: none;
   }
 
-  .map-dpad {
-    grid-template-columns: repeat(3, 26px);
+  .s3-info-panel {
+    width: calc(100vw - var(--space-lg) * 2);
+    max-height: 55vh;
   }
 }

@@ -96,6 +96,7 @@ function PlexusEdge({
         style={{
           opacity: crossOpacity,
           transition: 'opacity 200ms ease',
+          pointerEvents: edgeState === 'faded' ? 'none' : 'stroke',
         }}
       />
 

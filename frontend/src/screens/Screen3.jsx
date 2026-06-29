@@ -48,8 +48,8 @@ function runForceLayout(layoutData) {
 
   // Compute centroid of all seed positions so everything starts around (0,0)
   const rawPositions = ln.map(n => ({
-    x: n.x * COORD_SCALE + (n.stratum === 'gcc' ? GCC_OFFSET_X : 0),
-    y: n.y * COORD_SCALE + (n.stratum === 'gcc' ? GCC_OFFSET_Y : 0),
+    x: n.x * COORD_SCALE + (n.stratum === 'gcc' && !n.low_connectivity ? GCC_OFFSET_X : 0),
+    y: n.y * COORD_SCALE + (n.stratum === 'gcc' && !n.low_connectivity ? GCC_OFFSET_Y : 0),
   }))
   const cx = rawPositions.reduce((s, p) => s + p.x, 0) / rawPositions.length
   const cy = rawPositions.reduce((s, p) => s + p.y, 0) / rawPositions.length
@@ -271,7 +271,8 @@ function GraphCanvas({
         const srcColor = `var(--role-${roleSlug(e.source)})`
         const tgtColor = `var(--role-${roleSlug(e.target)})`
 
-        let edgeState = (!pinnedId && !hoveredId) ? 'faded' : 'default'
+        const isColdCrossVisible = !pinnedId && !hoveredId && showCrossStratum && e.is_cross_stratum
+        let edgeState = (!pinnedId && !hoveredId) ? (isColdCrossVisible ? 'default' : 'faded') : 'default'
         if (selectedEdge) {
           const isSelected =
             (e.source === selectedEdge.sourceId && e.target === selectedEdge.targetId) ||
@@ -313,7 +314,7 @@ function GraphCanvas({
                 nodesWithPos, e.source, e.target
               )
             })(),
-            isHovered: hoveredEdgeId === `${e.source}--${e.target}` || hoveredEdgeId === `${e.target}--${e.source}`,
+            isHovered: !!pinnedId && edgeState === 'active' && (hoveredEdgeId === `${e.source}--${e.target}` || hoveredEdgeId === `${e.target}--${e.source}`),
           },
         }
       })
@@ -325,19 +326,24 @@ function GraphCanvas({
   // Fit view on initial load
   useEffect(() => {
     if (layoutData) {
-      setTimeout(() => fitView({ padding: 0.12, duration: 400 }), 100)
+      setTimeout(() => fitView({ padding: 0.25, duration: 400 }), 100)
     }
   }, [layoutData])
 
-  // Pan to pinned node
+  // Pan to pinned node — on mobile offset upward so node sits in the graph area above the sheet
   useEffect(() => {
     if (!pinnedId) return
     setTimeout(() => {
       const node = getNode(pinnedId)
       if (!node) return
       const r = BUCKET_RADIUS[node.data.volumeBucket] ?? 14
-      setCenter(node.position.x + r, node.position.y + r, {
-        zoom: Math.max(getZoom(), 1.0),
+      const isMobile = window.innerWidth <= 680
+      // On mobile the bottom sheet takes 45dvh — shift the target y up by ~25% of screen
+      // so the pinned node lands in the visible graph area, not behind the sheet
+      const yOffset = isMobile ? window.innerHeight * 0.225 : 0
+      const zoom = Math.max(getZoom(), 1.0)
+      setCenter(node.position.x + r, node.position.y + r + yOffset / zoom, {
+        zoom,
         duration: 600,
       })
     }, 120)
@@ -400,7 +406,7 @@ function GraphCanvas({
       maxZoom={2.5}
       translateExtent={translateExtent}
       fitView
-      fitViewOptions={{ padding: 0.12 }}
+      fitViewOptions={{ padding: 0.25 }}
       attributionPosition="bottom-left"
       proOptions={{ hideAttribution: true }}
     >
@@ -503,7 +509,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   const [pinnedId, setPinnedId]           = useState(null)
   const [hoveredId, setHoveredId]         = useState(null)
   const [showCrossStratum, setShowCrossStratum] = useState(false)
-  const [ghostDismissed, setGhostDismissed]     = useState(false)
+  const [showInfo, setShowInfo]           = useState(false)
   const [drawerOpen, setDrawerOpen]       = useState(false)
   const [selectedEdge, setSelectedEdge]   = useState(null)
   const [forcedPositions, setForcedPositions] = useState(null)
@@ -568,7 +574,6 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   useEffect(() => {
     if (pinnedId) {
       setDrawerOpen(true)
-      setGhostDismissed(true)
     } else {
       setDrawerOpen(false)
     }
@@ -665,18 +670,12 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
       <div className="s3-nav-btns">
         <button className="s3-nav-btn" onClick={() => nav('0')}>← Home</button>
         <button className="s3-nav-btn" onClick={() => nav(entryScreen ?? '2')}>← Back</button>
+        <button
+          className={`s3-nav-btn s3-info-btn${showInfo ? ' active' : ''}`}
+          onClick={() => setShowInfo(v => !v)}
+          aria-label="About this map"
+        >ⓘ How to read this map</button>
       </div>
-
-      {/* ── Ghost prompt (cold state, first visit) ── */}
-      {!ghostDismissed && !pinnedId && (
-        <div
-          className="s3-ghost-prompt"
-          onClick={() => setGhostDismissed(true)}
-          aria-label="Dismiss hint"
-        >
-          Click any role to explore its doors
-        </div>
-      )}
 
       {/* ── Annotation bar ── */}
       <div className="s3-annotation">
@@ -696,6 +695,23 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
       >
         {showCrossStratum ? 'Hide GCC overlaps' : 'Show GCC overlaps'}
       </button>
+
+      {/* ── Info panel ── */}
+      {showInfo && (
+        <div className="s3-info-panel">
+          <button className="s3-info-close" onClick={() => setShowInfo(false)} aria-label="Close">✕</button>
+
+          <h3 className="s3-info-heading">What is this?</h3>
+          <p className="s3-info-body">A structural map of the Indian IT job market built from 28,665 real job postings. Each node is a role. Each edge is a measure of skill overlap between two roles — the stronger the overlap, the more reachable one role is from the other. Roles that share more skills tend to sit closer together, but the layout is an approximation — the exact strength of any connection is shown on the edge when you hover it, not by how near two nodes appear. Roles at the edges of the map have few strong connections in this dataset; that's a structural finding, not a data gap.</p>
+
+          <h3 className="s3-info-heading">Navigating the map</h3>
+          <p className="s3-info-body">Hover a node to see its connections. Click to pin it and open a full breakdown — your doors, where they lead, and the skills that bridge the gap.</p>
+
+          <h3 className="s3-info-heading">How it works</h3>
+          <p className="s3-info-body">Edges are weighted by cosine similarity — how much two roles share the same skills. 0 means nothing in common, 1 means identical skill profiles. This map shows edges at 0.20 and above. A score of 0.20–0.35 is a stretch move. 0.35–0.50 is a natural door. Above 0.50, the roles are nearly interchangeable.</p>
+          <p className="s3-info-body">One of the map's core findings is that the same job title means a different role depending on who's hiring. Indian IT services firms (Wipro, Infosys, TCS) and Global Capability Centres — multinationals running their own in-house tech teams in India (Walmart Tech, JP Morgan, Google) — hire for the same titles but with meaningfully different skill profiles. The "Show GCC overlaps" toggle reveals the cross-connections between the two.</p>
+        </div>
+      )}
 
       {/* ── Drawer ── */}
       {drawerOpen && pinnedId && (
