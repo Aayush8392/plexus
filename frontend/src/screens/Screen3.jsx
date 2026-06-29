@@ -256,7 +256,7 @@ function GraphCanvas({
 // Screen3 — outer shell, state, data loading
 // ═══════════════════════════════════════════════════════════════════════════════
 
-export default function Screen3({ nav, confirmedRole, cvData }) {
+export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   const [layoutData, setLayoutData]       = useState(null)
   const [loading, setLoading]             = useState(true)
   const [error, setError]                 = useState(null)
@@ -378,6 +378,12 @@ export default function Screen3({ nav, confirmedRole, cvData }) {
             onSelectEdge={setSelectedEdge}
           />
         </ReactFlowProvider>
+      </div>
+
+      {/* ── Nav buttons (top-left) ── */}
+      <div className="s3-nav-btns">
+        <button className="s3-nav-btn" onClick={() => nav('0')}>← Home</button>
+        <button className="s3-nav-btn" onClick={() => nav(entryScreen ?? '2')}>← Back</button>
       </div>
 
       {/* ── Ghost prompt (cold state, first visit) ── */}

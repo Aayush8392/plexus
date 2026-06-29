@@ -73,6 +73,10 @@ function SectionWhoHiring({ drawerData, stratum }) {
   return (
     <Section>
       <div className="drawer-section-title">Who's hiring</div>
+      <p className="drawer-section-subtitle">
+        The companies posting the most jobs for this role, split by employer type.
+        GCC numbers are small — they make up about 5% of this dataset, and that's a real market fact, not a data gap.
+      </p>
       <div className="drawer-companies-grid">
         {svcList.length > 0 && (
           <div className="drawer-companies-col">
@@ -81,7 +85,7 @@ function SectionWhoHiring({ drawerData, stratum }) {
               {svcList.map(c => (
                 <li key={c.name} className="drawer-company-row">
                   <span className="drawer-company-name">{c.name}</span>
-                  <span className="drawer-company-count">{c.count}</span>
+                  <span className="drawer-company-count">{c.count} postings</span>
                 </li>
               ))}
             </ul>
@@ -94,7 +98,7 @@ function SectionWhoHiring({ drawerData, stratum }) {
               {gccList.map(c => (
                 <li key={c.name} className="drawer-company-row">
                   <span className="drawer-company-name">{c.name}</span>
-                  <span className="drawer-company-count">{c.count}</span>
+                  <span className="drawer-company-count">{c.count} postings</span>
                 </li>
               ))}
             </ul>
@@ -115,6 +119,9 @@ function SectionSeniority({ drawerData }) {
   return (
     <Section>
       <div className="drawer-section-title">Seniority spread</div>
+      <p className="drawer-section-subtitle">
+        How many job postings asked for each experience level. Shows whether this role skews junior, mid-level, or senior in practice.
+      </p>
       <div className="drawer-seniority-chart">
         <ResponsiveContainer width="100%" height={110}>
           <BarChart
@@ -182,6 +189,9 @@ function SectionDoors({ pf, onSelectEdge, nodeId }) {
         Your doors
         <span className="drawer-door-count">{allDoors.length} total</span>
       </div>
+      <p className="drawer-section-subtitle">
+        Other roles that share enough skills with this one that a move is realistic. The more skills you already have in common, the shorter the gap to bridge.
+      </p>
 
       <div className="drawer-proxy-caveat">
         Edges show skill overlap — a proxy for reachability, not a guarantee.
@@ -248,6 +258,9 @@ function SectionOnward({ pf, onNavigate }) {
         Where this opens toward
         <span className="drawer-onward-volume">{combinedVolume.toLocaleString()} combined postings</span>
       </div>
+      <p className="drawer-section-subtitle">
+        Two steps out. If you move to one of your doors, these are the roles that become reachable next. No ranking — the data doesn't favour one over another, so all are shown at equal weight.
+      </p>
       <ul className="drawer-onward-list">
         {region.map(r => (
           <li key={r.node_id}>
@@ -293,11 +306,16 @@ function SectionBridgeSkills({ pf }) {
         {open ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
       </button>
       {open && (
-        <div className="drawer-bridge-skills">
-          {skills.map(s => (
-            <span key={s} className="chip">{s}</span>
-          ))}
-        </div>
+        <>
+          <p className="drawer-section-subtitle" style={{ marginTop: 'var(--space-sm)' }}>
+            Skills the door roles ask for that this role doesn't emphasise. These are the gaps you'd need to fill to make a move.
+          </p>
+          <div className="drawer-bridge-skills">
+            {skills.map(s => (
+              <span key={s} className="chip">{s}</span>
+            ))}
+          </div>
+        </>
       )}
     </Section>
   )
@@ -322,12 +340,16 @@ function SectionTwoDialects({ pf, layoutNodes }) {
   return (
     <Section>
       <div className="drawer-section-title">Same title, different market</div>
+      <p className="drawer-section-subtitle">
+        The same job title asks for different skills depending on who's hiring.
+        A role at an IT services company and the same role at a GCC (Global Capability Centre — a multinational's in-house tech team) are genuinely different jobs. This shows you the gap.
+      </p>
       <div className="drawer-dialects-grid">
         <div className="drawer-dialect-col">
           <div className="drawer-dialect-label badge badge-services">Services</div>
           <ul className="drawer-dialect-skills">
             {svcSkills.map(s => (
-              <li key={s} className="chip">{s}</li>
+              <li key={s} className="chip chip--dialect-services">{s}</li>
             ))}
           </ul>
         </div>
@@ -335,7 +357,7 @@ function SectionTwoDialects({ pf, layoutNodes }) {
           <div className="drawer-dialect-label badge badge-gcc">GCC</div>
           <ul className="drawer-dialect-skills">
             {gccSkills.map(s => (
-              <li key={s} className="chip">{s}</li>
+              <li key={s} className="chip chip--dialect-gcc">{s}</li>
             ))}
           </ul>
         </div>

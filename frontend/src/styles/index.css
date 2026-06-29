@@ -308,6 +308,26 @@ body {
   margin: var(--space-lg) 0;
 }
 
+/* ── Back button (Screens 1, 2, 2b) ────────────────────────────────── */
+.screen-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  letter-spacing: 0.04em;
+  padding: var(--space-xs) 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+  margin-bottom: var(--space-md);
+}
+
+.screen-back-btn:hover {
+  color: var(--text-secondary);
+}
+
 /* ── Visually hidden ────────────────────────────────────────────────── */
 .visually-hidden {
   position: absolute;

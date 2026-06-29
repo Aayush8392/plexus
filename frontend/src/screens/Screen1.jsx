@@ -4,6 +4,7 @@ export default function Screen1({ nav }) {
   return (
     <div className="screen screen-1">
       <div className="screen-1-container">
+        <button className="screen-back-btn" onClick={() => nav('0')}>← Back</button>
         <div className="screen-1-header">
           <h1 className="screen-1-title">PLEXUS</h1>
           <p className="screen-1-tagline">Map the structure of your market.</p>

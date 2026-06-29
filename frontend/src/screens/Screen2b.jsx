@@ -83,6 +83,7 @@ export default function Screen2b({ nav, cvData }) {
   return (
     <div className="screen screen-2b">
       <div className="screen-2b-container">
+        <button className="screen-back-btn" onClick={() => nav('2')}>← Back</button>
 
         {/* ── Header ── */}
         <div className="screen-2b-header">

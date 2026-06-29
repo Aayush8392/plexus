@@ -195,6 +195,7 @@ export default function Screen2({ nav }) {
       />
 
       <div className="screen-2-container">
+        <button className="screen-back-btn" onClick={() => nav('1')}>← Back</button>
         <div className="screen-2-header">
           <h1 className="screen-2-title">How would you like to start?</h1>
         </div>
