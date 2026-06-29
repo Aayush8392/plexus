@@ -370,13 +370,12 @@ with open("../output/plexus_graph.json", "w", encoding="utf-8") as f:
     json.dump({"nodes": node_list, "edges": edges, "meta": meta_block}, f, indent=2)
 print("\nWritten: output/plexus_graph.json")
 
-# plexus_overview_layout.json — within-stratum edges only (frontend default view)
-overview_edges = [e for e in edges if not e["is_cross_stratum"]]
+# plexus_overview_layout.json — all edges (within + cross-stratum)
 with open("../output/plexus_overview_layout.json", "w", encoding="utf-8") as f:
     json.dump({
         "nodes": node_list,
-        "edges": overview_edges,
-        "meta":  {**meta_block, "edges_shown": "within_stratum_only"},
+        "edges": edges,
+        "meta":  {**meta_block, "edges_shown": "all"},
     }, f, indent=2)
 print("Written: output/plexus_overview_layout.json")
 

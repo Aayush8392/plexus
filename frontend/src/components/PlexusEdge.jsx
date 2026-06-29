@@ -3,15 +3,15 @@
 // Width encodes cosine weight. Cosine label appears on hover only.
 // Edge states: default | active | secondary | faded
 
-import { memo, useState, useId } from 'react'
-import { getBezierPath, EdgeLabelRenderer } from 'reactflow'
+import { memo, useId } from 'react'
+import { EdgeLabelRenderer } from 'reactflow'
 
 // ── Opacity by edge state ─────────────────────────────────────────────────────
 const STATE_OPACITY = {
-  default:   0.25,
+  default:   0.60,
   active:    0.90,
-  secondary: 0.40,
-  faded:     0.08,
+  secondary: 0.55,
+  faded:     0.00,
 }
 
 // ── Stroke width from cosine ──────────────────────────────────────────────────
@@ -19,7 +19,7 @@ const STATE_OPACITY = {
 // Map to stroke width: 1.2px – 4px
 function cosineToWidth(cosine) {
   const min = 0.20, max = 0.60
-  const minW = 1.2,  maxW = 4.0
+  const minW = 2.5,  maxW = 7.0
   const t = Math.min(Math.max((cosine - min) / (max - min), 0), 1)
   return minW + t * (maxW - minW)
 }
@@ -39,16 +39,28 @@ function PlexusEdge({
     srcColor = 'var(--text-muted)',
     tgtColor = 'var(--text-muted)',
     edgeState = 'default',
+    isHovered = false,
   } = data
-
-  const [hovered, setHovered] = useState(false)
   const gradientId = useId().replace(/:/g, '')
 
-  const [edgePath, labelX, labelY] = getBezierPath({
-    sourceX, sourceY, sourcePosition,
-    targetX, targetY, targetPosition,
-    curvature: 0.55,
-  })
+  // Control point pre-computed in Screen3 with obstacle avoidance.
+  // Fall back to midpoint if not provided.
+  const srcR = data.srcRadius ?? 18
+  const tgtR = data.tgtRadius ?? 18
+  const dx = targetX - sourceX
+  const dy = targetY - sourceY
+  const len = Math.sqrt(dx * dx + dy * dy) || 1
+  const ux = dx / len
+  const uy = dy / len
+  const sx = sourceX + ux * srcR
+  const sy = sourceY + uy * srcR
+  const tx = targetX - ux * tgtR
+  const ty = targetY - uy * tgtR
+  const cx = data.cpx ?? (sx + tx) / 2
+  const cy = data.cpy ?? (sy + ty) / 2
+  const edgePath = `M ${sx} ${sy} Q ${cx} ${cy} ${tx} ${ty}`
+  const labelX = cx
+  const labelY = cy
 
   const opacity  = STATE_OPACITY[edgeState] ?? 0.55
   const width    = cosineToWidth(cosine)
@@ -71,18 +83,8 @@ function PlexusEdge({
         </linearGradient>
       </defs>
 
-      {/* Invisible wider hit area for hover */}
-      <path
-        d={edgePath}
-        fill="none"
-        stroke="transparent"
-        strokeWidth={Math.max(width + 10, 14)}
-        style={{ cursor: 'default' }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
-      />
 
-      {/* Visible edge */}
+      {/* Filament — thin precise line, interactive */}
       <path
         id={id}
         d={edgePath}
@@ -94,12 +96,11 @@ function PlexusEdge({
         style={{
           opacity: crossOpacity,
           transition: 'opacity 200ms ease',
-          pointerEvents: 'none',
         }}
       />
 
       {/* Cosine label — hover only */}
-      {hovered && (
+      {isHovered && (
         <EdgeLabelRenderer>
           <div
             style={{

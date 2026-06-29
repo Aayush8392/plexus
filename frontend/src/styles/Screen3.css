@@ -247,6 +247,75 @@
   box-shadow: none !important;
 }
 
+/* ── Canvas legend ───────────────────────────────────────────────────────────── */
+.graph-legend {
+  position: absolute;
+  top: var(--space-md);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: var(--space-sm);
+  background: rgba(13, 17, 23, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-pill);
+  padding: 5px 12px;
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+
+.graph-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+/* ── Map controls (zoom + d-pad) ────────────────────────────────────────────── */
+.map-controls {
+  position: absolute;
+  bottom: 52px; /* clear annotation bar */
+  right: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 20;
+}
+
+.map-ctrl-btn {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none; /* prevent scroll interference on touch */
+  transition: background 100ms;
+}
+
+.map-ctrl-btn:hover,
+.map-ctrl-btn:active {
+  background: rgba(255,255,255,0.12);
+}
+
+.map-dpad {
+  display: grid;
+  grid-template-columns: repeat(3, 30px);
+  gap: 3px;
+  margin-top: 4px;
+}
+
 /* ── Mobile ─────────────────────────────────────────────────────────────────── */
 @media (max-width: 680px) {
   .screen-3.drawer-open .s3-graph-area {
@@ -273,5 +342,20 @@
 
   .s3-annotation-sep {
     display: none;
+  }
+
+  .map-controls {
+    right: var(--space-md);
+    bottom: 56px;
+  }
+
+  .map-ctrl-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 11px;
+  }
+
+  .map-dpad {
+    grid-template-columns: repeat(3, 26px);
   }
 }
