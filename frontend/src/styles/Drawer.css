@@ -1,0 +1,395 @@
+/* ─── Plexus · Drawer styles ────────────────────────────────────────────────── */
+/* Drawer CSS is embedded in Screen3.css import chain via Screen3.jsx.          */
+/* Add @import './Drawer.css' to Screen3.css, or import directly in Drawer.jsx. */
+
+/* ── Drawer shell ───────────────────────────────────────────────────────────── */
+.drawer {
+  position: fixed;
+  top: var(--nav-height);
+  right: 0;
+  bottom: 0;
+  width: 380px;
+  z-index: var(--z-drawer);
+  background: var(--bg-surface);
+  border-left: 1px solid rgba(255, 255, 255, 0.07);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: drawer-slide-in 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes drawer-slide-in {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+
+/* ── Close button ───────────────────────────────────────────────────────────── */
+.drawer-close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  transition: color var(--transition-fast), background var(--transition-fast);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.drawer-close:hover {
+  color: var(--text-primary);
+  background: var(--bg-elevated);
+}
+
+/* ── Scrollable content ─────────────────────────────────────────────────────── */
+.drawer-content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-bottom: var(--space-2xl);
+  scrollbar-width: thin;
+  scrollbar-color: var(--bg-elevated) transparent;
+}
+
+/* ── Loading / error ────────────────────────────────────────────────────────── */
+.drawer-loading,
+.drawer-error {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  color: var(--text-muted);
+  font-size: var(--text-sm);
+}
+
+.drawer-spinner {
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(255,255,255,0.08);
+  border-top-color: var(--text-accent);
+  border-radius: 50%;
+  animation: drawer-spin 0.8s linear infinite;
+}
+
+@keyframes drawer-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Section ────────────────────────────────────────────────────────────────── */
+.drawer-section {
+  padding: var(--space-lg) var(--space-lg);
+}
+
+.drawer-section-title {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+/* ── Section 1 — Role header ────────────────────────────────────────────────── */
+.drawer-section-header {
+  padding-top: var(--space-xl);
+  padding-right: 44px; /* space for close button */
+}
+
+.drawer-role-name {
+  font-size: var(--text-lg);
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: var(--space-sm);
+}
+
+.drawer-role-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-md);
+}
+
+.drawer-posting-count {
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+}
+
+.drawer-top-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+}
+
+/* ── Section 2 — Who's hiring ───────────────────────────────────────────────── */
+.drawer-companies-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.drawer-companies-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.drawer-companies-col-label {
+  align-self: flex-start;
+}
+
+.drawer-companies-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.drawer-company-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-xs);
+}
+
+.drawer-company-name {
+  color: var(--text-secondary);
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.drawer-company-count {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ── Section 3 — Seniority spread ──────────────────────────────────────────── */
+.drawer-seniority-chart {
+  margin-top: var(--space-xs);
+}
+
+/* ── Section 4 — Doors ──────────────────────────────────────────────────────── */
+.drawer-door-count {
+  color: var(--text-muted);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: var(--text-xs);
+}
+
+.drawer-proxy-caveat {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: var(--space-sm);
+  line-height: 1.5;
+}
+
+.drawer-doors-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.drawer-door-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.drawer-door-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  border: 1px solid rgba(255,255,255,0.07);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+  text-align: left;
+  width: 100%;
+}
+
+.drawer-door-btn:hover {
+  border-color: var(--door-color, rgba(255,255,255,0.18));
+  background: rgba(255,255,255,0.04);
+}
+
+.drawer-door-name {
+  font-size: var(--text-sm);
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.drawer-door-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2xs);
+  padding-left: var(--space-md);
+}
+
+.drawer-expand-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+  font-size: var(--text-xs);
+  color: var(--text-accent);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.drawer-expand-btn:hover {
+  opacity: 0.75;
+}
+
+.drawer-low-conn-note,
+.drawer-hub-note {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-style: italic;
+}
+
+/* ── Section 5 — Onward region ──────────────────────────────────────────────── */
+.drawer-onward-volume {
+  color: var(--text-muted);
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: var(--text-xs);
+}
+
+.drawer-onward-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.drawer-onward-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-md);
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.07);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    background var(--transition-fast);
+  text-align: left;
+  width: 100%;
+}
+
+.drawer-onward-btn:hover {
+  border-color: var(--onward-color, rgba(255,255,255,0.18));
+  background: rgba(255,255,255,0.03);
+}
+
+.drawer-onward-name {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+  flex: 1;
+}
+
+/* ── Section 6 — Bridge skills ──────────────────────────────────────────────── */
+.drawer-collapse-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-muted);
+  padding: 0;
+  transition: color var(--transition-fast);
+}
+
+.drawer-collapse-toggle:hover {
+  color: var(--text-secondary);
+}
+
+.drawer-bridge-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-sm);
+}
+
+/* ── Section 7 — Two dialects ───────────────────────────────────────────────── */
+.drawer-dialects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.drawer-dialect-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.drawer-dialect-label {
+  align-self: flex-start;
+}
+
+.drawer-dialect-skills {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+}
+
+.drawer-dialect-skills .chip {
+  width: fit-content;
+}
+
+/* ── Mobile — bottom sheet ──────────────────────────────────────────────────── */
+@media (max-width: 680px) {
+  .drawer {
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60dvh;
+    border-left: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    animation: drawer-slide-up 250ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes drawer-slide-up {
+    from { transform: translateY(100%); opacity: 0; }
+    to   { transform: translateY(0);    opacity: 1; }
+  }
+
+  .drawer-companies-grid,
+  .drawer-dialects-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}
