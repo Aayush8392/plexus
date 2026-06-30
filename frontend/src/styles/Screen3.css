@@ -311,7 +311,8 @@
   }
 
   .screen-3.drawer-open .s3-right-controls,
-  .screen-3.cv-compare-open .s3-right-controls {
+  .screen-3.cv-compare-open .s3-right-controls,
+  .screen-3.compare-open .s3-right-controls {
     display: none;
   }
 

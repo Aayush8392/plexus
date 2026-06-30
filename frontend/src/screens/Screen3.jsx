@@ -20,6 +20,7 @@ import PlexusNode from '../components/PlexusNode.jsx'
 import PlexusEdge from '../components/PlexusEdge.jsx'
 import Drawer from '../components/Drawer.jsx'
 import CvCompare from '../components/CvCompare.jsx'
+import SplitDossier from '../components/SplitDossier.jsx'
 import '../styles/Screen3.css'
 
 // ── react-flow custom type registration ──────────────────────────────────────
@@ -240,6 +241,8 @@ function GraphCanvas({
   onwardIds,
   selectedEdge,
   onSelectEdge,
+  compareId,
+  setCompareId,
 }) {
   const [nodes, setNodes, onNodesChange] = useNodesState([])
   const [edges, setEdges, onEdgesChange] = useEdgesState([])
@@ -276,7 +279,10 @@ function GraphCanvas({
       const color = `var(--role-${slug})`
 
       let visualState = 'default'
-      if (pinnedId && selectedEdge) {
+      if (compareId) {
+        if (n.id === pinnedId || n.id === compareId) visualState = 'pinned'
+        else visualState = 'faded'
+      } else if (pinnedId && selectedEdge) {
         if (n.id === selectedEdge.sourceId) visualState = 'pinned'
         else if (n.id === selectedEdge.targetId) visualState = 'door'
         else visualState = 'faded'
@@ -305,7 +311,7 @@ function GraphCanvas({
           volumeBucket: n.volume_bucket,
           lowConnectivity: n.low_connectivity,
           visualState,
-          isPinned: n.id === pinnedId,
+          isPinned: n.id === pinnedId || n.id === compareId,
         },
       }
     })
@@ -375,7 +381,7 @@ function GraphCanvas({
 
     setNodes(rfNodes)
     setEdges(rfEdges)
-  }, [canonData, forcedPositions, pinnedId, hoveredId, hoveredEdgeId, showCrossStratum, adjacentIds, onwardIds, selectedEdge])
+  }, [canonData, forcedPositions, pinnedId, hoveredId, hoveredEdgeId, showCrossStratum, adjacentIds, onwardIds, selectedEdge, compareId])
 
   // Fit view on initial load
   useEffect(() => {
@@ -403,14 +409,21 @@ function GraphCanvas({
     }, 120)
   }, [pinnedId])
 
-  const onNodeClick = useCallback((_, node) => {
+  const onNodeClick = useCallback((event, node) => {
+    // Shift-click with a pinned node → compare mode
+    if (event.shiftKey && pinnedId && node.id !== pinnedId) {
+      setCompareId(node.id)
+      return
+    }
+    // Clear compare if clicking anything without shift
+    setCompareId(null)
     if (node.id === pinnedId) {
       setPinnedId(null)
     } else {
       setPinnedId(node.id)
       onSelectEdge(null)
     }
-  }, [pinnedId, setPinnedId, onSelectEdge])
+  }, [pinnedId, setPinnedId, onSelectEdge, setCompareId])
 
   const onNodeMouseEnter = useCallback((_, node) => {
     if (pinnedId) return
@@ -425,8 +438,9 @@ function GraphCanvas({
 
   const onPaneClick = useCallback(() => {
     setPinnedId(null)
+    setCompareId(null)
     onSelectEdge(null)
-  }, [setPinnedId, onSelectEdge])
+  }, [setPinnedId, setCompareId, onSelectEdge])
 
   const onEdgeClick = useCallback((_, edge) => {
     let sourceId, targetId
@@ -568,6 +582,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   const [selectedEdge, setSelectedEdge]   = useState(null)
   const [forcedPositions, setForcedPositions] = useState(null)
   const [showCvCompare, setShowCvCompare]     = useState(false)
+  const [compareId, setCompareId]             = useState(null)
 
   // Load layout data
   useEffect(() => {
@@ -618,12 +633,13 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
     return { adjacentIds: doorSet, onwardIds: onwardSet }
   }, [canonData, pinnedId])
 
-  // Open/close drawer with pin
+  // Open/close drawer with pin; clear compare when pin clears
   useEffect(() => {
     if (pinnedId) {
       setDrawerOpen(true)
     } else {
       setDrawerOpen(false)
+      setCompareId(null)
     }
   }, [pinnedId])
 
@@ -654,7 +670,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   }
 
   return (
-    <div className={`screen screen-3${drawerOpen ? ' drawer-open' : ''}${showCvCompare ? ' cv-compare-open' : ''}`}>
+    <div className={`screen screen-3${drawerOpen && !compareId ? ' drawer-open' : ''}${showCvCompare ? ' cv-compare-open' : ''}${compareId ? ' compare-open' : ''}`}>
 
       {/* ── Graph canvas ── */}
       <div className="s3-graph-area">
@@ -704,6 +720,8 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
             onwardIds={onwardIds}
             selectedEdge={selectedEdge}
             onSelectEdge={setSelectedEdge}
+            compareId={compareId}
+            setCompareId={setCompareId}
           />
           <MapControls />
         </ReactFlowProvider>
@@ -738,7 +756,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
           <p className="s3-info-body">A structural map of the Indian IT job market built from 130,757 real job postings. Each node is a role. Each edge is a measure of skill overlap between two roles — the stronger the overlap, the more reachable one role is from the other. Roles that share more skills tend to sit closer together, but the layout is an approximation — the exact strength of any connection is shown on the edge when you hover it, not by how near two nodes appear. Roles at the edges of the map have few strong connections in this dataset; that's a structural finding, not a data gap.</p>
 
           <h3 className="s3-info-heading">Navigating the map</h3>
-          <p className="s3-info-body">Hover a node to see its connections. Click to pin it and open a full breakdown — your doors, where they lead, and the skills that bridge the gap.</p>
+          <p className="s3-info-body">Hover a node to see its connections. Click to pin it and open a full breakdown — your doors, where they lead, and the skills that bridge the gap. With a node pinned, shift-click any other node to compare both roles side by side.</p>
 
           <h3 className="s3-info-heading">How it works</h3>
           <p className="s3-info-body">Edges are weighted by cosine similarity — how much two roles share the same skills. 0 means nothing in common, 1 means identical skill profiles. This map shows edges at 0.20 and above. A score of 0.20–0.35 is a stretch move. 0.35–0.50 is a natural door. Above 0.50, the roles are nearly interchangeable.</p>
@@ -767,8 +785,8 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
         />
       )}
 
-      {/* ── Drawer ── */}
-      {drawerOpen && pinnedId && (
+      {/* ── Drawer (hidden when compare mode active) ── */}
+      {drawerOpen && pinnedId && !compareId && (
         <Drawer
           nodeId={pinnedId}
           layoutData={layoutData}
@@ -777,6 +795,17 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
           onNavigate={(id) => { setPinnedId(id); setSelectedEdge(null) }}
           selectedEdge={selectedEdge}
           onSelectEdge={setSelectedEdge}
+        />
+      )}
+
+      {/* ── Split Dossier (compare mode) ── */}
+      {compareId && pinnedId && (
+        <SplitDossier
+          nodeIdA={pinnedId}
+          nodeIdB={compareId}
+          canonData={canonData}
+          onClose={() => setCompareId(null)}
+          onNavigate={(id) => { setCompareId(null); setPinnedId(id); setSelectedEdge(null) }}
         />
       )}
 
