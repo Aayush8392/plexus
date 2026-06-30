@@ -13,6 +13,7 @@ import os
 from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 
 import backend.state as state
 from backend.routes.cv import router as cv_router
@@ -36,7 +37,7 @@ app.add_middleware(
 def _startup():
     state.OUTPUT_DIR = os.getenv("OUTPUT_DIR", "./output")
     state.vectoriser = RoleVectoriser(state.OUTPUT_DIR)
-    print(f"[plexus] vectoriser ready — {len(state.vectoriser._node_ids)} nodes, output: {state.OUTPUT_DIR}")
+    print(f"[plexus] vectoriser ready — {len(state.vectoriser._node_ids)} nodes")
 
 
 app.include_router(cv_router)
@@ -50,3 +51,14 @@ def health():
         "status": "ok",
         "nodes": len(state.vectoriser._node_ids) if state.vectoriser else 0,
     }
+
+
+# Static files — mounted last so API routes take priority.
+# In production (Vercel), FastAPI handles all requests; this serves the
+# built frontend. html=True enables SPA fallback to index.html.
+_static_dir = os.path.join(
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "frontend", "dist",
+)
+if os.path.isdir(_static_dir):
+    app.mount("/", StaticFiles(directory=_static_dir, html=True), name="static")
