@@ -558,7 +558,7 @@
   position: absolute;
   top: calc(var(--space-md) + 40px + var(--space-sm));
   right: var(--space-md);
-  z-index: 20;
+  z-index: 100;
   display: flex;
   gap: var(--space-sm);
   background: rgba(13, 17, 23, 0.72);
