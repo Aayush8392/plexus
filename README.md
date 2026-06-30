@@ -31,7 +31,7 @@ A seven-module Python pipeline processes raw Naukri job posting data:
 6. **Pathfinder engine** — precomputed adjacency, bridge skills, onward region, seniority stopword guard per node
 7. **Drawer data** — top hiring companies and seniority spread per stratified role node
 
-The pipeline emits static JSON artifacts consumed by a React/Vite frontend. A FastAPI backend adds TF-IDF CV snapping and JD classification in phase 2.
+The pipeline emits static JSON artifacts consumed by a React/Vite frontend. A FastAPI backend handles TF-IDF CV snapping and JD classification.
 
 ---
 
@@ -42,7 +42,7 @@ The pipeline emits static JSON artifacts consumed by a React/Vite frontend. A Fa
 | Pipeline | Python — pandas, scikit-learn, sentence-transformers, networkx |
 | Backend (phase 2) | FastAPI — CV snap, JD classify, static serving |
 | Frontend | React + Vite, react-flow, recharts |
-| Hosting | Vercel (static SPA) |
+| Hosting | Vercel (FastAPI + SPA) |
 
 ---
 
@@ -75,7 +75,7 @@ The pipeline emits static JSON artifacts consumed by a React/Vite frontend. A Fa
 
 Raw data files are not included in this repository. The pipeline expects:
 
-- `data/indian-job-market-dataset-2025.xlsx` — Naukri job postings (~28k base rows)
+- `data/indian-job-market-dataset-2025.xlsx` — Naukri job postings (28,665 base rows)
 - `data/GCC-Journal-India-List.xlsx` — GCC company reference list (274 entries)
 - Supplement files in `data/expansion/` — three additional Naukri scrapes (102k net new rows)
 
