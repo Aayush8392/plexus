@@ -641,6 +641,7 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 2px;
+    bottom: 45dvh;
   }
 
   .s3-annotation-sep {
