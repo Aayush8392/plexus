@@ -51,7 +51,7 @@ The pipeline emits static JSON artifacts consumed by a React/Vite frontend. A Fa
 | Metric | Value |
 |--------|-------|
 | Total IT postings | 130,757 |
-| Canonical roles | 23 |
+| Canonical roles | 22 |
 | Stratified nodes on graph | 38 |
 | Within-stratum edges | 163 |
 | Cross-stratum edges | 112 |
