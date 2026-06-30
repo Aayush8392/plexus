@@ -685,10 +685,10 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
     }
   }, [layoutData, confirmedRole])
 
-  // Derive adjacency for visual rings — uses all non-twin edges (solid + cross)
+  // Derive adjacency for visual rings — includes twin edges so self-twin lights up on pin
   const { adjacentIds, onwardIds } = useMemo(() => {
     if (!graphData || !pinnedId) return { adjacentIds: new Set(), onwardIds: new Set() }
-    const allEdges = [...graphData.solidEdges, ...graphData.crossEdges]
+    const allEdges = [...graphData.solidEdges, ...graphData.crossEdges, ...graphData.twinEdges]
     const doorSet = new Set()
     const onwardSet = new Set()
     for (const e of allEdges) {
