@@ -1,0 +1,1365 @@
+{
+  "net_developer": {
+    "all": {
+      "top_skills": [
+        "Dot",
+        "CQRS",
+        "Dotnet Development",
+        "Aspnet",
+        "ASP.NET"
+      ],
+      "count": 5360
+    },
+    "junior": {
+      "top_skills": [
+        "Vb.Net",
+        "Dot",
+        "ASP.NET",
+        "Linq",
+        "ASP.NET MVC",
+        "Dot Net",
+        "Wcf",
+        "Wpf"
+      ],
+      "count": 1973
+    },
+    "mid": {
+      "top_skills": [
+        "Dot",
+        "Dotnet Development",
+        "Vb.Net",
+        "Dot Net",
+        "ASP.NET",
+        "Linq",
+        "Wpf",
+        "ASP.NET MVC"
+      ],
+      "count": 2525
+    },
+    "senior": {
+      "top_skills": [
+        "Dot",
+        "Dotnet Development",
+        "ASP.NET",
+        "Linq",
+        "Dot Net",
+        ".NET Core",
+        "Web API",
+        "Core"
+      ],
+      "count": 774
+    },
+    "staff": {
+      "top_skills": [
+        ".NET Core",
+        "ASP.NET",
+        ".NET",
+        "Web API",
+        "Vb.Net",
+        "Core",
+        "React",
+        "Azure Functions"
+      ],
+      "count": 62
+    }
+  },
+  "backend_java_developer": {
+    "all": {
+      "top_skills": [
+        "Boot",
+        "Spring MVC",
+        "Java Development",
+        "Liferay",
+        "Java Spring Boot"
+      ],
+      "count": 8536
+    },
+    "junior": {
+      "top_skills": [
+        "Java J2Ee",
+        "Struts",
+        "Django",
+        "Java Development",
+        "Spring MVC",
+        "Python Development",
+        "Internship",
+        "WordPress"
+      ],
+      "count": 2428
+    },
+    "mid": {
+      "top_skills": [
+        "Java J2Ee",
+        "Java Development",
+        "Spring MVC",
+        "Boot",
+        "Struts",
+        "Springboot",
+        "Java Spring Boot",
+        "Django"
+      ],
+      "count": 4526
+    },
+    "senior": {
+      "top_skills": [
+        "Boot",
+        "Java Development",
+        "Springboot",
+        "Java J2Ee",
+        "Kafka",
+        "Django",
+        "Flask",
+        "Python Development"
+      ],
+      "count": 1448
+    },
+    "staff": {
+      "top_skills": [
+        "Spring Boot",
+        "Hibernate",
+        "Spring",
+        "Medical Insurance",
+        "Microservices",
+        "Java Development",
+        "Java Collections",
+        "Jms"
+      ],
+      "count": 71
+    }
+  },
+  "cloud_engineer_architect": {
+    "all": {
+      "top_skills": [
+        "R",
+        "Resource Management",
+        "Data Analytics",
+        "Disaster Recovery",
+        "Cloud Infrastructure"
+      ],
+      "count": 483
+    },
+    "junior": {
+      "top_skills": [
+        "Infrastructure",
+        "Social Media",
+        "Disaster Recovery",
+        "Cloud Security",
+        "GCP Cloud",
+        "PowerShell",
+        "Infrastructure Management",
+        "VPN"
+      ],
+      "count": 96
+    },
+    "mid": {
+      "top_skills": [
+        "Cloud Security",
+        "Infrastructure",
+        "PowerShell",
+        "AWS Cloud",
+        "AWS Cloudformation",
+        "Infrastructure Management",
+        "Disaster Recovery",
+        "Paas"
+      ],
+      "count": 225
+    },
+    "senior": {
+      "top_skills": [
+        "VPC",
+        "HIPAA",
+        "Cloud Architecture",
+        "Terraform",
+        "Azure Cloud",
+        "Social Media",
+        "Redhat",
+        "Google Cloud Platforms"
+      ],
+      "count": 134
+    },
+    "staff": {
+      "top_skills": [
+        "Azure Cloud",
+        "AWS IAM",
+        "Cloud Migration",
+        "Container",
+        "Infrastructure",
+        "Middleware",
+        "Kubernetes",
+        "Azure Services"
+      ],
+      "count": 26
+    }
+  },
+  "data_bi_analyst": {
+    "all": {
+      "top_skills": [
+        "Gap Analysis",
+        "Project Documentation",
+        "User Stories",
+        "Business Requirement Analysis",
+        "Business Process Analysis"
+      ],
+      "count": 4023
+    },
+    "junior": {
+      "top_skills": [
+        "Data Analyst",
+        "Requirement Gathering",
+        "Advanced Excel",
+        "Brd",
+        "Excel",
+        "Business Research",
+        "Market Research",
+        "Frd"
+      ],
+      "count": 1691
+    },
+    "mid": {
+      "top_skills": [
+        "Brd",
+        "Data Analyst",
+        "Requirement Gathering",
+        "Frd",
+        "Gap Analysis",
+        "Advanced Excel",
+        "Life Insurance",
+        "User Stories"
+      ],
+      "count": 1696
+    },
+    "senior": {
+      "top_skills": [
+        "Requirement Gathering",
+        "Brd",
+        "Data Analyst",
+        "Gap Analysis",
+        "Dax",
+        "Tableau",
+        "Business Analytics",
+        "User Stories"
+      ],
+      "count": 579
+    },
+    "staff": {
+      "top_skills": [
+        "Gap Analysis",
+        "Apache Spark",
+        "Microsoft Power BI",
+        "Data Analytics",
+        "Guidewire",
+        "Us Healthcare",
+        "Avaloq",
+        "AI/ML"
+      ],
+      "count": 36
+    }
+  },
+  "data_engineer": {
+    "all": {
+      "top_skills": [
+        "Linear Regression",
+        "AWS Cloud Microservices",
+        "Hadoop",
+        "Bricks",
+        "Big Data Technologies"
+      ],
+      "count": 6006
+    },
+    "junior": {
+      "top_skills": [
+        "Data Engineer",
+        "Data Pipeline",
+        "Hadoop",
+        "Data Engineering",
+        "Social Media",
+        "Bricks",
+        "OLAP",
+        "Glue"
+      ],
+      "count": 1189
+    },
+    "mid": {
+      "top_skills": [
+        "Data Engineer",
+        "Bricks",
+        "Airflow",
+        "Adf",
+        "Hadoop",
+        "Data Pipeline",
+        "Azure Synapse",
+        "Factory"
+      ],
+      "count": 3074
+    },
+    "senior": {
+      "top_skills": [
+        "Data Engineer",
+        "Azure Synapse",
+        "Bricks",
+        "Hadoop",
+        "Airflow",
+        "Snowpipe",
+        "Azure Databricks",
+        "Factory"
+      ],
+      "count": 1601
+    },
+    "staff": {
+      "top_skills": [
+        "Data Engineering",
+        "ETL",
+        "Azure Databricks",
+        "ETL Process",
+        "Data Warehousing",
+        "Data Integration",
+        "Databricks",
+        "Data Bricks"
+      ],
+      "count": 129
+    }
+  },
+  "data_scientist_ml": {
+    "all": {
+      "top_skills": [
+        "Chatbot",
+        "Image Processing",
+        "Keras",
+        "TensorFlow",
+        "PyTorch"
+      ],
+      "count": 3793
+    },
+    "junior": {
+      "top_skills": [
+        "Computer Vision",
+        "Science",
+        "Operations Research",
+        "Internship",
+        "Neural Networks",
+        "Machine",
+        "Deep Learning",
+        "Image Processing"
+      ],
+      "count": 1042
+    },
+    "mid": {
+      "top_skills": [
+        "Computer Vision",
+        "Science",
+        "Gen AI",
+        "MLOps",
+        "Neural Networks",
+        "Predictive Modeling",
+        "Deep Learning",
+        "Machine"
+      ],
+      "count": 1807
+    },
+    "senior": {
+      "top_skills": [
+        "Science",
+        "Gen AI",
+        "Computer Vision",
+        "MLOps",
+        "Deep Learning",
+        "Machine",
+        "Neural Networks",
+        "LLM"
+      ],
+      "count": 751
+    },
+    "staff": {
+      "top_skills": [
+        "Chatbot",
+        "Image Processing",
+        "TensorFlow",
+        "PyTorch",
+        "Deep Learning",
+        "NLP",
+        "Deployment Process",
+        "Keras"
+      ],
+      "count": 159
+    }
+  },
+  "database_administrator": {
+    "all": {
+      "top_skills": [
+        "PostgreSQL Database Administration",
+        "Database Administration",
+        "Database Maintenance",
+        "Database Management System",
+        "Oracle Dba"
+      ],
+      "count": 484
+    },
+    "junior": {
+      "top_skills": [
+        "It Software - Dba",
+        "Database Administration",
+        "Oracle Dba",
+        "Oracle Rac",
+        "Database",
+        "Database Management System",
+        "Rac",
+        "It Software - Application"
+      ],
+      "count": 83
+    },
+    "mid": {
+      "top_skills": [
+        "It Software - Dba",
+        "Database Administration",
+        "Database Migration",
+        "Oracle Dba",
+        "SQL Dba",
+        "MySQL Database Administration",
+        "Rman",
+        "Database Security"
+      ],
+      "count": 248
+    },
+    "senior": {
+      "top_skills": [
+        "It Software - Dba",
+        "Database Administration",
+        "Oracle Dba",
+        "Dataguard",
+        "PostgreSQL Database Administration",
+        "Rman",
+        "SQL Dba",
+        "MySQL Database Administration"
+      ],
+      "count": 145
+    },
+    "staff": {
+      "top_skills": [],
+      "count": 7
+    }
+  },
+  "database_architect": {
+    "all": {
+      "top_skills": [
+        "Data Warehousing",
+        "BI",
+        "Hive",
+        "Big Data Analytics",
+        "Enterprise Architecture"
+      ],
+      "count": 281
+    },
+    "junior": {
+      "top_skills": [],
+      "count": 15
+    },
+    "mid": {
+      "top_skills": [
+        "Data Architect",
+        "Data Architecture",
+        "Cataloguing",
+        "Glue",
+        "Data Quality",
+        "It Software - Dba",
+        "Oracle Adf",
+        "Data Modeling"
+      ],
+      "count": 53
+    },
+    "senior": {
+      "top_skills": [
+        "Data Architect",
+        "Data Architecture",
+        "Data Lake",
+        "Data Engineering",
+        "Data Bricks",
+        "Azure Data Factory",
+        "AI Solutions",
+        "Governance"
+      ],
+      "count": 157
+    },
+    "staff": {
+      "top_skills": [
+        "Data Architect",
+        "Data Architecture",
+        "Data Warehousing",
+        "BI",
+        "Hive",
+        "Enterprise Architecture",
+        "Azure Databricks",
+        "Power BI"
+      ],
+      "count": 56
+    }
+  },
+  "devops_sre": {
+    "all": {
+      "top_skills": [
+        "Container",
+        "Board Support Package",
+        "AWS DevOps",
+        "SRE",
+        "Data Munging"
+      ],
+      "count": 5196
+    },
+    "junior": {
+      "top_skills": [
+        "Redhat",
+        "Infrastructure",
+        "AWS DevOps",
+        "SRE",
+        "Nginx",
+        "Social Media",
+        "Infrastructure Management",
+        "Jenkins"
+      ],
+      "count": 1015
+    },
+    "mid": {
+      "top_skills": [
+        "AWS DevOps",
+        "SRE",
+        "Chef",
+        "Kubernates",
+        "Cicd Pipeline",
+        "Iac",
+        "Prometheus",
+        "Nagios"
+      ],
+      "count": 2821
+    },
+    "senior": {
+      "top_skills": [
+        "SRE",
+        "AWS DevOps",
+        "Kubernates",
+        "Chef",
+        "Cicd Pipeline",
+        "Iac",
+        "Terraform",
+        "Nginx"
+      ],
+      "count": 1219
+    },
+    "staff": {
+      "top_skills": [
+        "Financial Reconciliation",
+        "AWS Kinesis",
+        "Tlm",
+        "Terraform",
+        "SRE",
+        "AWS Cloudformation",
+        "Platform Architecture",
+        "Ansible"
+      ],
+      "count": 119
+    }
+  },
+  "eng_manager_tech_lead": {
+    "all": {
+      "top_skills": [
+        "Siemens Teamcenter",
+        "Microsoft Azure DevOps",
+        "Client Interaction",
+        "Itk",
+        "Microsoft Azure Iaas"
+      ],
+      "count": 3333
+    },
+    "junior": {
+      "top_skills": [
+        "WordPress",
+        "Project Development",
+        "Data Architect",
+        "Competitive Analysis",
+        "PHP",
+        "Server",
+        "Technical Lead",
+        "Leadership Development"
+      ],
+      "count": 137
+    },
+    "mid": {
+      "top_skills": [
+        "Client Interaction",
+        "Siemens Teamcenter",
+        "Microsoft Azure Iaas",
+        "ASP.NET MVC",
+        "Microsoft Azure DevOps",
+        "Technical Lead",
+        "SQL Development",
+        "Team"
+      ],
+      "count": 1635
+    },
+    "senior": {
+      "top_skills": [
+        "Team",
+        "Technical Lead",
+        "Engineering Management",
+        "ASP.NET MVC",
+        "Trello",
+        "Team Leading",
+        "Visio",
+        "Microsoft Azure DevOps"
+      ],
+      "count": 1009
+    },
+    "staff": {
+      "top_skills": [
+        "Siemens Teamcenter",
+        "Mobx",
+        "Itk",
+        "Teamcenter",
+        "Ado.Net",
+        "Development Methodologies",
+        "Microsoft Azure DevOps",
+        "Responsive Design"
+      ],
+      "count": 551
+    }
+  },
+  "frontend_developer": {
+    "all": {
+      "top_skills": [
+        "Mobx",
+        "Net Fullstack",
+        "Angular Development",
+        "React Native",
+        "Bootstrap"
+      ],
+      "count": 8331
+    },
+    "junior": {
+      "top_skills": [
+        "WordPress",
+        "Front",
+        "Cs",
+        "Angular Development",
+        "Xhtml",
+        "Html;Javascript",
+        "Web Designing",
+        "Seo"
+      ],
+      "count": 3755
+    },
+    "mid": {
+      "top_skills": [
+        "Front",
+        "Angular Development",
+        "Cs",
+        "WordPress",
+        "Html;Javascript",
+        "Frontend Development",
+        "Xhtml",
+        "End"
+      ],
+      "count": 3608
+    },
+    "senior": {
+      "top_skills": [
+        "Cs",
+        "React",
+        "Frontend Development",
+        "End",
+        "TypeScript",
+        "Front",
+        "Angular Development",
+        "Dom"
+      ],
+      "count": 822
+    },
+    "staff": {
+      "top_skills": [
+        "Mobx",
+        "Responsive Design",
+        "Bootstrap",
+        "Redux",
+        "CSS",
+        "React.js",
+        "JSP",
+        "Odata"
+      ],
+      "count": 94
+    }
+  },
+  "full_stack_developer": {
+    "all": {
+      "top_skills": [
+        "Stack",
+        "Full Stack",
+        "Java Fullstack",
+        "Bootstrap",
+        "Net Fullstack"
+      ],
+      "count": 4909
+    },
+    "junior": {
+      "top_skills": [
+        "Stack",
+        "Mean Stack",
+        "Mean",
+        "WordPress",
+        "PHP",
+        "Full Stack",
+        "Mern",
+        "Web Designing"
+      ],
+      "count": 1313
+    },
+    "mid": {
+      "top_skills": [
+        "Stack",
+        "Mean Stack",
+        "Full Stack",
+        "WordPress",
+        "Java Fullstack",
+        "Mern",
+        "PHP",
+        "React"
+      ],
+      "count": 2378
+    },
+    "senior": {
+      "top_skills": [
+        "Stack",
+        "Full Stack",
+        "Java Fullstack",
+        "React",
+        "Angular",
+        "Restful",
+        "React.js",
+        "Spring MVC"
+      ],
+      "count": 1075
+    },
+    "staff": {
+      "top_skills": [
+        "Full Stack",
+        "Bootstrap",
+        "Kafka",
+        "Computer System Validation",
+        "Database Management",
+        "Web Application",
+        "Stack",
+        "CSS"
+      ],
+      "count": 84
+    }
+  },
+  "mobile_developer": {
+    "all": {
+      "top_skills": [
+        "Android Application Development",
+        "Apple Ios Application Development",
+        "Android Studio",
+        "Uikit",
+        "Ios Development"
+      ],
+      "count": 5041
+    },
+    "junior": {
+      "top_skills": [
+        "Android SDK",
+        "Android Studio",
+        "Android Application Development",
+        "Io",
+        "Iphone",
+        "Mobile Applications",
+        "Ios Development",
+        "Sqlite"
+      ],
+      "count": 3293
+    },
+    "mid": {
+      "top_skills": [
+        "Android SDK",
+        "Android Studio",
+        "Android Application Development",
+        "Io",
+        "Ios Development",
+        "Mobile Applications",
+        "Iphone",
+        "Flutter"
+      ],
+      "count": 1476
+    },
+    "senior": {
+      "top_skills": [
+        "Android Application Development",
+        "Android SDK",
+        "Ios Development",
+        "Io",
+        "Mobile Applications",
+        "Objective C",
+        "MVVM",
+        "Native"
+      ],
+      "count": 219
+    },
+    "staff": {
+      "top_skills": [],
+      "count": 6
+    }
+  },
+  "network_sys_admin": {
+    "all": {
+      "top_skills": [
+        "Eigrp",
+        "Ccna",
+        "Checkpoint",
+        "Routing Protocols",
+        "Firmware"
+      ],
+      "count": 436
+    },
+    "junior": {
+      "top_skills": [
+        "It Software - Network Administration",
+        "Ccna",
+        "It Hardware",
+        "Network Engineering",
+        "Firewall",
+        "LAN",
+        "Routing Protocols",
+        "System Administration"
+      ],
+      "count": 169
+    },
+    "mid": {
+      "top_skills": [
+        "It Software - Network Administration",
+        "Firewall",
+        "Ccna",
+        "LAN",
+        "It Hardware",
+        "Network Engineering",
+        "WAN",
+        "Microfocus"
+      ],
+      "count": 179
+    },
+    "senior": {
+      "top_skills": [
+        "Ccna",
+        "It Software - Network Administration",
+        "Eigrp",
+        "Network Engineering",
+        "Firewall",
+        "Network Operations",
+        "L3",
+        "Firmware"
+      ],
+      "count": 83
+    },
+    "staff": {
+      "top_skills": [],
+      "count": 4
+    }
+  },
+  "product_manager": {
+    "all": {
+      "top_skills": [
+        "Product Strategy",
+        "Product Innovation",
+        "Product Launch",
+        "Product Management",
+        "Product Life Cycle"
+      ],
+      "count": 644
+    },
+    "junior": {
+      "top_skills": [
+        "Life Cycle",
+        "Product Strategy",
+        "Product Planning",
+        "Product Life Cycle",
+        "Requirement Gathering",
+        "Marketing",
+        "Product Life Cycle Management",
+        "Product Management"
+      ],
+      "count": 98
+    },
+    "mid": {
+      "top_skills": [
+        "Competitive Analysis",
+        "Product Strategy",
+        "Product Life Cycle",
+        "Life Cycle",
+        "Market Research",
+        "Marketing",
+        "Product Launch",
+        "Product Management"
+      ],
+      "count": 294
+    },
+    "senior": {
+      "top_skills": [
+        "Product Strategy",
+        "Market Research",
+        "Competitive Analysis",
+        "Product Management",
+        "Engineering Design",
+        "Wellness",
+        "User Stories",
+        "Market Analysis"
+      ],
+      "count": 220
+    },
+    "staff": {
+      "top_skills": [
+        "Product Planning",
+        "Product Management",
+        "Market Research",
+        "Product Strategy",
+        "Ethernet",
+        "Sales",
+        "Product Life Cycle Management",
+        "Marketing"
+      ],
+      "count": 28
+    }
+  },
+  "qa_test_engineer": {
+    "all": {
+      "top_skills": [
+        "Test Case Design",
+        "Test Engineering",
+        "Qa Automation",
+        "Selenium Testing",
+        "Sdet"
+      ],
+      "count": 4132
+    },
+    "junior": {
+      "top_skills": [
+        "It Software - Qa & Testing",
+        "Manual",
+        "Test Scripts",
+        "Test Case Execution",
+        "Black Box Testing",
+        "Test Execution",
+        "Mobile Testing",
+        "Qa Automation"
+      ],
+      "count": 1339
+    },
+    "mid": {
+      "top_skills": [
+        "Qa Automation",
+        "It Software - Qa & Testing",
+        "Sdet",
+        "REST Assured",
+        "Selenium Testing",
+        "API Automation",
+        "Test Engineering",
+        "Test Case Design"
+      ],
+      "count": 2003
+    },
+    "senior": {
+      "top_skills": [
+        "Qa Automation",
+        "Sdet",
+        "API Automation",
+        "It Software - Qa & Testing",
+        "REST Assured",
+        "API Testing",
+        "Selenium",
+        "Quality Control"
+      ],
+      "count": 672
+    },
+    "staff": {
+      "top_skills": [
+        "Qms",
+        "Quality Audit",
+        "Qc",
+        "Capa",
+        "Quality Check",
+        "Quality Assurance",
+        "Fabrication",
+        "Selenium"
+      ],
+      "count": 72
+    }
+  },
+  "sap_consultant": {
+    "all": {
+      "top_skills": [
+        "SAP Abap Development",
+        "SAP Abap",
+        "Bdc",
+        "Hana Database",
+        "SAP Basis Administration"
+      ],
+      "count": 7264
+    },
+    "junior": {
+      "top_skills": [
+        "SAP Testing",
+        "Certified",
+        "Mm",
+        "SAP Abap",
+        "Ites",
+        "SAP Mm",
+        "SAP Fico",
+        "SAP Abap Development"
+      ],
+      "count": 972
+    },
+    "mid": {
+      "top_skills": [
+        "SAP Abap",
+        "SAP Abap Development",
+        "Bdc",
+        "Oo Abap",
+        "Hana Database",
+        "SAP Basis Administration",
+        "Saps",
+        "Abap Dictionary"
+      ],
+      "count": 3683
+    },
+    "senior": {
+      "top_skills": [
+        "SAP Abap",
+        "Saps",
+        "SAP Implementation",
+        "Hana Implementation",
+        "Tds",
+        "SAP Ibp",
+        "Idocs",
+        "SAP Fico Implementation"
+      ],
+      "count": 2344
+    },
+    "staff": {
+      "top_skills": [
+        "SAP Abap Development",
+        "SAP Abap",
+        "SAP HANA",
+        "Bdc",
+        "Amdp",
+        "Cds Views",
+        "SAP Fico",
+        "SAP Basis Administration"
+      ],
+      "count": 252
+    }
+  },
+  "salesforce_developer": {
+    "all": {
+      "top_skills": [
+        "Salesforce Integration",
+        "Salesforce Lightning",
+        "Salesforce Platform",
+        "Sales Force Development",
+        "Salesforce"
+      ],
+      "count": 1623
+    },
+    "junior": {
+      "top_skills": [
+        "Salesforce.Com",
+        "Lightning",
+        "Lightning Components",
+        "Sales Force Development",
+        "Salesforce CRM",
+        "Salesforce",
+        "Salesforce Lightning",
+        "Sfdc"
+      ],
+      "count": 334
+    },
+    "mid": {
+      "top_skills": [
+        "Lwc",
+        "Lightning",
+        "Salesforce.Com",
+        "Salesforce Lightning",
+        "Lightning Components",
+        "Salesforce Integration",
+        "Salesforce Platform",
+        "Sales Force Development"
+      ],
+      "count": 929
+    },
+    "senior": {
+      "top_skills": [
+        "Lwc",
+        "Lightning",
+        "Lightning Components",
+        "Sales Force Development",
+        "Salesforce.Com",
+        "Apex",
+        "Triggers",
+        "Salesforce Lightning"
+      ],
+      "count": 311
+    },
+    "staff": {
+      "top_skills": [
+        "Salesforce Lightning",
+        "Salesforce Integration",
+        "Salesforce",
+        "Salesforce Platform",
+        "Apex",
+        "Visualforce",
+        "Cost Optimization",
+        "Soql"
+      ],
+      "count": 42
+    }
+  },
+  "security_engineer": {
+    "all": {
+      "top_skills": [
+        "Security Assessment",
+        "Risk Analysis",
+        "Security Operations",
+        "It Risk Management",
+        "Cyber Security"
+      ],
+      "count": 605
+    },
+    "junior": {
+      "top_skills": [
+        "It Software - Network Administration",
+        "Ceh",
+        "Penetration",
+        "Security Engineering",
+        "Mis Reporting",
+        "Security Assessment",
+        "Cyber Security",
+        "SIEM"
+      ],
+      "count": 157
+    },
+    "mid": {
+      "top_skills": [
+        "Security Assessment",
+        "Cyber Security",
+        "Risk Analysis",
+        "Security Operations",
+        "Security Engineering",
+        "It Risk Management",
+        "It Software - Network Administration",
+        "Cyberark"
+      ],
+      "count": 269
+    },
+    "senior": {
+      "top_skills": [
+        "Cyber Security",
+        "Cloud Security",
+        "Risk Assessments",
+        "Threat Modeling",
+        "Firewall",
+        "Cyberark",
+        "Cissp",
+        "Network Security"
+      ],
+      "count": 151
+    },
+    "staff": {
+      "top_skills": [],
+      "count": 22
+    }
+  },
+  "software_engineer_general": {
+    "all": {
+      "top_skills": [
+        "SAP Basis Administration",
+        "Development Methodologies",
+        "Workday Core Hcm",
+        "Mdg",
+        "SAP Master Data Governance"
+      ],
+      "count": 34247
+    },
+    "junior": {
+      "top_skills": [
+        "WordPress",
+        "Web",
+        "Android SDK",
+        "Internship",
+        "Vb.Net",
+        "Drupal",
+        "Software Engineer",
+        "Android Studio"
+      ],
+      "count": 11967
+    },
+    "mid": {
+      "top_skills": [
+        "WordPress",
+        "Android SDK",
+        "Drupal",
+        "Embedded Linux",
+        "Usb",
+        "SAP Basis Administration",
+        "Rtos",
+        "Appian"
+      ],
+      "count": 16524
+    },
+    "senior": {
+      "top_skills": [
+        "ServiceNow Development",
+        "Aerospace",
+        "Lead Software",
+        "Embedded C",
+        "Itom",
+        "Itam",
+        "Power Automate",
+        "Usb"
+      ],
+      "count": 4681
+    },
+    "staff": {
+      "top_skills": [
+        "Development Methodologies",
+        "SAP Master Data Governance",
+        "Mdg",
+        "Accounting",
+        "SAP Abap CRM",
+        "Financial Accounting",
+        "SAP Basis Administration",
+        "SAP Plant Maintenance"
+      ],
+      "count": 797
+    }
+  },
+  "solution_tech_architect": {
+    "all": {
+      "top_skills": [
+        "Rfps",
+        "Software Integration",
+        "Technology Architecture",
+        "Java Architecture",
+        "Cnn"
+      ],
+      "count": 1202
+    },
+    "junior": {
+      "top_skills": [
+        "Solution Architect",
+        "Bom",
+        "Cad",
+        "Access Control",
+        "Software Architecture",
+        "Technical",
+        "Server",
+        "Workflow"
+      ],
+      "count": 31
+    },
+    "mid": {
+      "top_skills": [
+        "Togaf",
+        "Software Architect",
+        "Exadata",
+        "Oci",
+        "Technical Architect",
+        "Solution Architect",
+        "Rac",
+        "Oracle Cloud Infrastructure"
+      ],
+      "count": 185
+    },
+    "senior": {
+      "top_skills": [
+        "C/C++",
+        "Erwin",
+        "Togaf",
+        "Rfps",
+        "Software Architect",
+        "Java Architecture",
+        "Solution Architect",
+        "Software Integration"
+      ],
+      "count": 654
+    },
+    "staff": {
+      "top_skills": [
+        "Encryption",
+        "Core Banking",
+        "Software Architect",
+        "Database",
+        "Core",
+        "Cnn",
+        "Solution Architect",
+        "Solution Architecting"
+      ],
+      "count": 332
+    }
+  },
+  "ux_ui_designer": {
+    "all": {
+      "top_skills": [
+        "Adobe Xd",
+        "Figma",
+        "Prototyping",
+        "UX",
+        "Tool Design"
+      ],
+      "count": 544
+    },
+    "junior": {
+      "top_skills": [
+        "Photoshop",
+        "UX Design",
+        "UI/UX",
+        "User Research",
+        "Wireframing",
+        "User Experience Design",
+        "Interaction Design",
+        "Prototyping"
+      ],
+      "count": 241
+    },
+    "mid": {
+      "top_skills": [
+        "Interaction Design",
+        "User Research",
+        "Photoshop",
+        "Xhtml",
+        "Internet Applications",
+        "Figma",
+        "Adobe Xd",
+        "Prototyping"
+      ],
+      "count": 223
+    },
+    "senior": {
+      "top_skills": [
+        "Tool Design",
+        "User Research",
+        "Adobe Xd",
+        "UX Design",
+        "Interaction Design",
+        "User Experience Design",
+        "Figma",
+        "Prototyping"
+      ],
+      "count": 48
+    },
+    "staff": {
+      "top_skills": [
+        "Adobe Xd",
+        "Figma",
+        "UX",
+        "Prototyping",
+        "Tool Design",
+        "User Research",
+        "Wireframing",
+        "Design Principles"
+      ],
+      "count": 27
+    }
+  }
+}

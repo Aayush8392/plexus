@@ -1,0 +1,2770 @@
+{
+  "nodes": [
+    {
+      "id": "backend_java_developer_gcc",
+      "label": "Backend / Java Developer",
+      "role": "Backend / Java Developer",
+      "role_slug": "backend_java_developer",
+      "stratum": "gcc",
+      "posting_count": 205,
+      "volume_bucket": "v2",
+      "twin_id": "backend_java_developer_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Data Structures And Algorithms",
+        "Jpa",
+        "Java Development",
+        "Spring Boot",
+        "Spring"
+      ],
+      "signature_skills": [
+        "Data Structures And Algorithms",
+        "Jms",
+        "Swagger",
+        "Aop",
+        "End"
+      ],
+      "degree": 21,
+      "low_connectivity": false,
+      "x": 798.61,
+      "y": 416.38
+    },
+    {
+      "id": "backend_java_developer_services",
+      "label": "Backend / Java Developer",
+      "role": "Backend / Java Developer",
+      "role_slug": "backend_java_developer",
+      "stratum": "services",
+      "posting_count": 865,
+      "volume_bucket": "v3",
+      "twin_id": "backend_java_developer_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Boot",
+        "Spring MVC",
+        "Java Development",
+        "Liferay",
+        "Java Spring Boot"
+      ],
+      "signature_skills": [
+        "Spring MVC",
+        "Liferay",
+        "Java Spring Boot",
+        "Springboot",
+        "AWS Infrastructure"
+      ],
+      "degree": 20,
+      "low_connectivity": false,
+      "x": 689.33,
+      "y": 473.58
+    },
+    {
+      "id": "cloud_engineer_architect_gcc",
+      "label": "Cloud Engineer / Architect",
+      "role": "Cloud Engineer / Architect",
+      "role_slug": "cloud_engineer_architect",
+      "stratum": "gcc",
+      "posting_count": 28,
+      "volume_bucket": "v1",
+      "twin_id": null,
+      "has_gcc_twin": true,
+      "top_skills": [
+        "R",
+        "Resource Management",
+        "Data Analytics",
+        "Disaster Recovery",
+        "Cloud Infrastructure"
+      ],
+      "signature_skills": [
+        "Replication",
+        "Renewable Energy",
+        "Refrigeration",
+        "Supervision",
+        "Open API"
+      ],
+      "degree": 14,
+      "low_connectivity": false,
+      "x": 401.58,
+      "y": 193.19
+    },
+    {
+      "id": "data_bi_analyst_gcc",
+      "label": "Data / BI Analyst",
+      "role": "Data / BI Analyst",
+      "role_slug": "data_bi_analyst",
+      "stratum": "gcc",
+      "posting_count": 147,
+      "volume_bucket": "v1",
+      "twin_id": "data_bi_analyst_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Data Analyst",
+        "Operational Risk",
+        "Vba",
+        "Sas",
+        "MS Office"
+      ],
+      "signature_skills": [
+        "Data Analyst",
+        "Operational Risk",
+        "Vba",
+        "Risk Analytics",
+        "Qlik"
+      ],
+      "degree": 16,
+      "low_connectivity": false,
+      "x": 231.36,
+      "y": 255.96
+    },
+    {
+      "id": "data_bi_analyst_services",
+      "label": "Data / BI Analyst",
+      "role": "Data / BI Analyst",
+      "role_slug": "data_bi_analyst",
+      "stratum": "services",
+      "posting_count": 363,
+      "volume_bucket": "v2",
+      "twin_id": "data_bi_analyst_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Gap Analysis",
+        "Project Documentation",
+        "User Stories",
+        "Business Requirement Analysis",
+        "Business Process Analysis"
+      ],
+      "signature_skills": [
+        "Gap Analysis",
+        "Project Documentation",
+        "User Stories",
+        "Business Process Analysis",
+        "Openlink Endur"
+      ],
+      "degree": 12,
+      "low_connectivity": false,
+      "x": 192.46,
+      "y": 388.69
+    },
+    {
+      "id": "data_engineer_gcc",
+      "label": "Data Engineer",
+      "role": "Data Engineer",
+      "role_slug": "data_engineer",
+      "stratum": "gcc",
+      "posting_count": 194,
+      "volume_bucket": "v2",
+      "twin_id": "data_engineer_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Data Pipeline",
+        "Data Engineering",
+        "OLAP",
+        "Teradata",
+        "Data Quality"
+      ],
+      "signature_skills": [
+        "Data Pipeline",
+        "OLAP",
+        "Teradata",
+        "It Software - Dba",
+        "Banking"
+      ],
+      "degree": 26,
+      "low_connectivity": false,
+      "x": 399.56,
+      "y": 314.65
+    },
+    {
+      "id": "data_engineer_services",
+      "label": "Data Engineer",
+      "role": "Data Engineer",
+      "role_slug": "data_engineer",
+      "stratum": "services",
+      "posting_count": 890,
+      "volume_bucket": "v3",
+      "twin_id": "data_engineer_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Linear Regression",
+        "AWS Cloud Microservices",
+        "Hadoop",
+        "Bricks",
+        "Big Data Technologies"
+      ],
+      "signature_skills": [
+        "Linear Regression",
+        "AWS Cloud Microservices",
+        "Bricks",
+        "Big Data Technologies",
+        "Glue"
+      ],
+      "degree": 21,
+      "low_connectivity": false,
+      "x": 278.72,
+      "y": 419.41
+    },
+    {
+      "id": "data_scientist_ml_gcc",
+      "label": "Data Scientist / ML",
+      "role": "Data Scientist / ML",
+      "role_slug": "data_scientist_ml",
+      "stratum": "gcc",
+      "posting_count": 230,
+      "volume_bucket": "v2",
+      "twin_id": "data_scientist_ml_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Computer Vision",
+        "Neural Networks",
+        "Advanced Analytics",
+        "Deep Learning",
+        "Data Mining"
+      ],
+      "signature_skills": [
+        "Computer Vision",
+        "Neural Networks",
+        "Advanced Analytics",
+        "Information Retrieval",
+        "Clinical Trials"
+      ],
+      "degree": 20,
+      "low_connectivity": false,
+      "x": 335.43,
+      "y": 259.78
+    },
+    {
+      "id": "data_scientist_ml_services",
+      "label": "Data Scientist / ML",
+      "role": "Data Scientist / ML",
+      "role_slug": "data_scientist_ml",
+      "stratum": "services",
+      "posting_count": 413,
+      "volume_bucket": "v2",
+      "twin_id": "data_scientist_ml_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Chatbot",
+        "Image Processing",
+        "Keras",
+        "TensorFlow",
+        "PyTorch"
+      ],
+      "signature_skills": [
+        "Chatbot",
+        "Image Processing",
+        "Keras",
+        "Time Series Analysis",
+        "Spotfire"
+      ],
+      "degree": 16,
+      "low_connectivity": false,
+      "x": 182.81,
+      "y": 313.73
+    },
+    {
+      "id": "database_administrator_gcc",
+      "label": "Database Administrator",
+      "role": "Database Administrator",
+      "role_slug": "database_administrator",
+      "stratum": "gcc",
+      "posting_count": 25,
+      "volume_bucket": "v1",
+      "twin_id": "database_administrator_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "It Software - Dba",
+        "SQL Dba",
+        "Database Administration",
+        "Database Migration",
+        "Teradata"
+      ],
+      "signature_skills": [
+        "It Software - Dba",
+        "SQL Dba",
+        "Database Migration",
+        "Teradata",
+        "Patching"
+      ],
+      "degree": 2,
+      "low_connectivity": false,
+      "x": 736.08,
+      "y": 661.39
+    },
+    {
+      "id": "database_administrator_services",
+      "label": "Database Administrator",
+      "role": "Database Administrator",
+      "role_slug": "database_administrator",
+      "stratum": "services",
+      "posting_count": 46,
+      "volume_bucket": "v1",
+      "twin_id": "database_administrator_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "PostgreSQL Database Administration",
+        "Database Administration",
+        "Database Maintenance",
+        "Database Management System",
+        "Oracle Dba"
+      ],
+      "signature_skills": [
+        "PostgreSQL Database Administration",
+        "Database Maintenance",
+        "Database Management System",
+        "Oracle Dba",
+        "Oracle Rac"
+      ],
+      "degree": 1,
+      "low_connectivity": false,
+      "x": 848.98,
+      "y": 678.32
+    },
+    {
+      "id": "database_architect_services",
+      "label": "Database Architect",
+      "role": "Database Architect",
+      "role_slug": "database_architect",
+      "stratum": "services",
+      "posting_count": 45,
+      "volume_bucket": "v1",
+      "twin_id": null,
+      "has_gcc_twin": false,
+      "top_skills": [
+        "Data Warehousing",
+        "BI",
+        "Hive",
+        "Big Data Analytics",
+        "Enterprise Architecture"
+      ],
+      "signature_skills": [
+        "Big Data Analytics",
+        "ETL Pipelines",
+        "Snowpipe",
+        "Data Architect",
+        "Glue"
+      ],
+      "degree": 8,
+      "low_connectivity": false,
+      "x": 80.0,
+      "y": 432.97
+    },
+    {
+      "id": "devops_sre_gcc",
+      "label": "DevOps / SRE",
+      "role": "DevOps / SRE",
+      "role_slug": "devops_sre",
+      "stratum": "gcc",
+      "posting_count": 275,
+      "volume_bucket": "v2",
+      "twin_id": "devops_sre_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "SRE",
+        "Manufacturing Processes",
+        "Reliability Engineering",
+        "Manufacturing Execution System",
+        "Otm"
+      ],
+      "signature_skills": [
+        "SRE",
+        "Reliability Engineering",
+        "Manufacturing Processes",
+        "Manufacturing Execution System",
+        "Otm"
+      ],
+      "degree": 25,
+      "low_connectivity": false,
+      "x": 577.98,
+      "y": 279.18
+    },
+    {
+      "id": "devops_sre_services",
+      "label": "DevOps / SRE",
+      "role": "DevOps / SRE",
+      "role_slug": "devops_sre",
+      "stratum": "services",
+      "posting_count": 756,
+      "volume_bucket": "v3",
+      "twin_id": "devops_sre_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Container",
+        "Board Support Package",
+        "AWS DevOps",
+        "SRE",
+        "Data Munging"
+      ],
+      "signature_skills": [
+        "Board Support Package",
+        "AWS DevOps",
+        "SRE",
+        "Microsoft Azure DevOps",
+        "Cloud Automation DevOps"
+      ],
+      "degree": 25,
+      "low_connectivity": false,
+      "x": 441.17,
+      "y": 404.72
+    },
+    {
+      "id": "eng_manager_tech_lead_gcc",
+      "label": "Eng Manager / Tech Lead",
+      "role": "Eng Manager / Tech Lead",
+      "role_slug": "eng_manager_tech_lead",
+      "stratum": "gcc",
+      "posting_count": 97,
+      "volume_bucket": "v1",
+      "twin_id": "eng_manager_tech_lead_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Engineering Management",
+        "Technical Lead",
+        "Mechanical Engineering",
+        "Avionics",
+        "Ips"
+      ],
+      "signature_skills": [
+        "Engineering Management",
+        "Technical Lead",
+        "Mechanical Engineering",
+        "Avionics",
+        "Resource Allocation"
+      ],
+      "degree": 26,
+      "low_connectivity": false,
+      "x": 719.82,
+      "y": 268.01
+    },
+    {
+      "id": "eng_manager_tech_lead_services",
+      "label": "Eng Manager / Tech Lead",
+      "role": "Eng Manager / Tech Lead",
+      "role_slug": "eng_manager_tech_lead",
+      "stratum": "services",
+      "posting_count": 1806,
+      "volume_bucket": "v4",
+      "twin_id": "eng_manager_tech_lead_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Siemens Teamcenter",
+        "Microsoft Azure DevOps",
+        "Client Interaction",
+        "Itk",
+        "Microsoft Azure Iaas"
+      ],
+      "signature_skills": [
+        "Siemens Teamcenter",
+        "Microsoft Azure DevOps",
+        "Client Interaction",
+        "Itk",
+        "Microsoft Azure Iaas"
+      ],
+      "degree": 23,
+      "low_connectivity": false,
+      "x": 503.43,
+      "y": 530.45
+    },
+    {
+      "id": "frontend_developer_gcc",
+      "label": "Frontend Developer",
+      "role": "Frontend Developer",
+      "role_slug": "frontend_developer",
+      "stratum": "gcc",
+      "posting_count": 159,
+      "volume_bucket": "v2",
+      "twin_id": "frontend_developer_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "CI / CD",
+        "Oracle Jet",
+        "TypeScript",
+        "Siemens",
+        "React.js"
+      ],
+      "signature_skills": [
+        "CI / CD",
+        "Oracle Jet",
+        "React",
+        "Xhtml",
+        "Shipping"
+      ],
+      "degree": 25,
+      "low_connectivity": false,
+      "x": 821.64,
+      "y": 350.58
+    },
+    {
+      "id": "frontend_developer_services",
+      "label": "Frontend Developer",
+      "role": "Frontend Developer",
+      "role_slug": "frontend_developer",
+      "stratum": "services",
+      "posting_count": 916,
+      "volume_bucket": "v3",
+      "twin_id": "frontend_developer_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Mobx",
+        "Net Fullstack",
+        "Angular Development",
+        "React Native",
+        "Bootstrap"
+      ],
+      "signature_skills": [
+        "Mobx",
+        "Net Fullstack",
+        "Angular Development",
+        "React Native",
+        "Cs"
+      ],
+      "degree": 19,
+      "low_connectivity": false,
+      "x": 655.42,
+      "y": 552.87
+    },
+    {
+      "id": "full_stack_developer_gcc",
+      "label": "Full Stack Developer",
+      "role": "Full Stack Developer",
+      "role_slug": "full_stack_developer",
+      "stratum": "gcc",
+      "posting_count": 139,
+      "volume_bucket": "v1",
+      "twin_id": "full_stack_developer_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Stack",
+        "Full Stack",
+        "React",
+        "Jms",
+        "React.js"
+      ],
+      "signature_skills": [
+        "Stack",
+        "React",
+        "Jms",
+        "Java Fullstack",
+        "Medical Insurance"
+      ],
+      "degree": 23,
+      "low_connectivity": false,
+      "x": 751.57,
+      "y": 384.36
+    },
+    {
+      "id": "full_stack_developer_services",
+      "label": "Full Stack Developer",
+      "role": "Full Stack Developer",
+      "role_slug": "full_stack_developer",
+      "stratum": "services",
+      "posting_count": 567,
+      "volume_bucket": "v3",
+      "twin_id": "full_stack_developer_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Stack",
+        "Full Stack",
+        "Java Fullstack",
+        "Bootstrap",
+        "Net Fullstack"
+      ],
+      "signature_skills": [
+        "Stack",
+        "Java Fullstack",
+        "Net Fullstack",
+        "React",
+        "Gradle"
+      ],
+      "degree": 20,
+      "low_connectivity": false,
+      "x": 763.2,
+      "y": 505.43
+    },
+    {
+      "id": "mobile_developer_services",
+      "label": "Mobile Developer",
+      "role": "Mobile Developer",
+      "role_slug": "mobile_developer",
+      "stratum": "services",
+      "posting_count": 96,
+      "volume_bucket": "v1",
+      "twin_id": null,
+      "has_gcc_twin": false,
+      "top_skills": [
+        "Android Application Development",
+        "Apple Ios Application Development",
+        "Android Studio",
+        "Uikit",
+        "Ios Development"
+      ],
+      "signature_skills": [
+        "Android Application Development",
+        "Apple Ios Application Development",
+        "Android Studio",
+        "Uikit",
+        "Ios Development"
+      ],
+      "degree": 1,
+      "low_connectivity": false,
+      "x": 1038.16,
+      "y": 205.79
+    },
+    {
+      "id": "net_developer_gcc",
+      "label": ".NET Developer",
+      "role": ".NET Developer",
+      "role_slug": "net_developer",
+      "stratum": "gcc",
+      "posting_count": 56,
+      "volume_bucket": "v1",
+      "twin_id": "net_developer_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        ".NET",
+        ".NET Core",
+        "Wpf",
+        "Mfc",
+        "Linq"
+      ],
+      "signature_skills": [
+        "Wpf",
+        "Mfc",
+        "Linq",
+        "Dot",
+        "VPC"
+      ],
+      "degree": 15,
+      "low_connectivity": false,
+      "x": 939.81,
+      "y": 486.08
+    },
+    {
+      "id": "net_developer_services",
+      "label": ".NET Developer",
+      "role": ".NET Developer",
+      "role_slug": "net_developer",
+      "stratum": "services",
+      "posting_count": 377,
+      "volume_bucket": "v2",
+      "twin_id": "net_developer_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Dot",
+        "CQRS",
+        "Dotnet Development",
+        "Aspnet",
+        "ASP.NET"
+      ],
+      "signature_skills": [
+        "Dot",
+        "CQRS",
+        "Dotnet Development",
+        "Aspnet",
+        "Sass"
+      ],
+      "degree": 14,
+      "low_connectivity": false,
+      "x": 906.13,
+      "y": 555.78
+    },
+    {
+      "id": "network_sys_admin_services",
+      "label": "Network / Sys Admin",
+      "role": "Network / Sys Admin",
+      "role_slug": "network_sys_admin",
+      "stratum": "services",
+      "posting_count": 43,
+      "volume_bucket": "v1",
+      "twin_id": null,
+      "has_gcc_twin": false,
+      "top_skills": [
+        "Eigrp",
+        "Ccna",
+        "Checkpoint",
+        "Routing Protocols",
+        "Firmware"
+      ],
+      "signature_skills": [
+        "Eigrp",
+        "Ccna",
+        "Routing Protocols",
+        "Checkpoint",
+        "Firmware"
+      ],
+      "degree": 0,
+      "low_connectivity": true,
+      "x": 480.0,
+      "y": 665.0
+    },
+    {
+      "id": "product_manager_gcc",
+      "label": "Product Manager",
+      "role": "Product Manager",
+      "role_slug": "product_manager",
+      "stratum": "gcc",
+      "posting_count": 84,
+      "volume_bucket": "v1",
+      "twin_id": null,
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Product Strategy",
+        "Product Innovation",
+        "Product Launch",
+        "Product Management",
+        "Product Life Cycle"
+      ],
+      "signature_skills": [
+        "Product Strategy",
+        "Product Launch",
+        "Product Innovation",
+        "Product Life Cycle",
+        "Engineering Design"
+      ],
+      "degree": 7,
+      "low_connectivity": false,
+      "x": 1094.19,
+      "y": 496.35
+    },
+    {
+      "id": "qa_test_engineer_gcc",
+      "label": "QA / Test Engineer",
+      "role": "QA / Test Engineer",
+      "role_slug": "qa_test_engineer",
+      "stratum": "gcc",
+      "posting_count": 181,
+      "volume_bucket": "v2",
+      "twin_id": "qa_test_engineer_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "It Software - Qa & Testing",
+        "Qa Process",
+        "Selenium",
+        "Test Scripts",
+        "Sdet"
+      ],
+      "signature_skills": [
+        "It Software - Qa & Testing",
+        "Qa Process",
+        "Test Scripts",
+        "Sdet",
+        "Capa"
+      ],
+      "degree": 14,
+      "low_connectivity": false,
+      "x": 1044.7,
+      "y": 361.56
+    },
+    {
+      "id": "qa_test_engineer_services",
+      "label": "QA / Test Engineer",
+      "role": "QA / Test Engineer",
+      "role_slug": "qa_test_engineer",
+      "stratum": "services",
+      "posting_count": 374,
+      "volume_bucket": "v2",
+      "twin_id": "qa_test_engineer_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Test Case Design",
+        "Test Engineering",
+        "Qa Automation",
+        "Selenium Testing",
+        "Sdet"
+      ],
+      "signature_skills": [
+        "Test Case Design",
+        "Test Engineering",
+        "Qa Automation",
+        "Selenium Testing",
+        "Sdet"
+      ],
+      "degree": 7,
+      "low_connectivity": false,
+      "x": 1112.75,
+      "y": 404.88
+    },
+    {
+      "id": "salesforce_developer_gcc",
+      "label": "Salesforce Developer",
+      "role": "Salesforce Developer",
+      "role_slug": "salesforce_developer",
+      "stratum": "gcc",
+      "posting_count": 26,
+      "volume_bucket": "v1",
+      "twin_id": "salesforce_developer_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Sales Operations",
+        "Ant",
+        "Release Management",
+        "Soql",
+        "Salesforce"
+      ],
+      "signature_skills": [
+        "Sales Operations",
+        "Ant",
+        "Service Quality",
+        "Salesforce.Com",
+        "Ibm Mq"
+      ],
+      "degree": 9,
+      "low_connectivity": false,
+      "x": 706.67,
+      "y": 138.82
+    },
+    {
+      "id": "salesforce_developer_services",
+      "label": "Salesforce Developer",
+      "role": "Salesforce Developer",
+      "role_slug": "salesforce_developer",
+      "stratum": "services",
+      "posting_count": 288,
+      "volume_bucket": "v2",
+      "twin_id": "salesforce_developer_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Salesforce Integration",
+        "Salesforce Lightning",
+        "Salesforce Platform",
+        "Sales Force Development",
+        "Salesforce"
+      ],
+      "signature_skills": [
+        "Salesforce Integration",
+        "Salesforce Lightning",
+        "Salesforce Platform",
+        "Sales Force Development",
+        "Salesforce Dx"
+      ],
+      "degree": 5,
+      "low_connectivity": false,
+      "x": 829.79,
+      "y": 149.08
+    },
+    {
+      "id": "sap_consultant_gcc",
+      "label": "SAP Consultant",
+      "role": "SAP Consultant",
+      "role_slug": "sap_consultant",
+      "stratum": "gcc",
+      "posting_count": 56,
+      "volume_bucket": "v1",
+      "twin_id": "sap_consultant_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Production Planning",
+        "Business Administration",
+        "SAP Application",
+        "Abap",
+        "SAP Mm"
+      ],
+      "signature_skills": [
+        "Production Planning",
+        "Business Administration",
+        "SAP Application",
+        "SAP Mm",
+        "SAP Abap"
+      ],
+      "degree": 4,
+      "low_connectivity": false,
+      "x": 229.99,
+      "y": 584.13
+    },
+    {
+      "id": "sap_consultant_services",
+      "label": "SAP Consultant",
+      "role": "SAP Consultant",
+      "role_slug": "sap_consultant",
+      "stratum": "services",
+      "posting_count": 2521,
+      "volume_bucket": "v4",
+      "twin_id": "sap_consultant_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "SAP Abap Development",
+        "SAP Abap",
+        "Bdc",
+        "Hana Database",
+        "SAP Basis Administration"
+      ],
+      "signature_skills": [
+        "SAP Abap Development",
+        "SAP Abap",
+        "Bdc",
+        "Hana Database",
+        "SAP Basis Administration"
+      ],
+      "degree": 11,
+      "low_connectivity": false,
+      "x": 384.6,
+      "y": 590.12
+    },
+    {
+      "id": "security_engineer_gcc",
+      "label": "Security Engineer",
+      "role": "Security Engineer",
+      "role_slug": "security_engineer",
+      "stratum": "gcc",
+      "posting_count": 41,
+      "volume_bucket": "v1",
+      "twin_id": "security_engineer_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Vulnerability",
+        "Cyber Security",
+        "Network Security",
+        "Cloud Security",
+        "Information Security"
+      ],
+      "signature_skills": [
+        "Vulnerability",
+        "Cloud Security",
+        "Security Engineering",
+        "Threat Modeling",
+        "IP"
+      ],
+      "degree": 11,
+      "low_connectivity": false,
+      "x": 580.03,
+      "y": 147.85
+    },
+    {
+      "id": "security_engineer_services",
+      "label": "Security Engineer",
+      "role": "Security Engineer",
+      "role_slug": "security_engineer",
+      "stratum": "services",
+      "posting_count": 101,
+      "volume_bucket": "v1",
+      "twin_id": "security_engineer_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Security Assessment",
+        "Risk Analysis",
+        "Security Operations",
+        "It Risk Management",
+        "Cyber Security"
+      ],
+      "signature_skills": [
+        "Security Assessment",
+        "Risk Analysis",
+        "Security Operations",
+        "It Risk Management",
+        "Security Services"
+      ],
+      "degree": 1,
+      "low_connectivity": false,
+      "x": 1120.0,
+      "y": 266.08
+    },
+    {
+      "id": "software_engineer_general_gcc",
+      "label": "Software Engineer (General)",
+      "role": "Software Engineer (General)",
+      "role_slug": "software_engineer_general",
+      "stratum": "gcc",
+      "posting_count": 1670,
+      "volume_bucket": "v4",
+      "twin_id": "software_engineer_general_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Sez",
+        "Business Services",
+        "Software Engineer Iii",
+        "Software Engineer Ii",
+        "Internship"
+      ],
+      "signature_skills": [
+        "Sez",
+        "Business Services",
+        "Software Engineer Iii",
+        "Software Engineer Ii",
+        "Internship"
+      ],
+      "degree": 29,
+      "low_connectivity": false,
+      "x": 606.74,
+      "y": 354.29
+    },
+    {
+      "id": "software_engineer_general_services",
+      "label": "Software Engineer (General)",
+      "role": "Software Engineer (General)",
+      "role_slug": "software_engineer_general",
+      "stratum": "services",
+      "posting_count": 6874,
+      "volume_bucket": "v4",
+      "twin_id": "software_engineer_general_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "SAP Basis Administration",
+        "Development Methodologies",
+        "Workday Core Hcm",
+        "Mdg",
+        "SAP Master Data Governance"
+      ],
+      "signature_skills": [
+        "SAP Basis Administration",
+        "Development Methodologies",
+        "Workday Core Hcm",
+        "SAP Master Data Governance",
+        "Mdg"
+      ],
+      "degree": 25,
+      "low_connectivity": false,
+      "x": 459.82,
+      "y": 496.93
+    },
+    {
+      "id": "solution_tech_architect_gcc",
+      "label": "Solution / Tech Architect",
+      "role": "Solution / Tech Architect",
+      "role_slug": "solution_tech_architect",
+      "stratum": "gcc",
+      "posting_count": 62,
+      "volume_bucket": "v1",
+      "twin_id": "solution_tech_architect_services",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "It Architecture",
+        "Operational Support",
+        "Software Architect",
+        "Togaf",
+        "User Support"
+      ],
+      "signature_skills": [
+        "It Architecture",
+        "Operational Support",
+        "Software Architect",
+        "User Support",
+        "Togaf"
+      ],
+      "degree": 11,
+      "low_connectivity": true,
+      "x": 1000.0,
+      "y": 500.0
+    },
+    {
+      "id": "solution_tech_architect_services",
+      "label": "Solution / Tech Architect",
+      "role": "Solution / Tech Architect",
+      "role_slug": "solution_tech_architect",
+      "stratum": "services",
+      "posting_count": 237,
+      "volume_bucket": "v2",
+      "twin_id": "solution_tech_architect_gcc",
+      "has_gcc_twin": true,
+      "top_skills": [
+        "Rfps",
+        "Software Integration",
+        "Technology Architecture",
+        "Java Architecture",
+        "Cnn"
+      ],
+      "signature_skills": [
+        "Rfps",
+        "Software Integration",
+        "Technology Architecture",
+        "Java Architecture",
+        "Cnn"
+      ],
+      "degree": 23,
+      "low_connectivity": false,
+      "x": 308.57,
+      "y": 490.95
+    },
+    {
+      "id": "ux_ui_designer_services",
+      "label": "UX / UI Designer",
+      "role": "UX / UI Designer",
+      "role_slug": "ux_ui_designer",
+      "stratum": "services",
+      "posting_count": 43,
+      "volume_bucket": "v1",
+      "twin_id": null,
+      "has_gcc_twin": false,
+      "top_skills": [
+        "Adobe Xd",
+        "Figma",
+        "Prototyping",
+        "UX",
+        "Tool Design"
+      ],
+      "signature_skills": [
+        "Adobe Xd",
+        "Figma",
+        "Prototyping",
+        "Tool Design",
+        "User Research"
+      ],
+      "degree": 0,
+      "low_connectivity": true,
+      "x": 320.0,
+      "y": 665.0
+    }
+  ],
+  "edges": [
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "backend_java_developer_services",
+      "cosine": 0.5459,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "cloud_engineer_architect_gcc",
+      "cosine": 0.2327,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "data_engineer_gcc",
+      "cosine": 0.3342,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "data_engineer_services",
+      "cosine": 0.2601,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "data_scientist_ml_gcc",
+      "cosine": 0.2718,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "devops_sre_gcc",
+      "cosine": 0.3793,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "devops_sre_services",
+      "cosine": 0.2951,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "eng_manager_tech_lead_gcc",
+      "cosine": 0.3759,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "eng_manager_tech_lead_services",
+      "cosine": 0.2632,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "frontend_developer_gcc",
+      "cosine": 0.4337,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "frontend_developer_services",
+      "cosine": 0.3247,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "full_stack_developer_gcc",
+      "cosine": 0.5421,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "full_stack_developer_services",
+      "cosine": 0.4502,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "net_developer_gcc",
+      "cosine": 0.3346,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "net_developer_services",
+      "cosine": 0.2617,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "qa_test_engineer_gcc",
+      "cosine": 0.2573,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "security_engineer_gcc",
+      "cosine": 0.2009,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.4376,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2586,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "solution_tech_architect_gcc",
+      "cosine": 0.2411,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_gcc",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2418,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "data_engineer_gcc",
+      "cosine": 0.2554,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "data_engineer_services",
+      "cosine": 0.2899,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "data_scientist_ml_services",
+      "cosine": 0.2209,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "devops_sre_gcc",
+      "cosine": 0.333,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "devops_sre_services",
+      "cosine": 0.3719,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "eng_manager_tech_lead_gcc",
+      "cosine": 0.2914,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "eng_manager_tech_lead_services",
+      "cosine": 0.3382,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "frontend_developer_gcc",
+      "cosine": 0.3573,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "frontend_developer_services",
+      "cosine": 0.3958,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "full_stack_developer_gcc",
+      "cosine": 0.4479,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "full_stack_developer_services",
+      "cosine": 0.5427,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "net_developer_gcc",
+      "cosine": 0.2619,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "net_developer_services",
+      "cosine": 0.2981,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "qa_test_engineer_gcc",
+      "cosine": 0.2182,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "qa_test_engineer_services",
+      "cosine": 0.2006,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "sap_consultant_services",
+      "cosine": 0.2161,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.3583,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "software_engineer_general_services",
+      "cosine": 0.3532,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "backend_java_developer_services",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2746,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "cloud_engineer_architect_gcc",
+      "target": "data_bi_analyst_gcc",
+      "cosine": 0.2207,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "cloud_engineer_architect_gcc",
+      "target": "data_engineer_gcc",
+      "cosine": 0.3125,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "cloud_engineer_architect_gcc",
+      "target": "data_engineer_services",
+      "cosine": 0.2022,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "cloud_engineer_architect_gcc",
+      "target": "data_scientist_ml_gcc",
+      "cosine": 0.304,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "cloud_engineer_architect_gcc",
+      "target": "data_scientist_ml_services",
+      "cosine": 0.2402,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "cloud_engineer_architect_gcc",
+      "target": "devops_sre_gcc",
+      "cosine": 0.3461,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "cloud_engineer_architect_gcc",
+      "target": "devops_sre_services",
+      "cosine": 0.2572,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "cloud_engineer_architect_gcc",
+      "target": "eng_manager_tech_lead_gcc",
+      "cosine": 0.2585,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "cloud_engineer_architect_gcc",
+      "target": "frontend_developer_gcc",
+      "cosine": 0.2454,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "cloud_engineer_architect_gcc",
+      "target": "full_stack_developer_gcc",
+      "cosine": 0.2738,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "cloud_engineer_architect_gcc",
+      "target": "security_engineer_gcc",
+      "cosine": 0.2281,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "cloud_engineer_architect_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.2633,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "cloud_engineer_architect_gcc",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2099,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "data_bi_analyst_services",
+      "cosine": 0.3918,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "data_engineer_gcc",
+      "cosine": 0.4229,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "data_engineer_services",
+      "cosine": 0.3005,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "data_scientist_ml_gcc",
+      "cosine": 0.3885,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "data_scientist_ml_services",
+      "cosine": 0.267,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "database_architect_services",
+      "cosine": 0.2054,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "devops_sre_gcc",
+      "cosine": 0.2106,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "devops_sre_services",
+      "cosine": 0.2076,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "eng_manager_tech_lead_gcc",
+      "cosine": 0.2236,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "frontend_developer_gcc",
+      "cosine": 0.222,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "full_stack_developer_gcc",
+      "cosine": 0.2195,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "product_manager_gcc",
+      "cosine": 0.2116,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "salesforce_developer_gcc",
+      "cosine": 0.201,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.3317,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_gcc",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2213,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_bi_analyst_services",
+      "target": "data_engineer_gcc",
+      "cosine": 0.3011,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_bi_analyst_services",
+      "target": "data_engineer_services",
+      "cosine": 0.3378,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_services",
+      "target": "data_scientist_ml_gcc",
+      "cosine": 0.2879,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_bi_analyst_services",
+      "target": "data_scientist_ml_services",
+      "cosine": 0.2788,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_services",
+      "target": "devops_sre_services",
+      "cosine": 0.2543,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_services",
+      "target": "eng_manager_tech_lead_services",
+      "cosine": 0.3302,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_services",
+      "target": "frontend_developer_services",
+      "cosine": 0.2225,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_services",
+      "target": "sap_consultant_services",
+      "cosine": 0.277,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_services",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.2706,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_bi_analyst_services",
+      "target": "software_engineer_general_services",
+      "cosine": 0.3789,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_bi_analyst_services",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2602,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "data_engineer_services",
+      "cosine": 0.4908,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "data_scientist_ml_gcc",
+      "cosine": 0.4476,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "data_scientist_ml_services",
+      "cosine": 0.3171,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "database_administrator_gcc",
+      "cosine": 0.2358,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "database_architect_services",
+      "cosine": 0.3407,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "devops_sre_gcc",
+      "cosine": 0.3331,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "devops_sre_services",
+      "cosine": 0.3408,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "eng_manager_tech_lead_gcc",
+      "cosine": 0.3387,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "eng_manager_tech_lead_services",
+      "cosine": 0.247,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "frontend_developer_gcc",
+      "cosine": 0.3171,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "full_stack_developer_gcc",
+      "cosine": 0.3544,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "full_stack_developer_services",
+      "cosine": 0.2335,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "net_developer_gcc",
+      "cosine": 0.2374,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "product_manager_gcc",
+      "cosine": 0.2096,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "qa_test_engineer_gcc",
+      "cosine": 0.2381,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "salesforce_developer_gcc",
+      "cosine": 0.2563,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "security_engineer_gcc",
+      "cosine": 0.2414,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.4257,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2598,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "solution_tech_architect_gcc",
+      "cosine": 0.2267,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_gcc",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2585,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "data_scientist_ml_gcc",
+      "cosine": 0.2686,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "data_scientist_ml_services",
+      "cosine": 0.3136,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "database_architect_services",
+      "cosine": 0.4283,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "devops_sre_gcc",
+      "cosine": 0.2489,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "devops_sre_services",
+      "cosine": 0.4457,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "eng_manager_tech_lead_gcc",
+      "cosine": 0.2115,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "eng_manager_tech_lead_services",
+      "cosine": 0.3548,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "frontend_developer_gcc",
+      "cosine": 0.2125,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "frontend_developer_services",
+      "cosine": 0.2249,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "full_stack_developer_gcc",
+      "cosine": 0.2293,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "full_stack_developer_services",
+      "cosine": 0.2775,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "sap_consultant_services",
+      "cosine": 0.219,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.2977,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "software_engineer_general_services",
+      "cosine": 0.3867,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_engineer_services",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2927,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "data_scientist_ml_services",
+      "cosine": 0.5359,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "database_architect_services",
+      "cosine": 0.2034,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "devops_sre_gcc",
+      "cosine": 0.2985,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "devops_sre_services",
+      "cosine": 0.2441,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "eng_manager_tech_lead_gcc",
+      "cosine": 0.3115,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "frontend_developer_gcc",
+      "cosine": 0.3164,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "full_stack_developer_gcc",
+      "cosine": 0.2912,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "full_stack_developer_services",
+      "cosine": 0.2102,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "product_manager_gcc",
+      "cosine": 0.2359,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "salesforce_developer_gcc",
+      "cosine": 0.2059,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "security_engineer_gcc",
+      "cosine": 0.2056,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.3887,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2172,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_scientist_ml_gcc",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2356,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_scientist_ml_services",
+      "target": "database_architect_services",
+      "cosine": 0.2655,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_services",
+      "target": "devops_sre_gcc",
+      "cosine": 0.2318,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_scientist_ml_services",
+      "target": "devops_sre_services",
+      "cosine": 0.3105,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_services",
+      "target": "eng_manager_tech_lead_gcc",
+      "cosine": 0.2046,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_scientist_ml_services",
+      "target": "eng_manager_tech_lead_services",
+      "cosine": 0.2578,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_services",
+      "target": "full_stack_developer_services",
+      "cosine": 0.2183,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_services",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.2332,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "data_scientist_ml_services",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2514,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "data_scientist_ml_services",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2975,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "database_administrator_gcc",
+      "target": "database_administrator_services",
+      "cosine": 0.3595,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "database_architect_services",
+      "target": "devops_sre_services",
+      "cosine": 0.302,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "database_architect_services",
+      "target": "eng_manager_tech_lead_services",
+      "cosine": 0.2054,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "database_architect_services",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2605,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "devops_sre_services",
+      "cosine": 0.4857,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "eng_manager_tech_lead_gcc",
+      "cosine": 0.3296,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "eng_manager_tech_lead_services",
+      "cosine": 0.2716,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "frontend_developer_gcc",
+      "cosine": 0.3667,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "frontend_developer_services",
+      "cosine": 0.2233,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "full_stack_developer_gcc",
+      "cosine": 0.3639,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "full_stack_developer_services",
+      "cosine": 0.3059,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "net_developer_gcc",
+      "cosine": 0.2651,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "net_developer_services",
+      "cosine": 0.2097,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "product_manager_gcc",
+      "cosine": 0.2103,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "qa_test_engineer_gcc",
+      "cosine": 0.2612,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "salesforce_developer_gcc",
+      "cosine": 0.2147,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "security_engineer_gcc",
+      "cosine": 0.3002,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.448,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2854,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "solution_tech_architect_gcc",
+      "cosine": 0.252,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_gcc",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2431,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "eng_manager_tech_lead_gcc",
+      "cosine": 0.2534,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "eng_manager_tech_lead_services",
+      "cosine": 0.432,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "frontend_developer_gcc",
+      "cosine": 0.2768,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "frontend_developer_services",
+      "cosine": 0.2815,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "full_stack_developer_gcc",
+      "cosine": 0.2919,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "full_stack_developer_services",
+      "cosine": 0.3552,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "net_developer_gcc",
+      "cosine": 0.2262,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "net_developer_services",
+      "cosine": 0.2274,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "qa_test_engineer_gcc",
+      "cosine": 0.2018,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "sap_consultant_services",
+      "cosine": 0.2049,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "security_engineer_gcc",
+      "cosine": 0.2176,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.3707,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "software_engineer_general_services",
+      "cosine": 0.42,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "devops_sre_services",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.3629,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "eng_manager_tech_lead_services",
+      "cosine": 0.2493,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "frontend_developer_gcc",
+      "cosine": 0.3762,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "frontend_developer_services",
+      "cosine": 0.245,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "full_stack_developer_gcc",
+      "cosine": 0.3766,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "full_stack_developer_services",
+      "cosine": 0.2824,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "net_developer_gcc",
+      "cosine": 0.2967,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "net_developer_services",
+      "cosine": 0.2143,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "product_manager_gcc",
+      "cosine": 0.2806,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "qa_test_engineer_gcc",
+      "cosine": 0.2426,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "salesforce_developer_gcc",
+      "cosine": 0.2232,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "salesforce_developer_services",
+      "cosine": 0.2052,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "security_engineer_gcc",
+      "cosine": 0.2345,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.4302,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2402,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "solution_tech_architect_gcc",
+      "cosine": 0.2587,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_gcc",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2393,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "eng_manager_tech_lead_services",
+      "target": "frontend_developer_gcc",
+      "cosine": 0.2698,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "eng_manager_tech_lead_services",
+      "target": "frontend_developer_services",
+      "cosine": 0.5019,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_services",
+      "target": "full_stack_developer_gcc",
+      "cosine": 0.2847,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "eng_manager_tech_lead_services",
+      "target": "full_stack_developer_services",
+      "cosine": 0.378,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_services",
+      "target": "net_developer_gcc",
+      "cosine": 0.2156,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "eng_manager_tech_lead_services",
+      "target": "net_developer_services",
+      "cosine": 0.28,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_services",
+      "target": "qa_test_engineer_gcc",
+      "cosine": 0.2097,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "eng_manager_tech_lead_services",
+      "target": "qa_test_engineer_services",
+      "cosine": 0.2271,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_services",
+      "target": "salesforce_developer_services",
+      "cosine": 0.2631,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_services",
+      "target": "sap_consultant_services",
+      "cosine": 0.4123,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_services",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.3329,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "eng_manager_tech_lead_services",
+      "target": "software_engineer_general_services",
+      "cosine": 0.6674,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "eng_manager_tech_lead_services",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.3703,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "frontend_developer_services",
+      "cosine": 0.4119,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "full_stack_developer_gcc",
+      "cosine": 0.5465,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "full_stack_developer_services",
+      "cosine": 0.4061,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "net_developer_gcc",
+      "cosine": 0.3844,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "net_developer_services",
+      "cosine": 0.3168,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "product_manager_gcc",
+      "cosine": 0.2046,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "qa_test_engineer_gcc",
+      "cosine": 0.2629,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "qa_test_engineer_services",
+      "cosine": 0.2068,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "salesforce_developer_gcc",
+      "cosine": 0.2342,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "security_engineer_gcc",
+      "cosine": 0.237,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.4229,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2402,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "solution_tech_architect_gcc",
+      "cosine": 0.2143,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_gcc",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2158,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "frontend_developer_services",
+      "target": "full_stack_developer_gcc",
+      "cosine": 0.39,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "frontend_developer_services",
+      "target": "full_stack_developer_services",
+      "cosine": 0.4772,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_services",
+      "target": "mobile_developer_services",
+      "cosine": 0.2165,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_services",
+      "target": "net_developer_gcc",
+      "cosine": 0.2845,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "frontend_developer_services",
+      "target": "net_developer_services",
+      "cosine": 0.3593,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_services",
+      "target": "salesforce_developer_services",
+      "cosine": 0.2692,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_services",
+      "target": "sap_consultant_services",
+      "cosine": 0.2792,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_services",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.3062,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "frontend_developer_services",
+      "target": "software_engineer_general_services",
+      "cosine": 0.4444,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "frontend_developer_services",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.26,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "full_stack_developer_gcc",
+      "target": "full_stack_developer_services",
+      "cosine": 0.5281,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "full_stack_developer_gcc",
+      "target": "net_developer_gcc",
+      "cosine": 0.4103,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "full_stack_developer_gcc",
+      "target": "net_developer_services",
+      "cosine": 0.3252,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "full_stack_developer_gcc",
+      "target": "qa_test_engineer_gcc",
+      "cosine": 0.2522,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "full_stack_developer_gcc",
+      "target": "salesforce_developer_gcc",
+      "cosine": 0.2251,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "full_stack_developer_gcc",
+      "target": "security_engineer_gcc",
+      "cosine": 0.2258,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "full_stack_developer_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.4383,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "full_stack_developer_gcc",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2559,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "full_stack_developer_gcc",
+      "target": "solution_tech_architect_gcc",
+      "cosine": 0.2411,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "full_stack_developer_gcc",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2527,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "full_stack_developer_services",
+      "target": "net_developer_gcc",
+      "cosine": 0.3836,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "full_stack_developer_services",
+      "target": "net_developer_services",
+      "cosine": 0.4298,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "full_stack_developer_services",
+      "target": "qa_test_engineer_gcc",
+      "cosine": 0.2041,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "full_stack_developer_services",
+      "target": "qa_test_engineer_services",
+      "cosine": 0.2113,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "full_stack_developer_services",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.3382,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "full_stack_developer_services",
+      "target": "software_engineer_general_services",
+      "cosine": 0.3264,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "full_stack_developer_services",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2973,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "net_developer_gcc",
+      "target": "net_developer_services",
+      "cosine": 0.4599,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "net_developer_gcc",
+      "target": "qa_test_engineer_gcc",
+      "cosine": 0.2037,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "net_developer_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.3422,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "net_developer_gcc",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2058,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "net_developer_services",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.2803,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "net_developer_services",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2589,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "net_developer_services",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2238,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "product_manager_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.2793,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "qa_test_engineer_gcc",
+      "target": "qa_test_engineer_services",
+      "cosine": 0.556,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "qa_test_engineer_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.353,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "qa_test_engineer_gcc",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2348,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "qa_test_engineer_services",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.2391,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "qa_test_engineer_services",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2506,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "salesforce_developer_gcc",
+      "target": "salesforce_developer_services",
+      "cosine": 0.3538,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "salesforce_developer_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.2158,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "salesforce_developer_services",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2551,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "sap_consultant_gcc",
+      "target": "sap_consultant_services",
+      "cosine": 0.3358,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "sap_consultant_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.2031,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "sap_consultant_gcc",
+      "target": "software_engineer_general_services",
+      "cosine": 0.2154,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "sap_consultant_gcc",
+      "target": "solution_tech_architect_gcc",
+      "cosine": 0.2242,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "sap_consultant_services",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.257,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "sap_consultant_services",
+      "target": "software_engineer_general_services",
+      "cosine": 0.5789,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "sap_consultant_services",
+      "target": "solution_tech_architect_gcc",
+      "cosine": 0.2389,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "sap_consultant_services",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.3092,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "security_engineer_gcc",
+      "target": "security_engineer_services",
+      "cosine": 0.3975,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "security_engineer_gcc",
+      "target": "software_engineer_general_gcc",
+      "cosine": 0.2831,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "software_engineer_general_gcc",
+      "target": "software_engineer_general_services",
+      "cosine": 0.46,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "software_engineer_general_gcc",
+      "target": "solution_tech_architect_gcc",
+      "cosine": 0.2754,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "software_engineer_general_gcc",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2914,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "software_engineer_general_services",
+      "target": "solution_tech_architect_gcc",
+      "cosine": 0.2358,
+      "is_cross_stratum": true
+    },
+    {
+      "source": "software_engineer_general_services",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.3559,
+      "is_cross_stratum": false
+    },
+    {
+      "source": "solution_tech_architect_gcc",
+      "target": "solution_tech_architect_services",
+      "cosine": 0.2461,
+      "is_cross_stratum": true
+    }
+  ],
+  "meta": {
+    "threshold": 0.2,
+    "node_count": 38,
+    "edge_count": 275,
+    "within_stratum_edges": 163,
+    "cross_stratum_edges": 112,
+    "mds_stress": 54.7841,
+    "canvas_width": 1200,
+    "canvas_height": 800,
+    "nudge_iterations": 2,
+    "edges_shown": "all"
+  }
+}

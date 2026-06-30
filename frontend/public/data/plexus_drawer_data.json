@@ -1,0 +1,2054 @@
+{
+  "backend_java_developer_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Oracle",
+          "count": 41
+        },
+        {
+          "name": "Deutsche Bank",
+          "count": 22
+        },
+        {
+          "name": "Mastercard",
+          "count": 8
+        },
+        {
+          "name": "Salesforce",
+          "count": 8
+        },
+        {
+          "name": "Siemens",
+          "count": 8
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 1
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 24
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 21
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 13
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 1
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 4,
+      "label": "Typical: 4+ years",
+      "sample_size": 8473
+    }
+  },
+  "backend_java_developer_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Infosys",
+          "count": 220
+        },
+        {
+          "name": "Accenture",
+          "count": 154
+        },
+        {
+          "name": "IBM",
+          "count": 84
+        },
+        {
+          "name": "PRADEEPIT CONSULTING SERVICES PVT LTD",
+          "count": 57
+        },
+        {
+          "name": "Capgemini",
+          "count": 46
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 139
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 609
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 640
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 153
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 32
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 4,
+      "label": "Typical: 4+ years",
+      "sample_size": 8473
+    }
+  },
+  "cloud_engineer_architect_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Google",
+          "count": 5
+        },
+        {
+          "name": "Oracle",
+          "count": 4
+        },
+        {
+          "name": "Mercedes Benz",
+          "count": 4
+        },
+        {
+          "name": "Ford",
+          "count": 2
+        },
+        {
+          "name": "Sandoz",
+          "count": 2
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 12
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 45
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 34
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 22
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 9
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 4,
+      "label": "Typical: 4+ years",
+      "sample_size": 465
+    }
+  },
+  "data_bi_analyst_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Sanofi",
+          "count": 15
+        },
+        {
+          "name": "JPMorgan Chase Bank",
+          "count": 13
+        },
+        {
+          "name": "S&P Global Market Intelligence",
+          "count": 9
+        },
+        {
+          "name": "Deutsche Bank",
+          "count": 7
+        },
+        {
+          "name": "Hsbc",
+          "count": 5
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 11
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 28
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 20
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 5
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 2
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 3,
+      "label": "Typical: 3+ years",
+      "sample_size": 4002
+    }
+  },
+  "data_bi_analyst_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 200
+        },
+        {
+          "name": "Capgemini",
+          "count": 21
+        },
+        {
+          "name": "IBM",
+          "count": 18
+        },
+        {
+          "name": "Wipro",
+          "count": 15
+        },
+        {
+          "name": "EY",
+          "count": 14
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 59
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 234
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 229
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 43
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 5
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 3,
+      "label": "Typical: 3+ years",
+      "sample_size": 4002
+    }
+  },
+  "data_engineer_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Walmart",
+          "count": 13
+        },
+        {
+          "name": "Mastercard",
+          "count": 12
+        },
+        {
+          "name": "JPMorgan Chase Bank",
+          "count": 11
+        },
+        {
+          "name": "Barclays",
+          "count": 11
+        },
+        {
+          "name": "Visa",
+          "count": 10
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 3
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 20
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 15
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 8
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 2
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 5,
+      "label": "Typical: 5+ years",
+      "sample_size": 5993
+    }
+  },
+  "data_engineer_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 389
+        },
+        {
+          "name": "IBM",
+          "count": 114
+        },
+        {
+          "name": "Cognizant",
+          "count": 43
+        },
+        {
+          "name": "Infosys",
+          "count": 38
+        },
+        {
+          "name": "Pradeepit Consulting Services",
+          "count": 35
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 37
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 485
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 801
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 158
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 49
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 5,
+      "label": "Typical: 5+ years",
+      "sample_size": 5993
+    }
+  },
+  "data_scientist_ml_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Walmart",
+          "count": 27
+        },
+        {
+          "name": "Mastercard",
+          "count": 12
+        },
+        {
+          "name": "Target",
+          "count": 12
+        },
+        {
+          "name": "AMERICAN EXPRESS",
+          "count": 11
+        },
+        {
+          "name": "JPMorgan Chase Bank",
+          "count": 11
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 9
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 16
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 26
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 13
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 3
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 4,
+      "label": "Typical: 4+ years",
+      "sample_size": 3759
+    }
+  },
+  "data_scientist_ml_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 225
+        },
+        {
+          "name": "IBM",
+          "count": 44
+        },
+        {
+          "name": "Capgemini",
+          "count": 22
+        },
+        {
+          "name": "Incedo",
+          "count": 21
+        },
+        {
+          "name": "Infosys",
+          "count": 16
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 64
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 365
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 304
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 98
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 95
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 4,
+      "label": "Typical: 4+ years",
+      "sample_size": 3759
+    }
+  },
+  "database_administrator_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Hsbc",
+          "count": 4
+        },
+        {
+          "name": "JPMorgan Chase",
+          "count": 3
+        },
+        {
+          "name": "S&P Global Market Intelligence",
+          "count": 2
+        },
+        {
+          "name": "Airtel",
+          "count": 2
+        },
+        {
+          "name": "United Airlines",
+          "count": 2
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 1
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 7
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 3
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 3
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 0
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 5,
+      "label": "Typical: 5+ years",
+      "sample_size": 483
+    }
+  },
+  "database_administrator_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 10
+        },
+        {
+          "name": "Tata Consultancy Services",
+          "count": 6
+        },
+        {
+          "name": "Infosys",
+          "count": 6
+        },
+        {
+          "name": "Kyndryl",
+          "count": 5
+        },
+        {
+          "name": "IBM",
+          "count": 3
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 6
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 81
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 84
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 28
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 4
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 5,
+      "label": "Typical: 5+ years",
+      "sample_size": 483
+    }
+  },
+  "database_architect_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 24
+        },
+        {
+          "name": "Capgemini",
+          "count": 13
+        },
+        {
+          "name": "Infogain",
+          "count": 2
+        },
+        {
+          "name": "HCLTech",
+          "count": 1
+        },
+        {
+          "name": "EY",
+          "count": 1
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 1
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 8
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 21
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 34
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 28
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 8,
+      "label": "Typical: 8+ years",
+      "sample_size": 272
+    }
+  },
+  "devops_sre_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Oracle",
+          "count": 54
+        },
+        {
+          "name": "Siemens",
+          "count": 19
+        },
+        {
+          "name": "JPMorgan Chase Bank",
+          "count": 16
+        },
+        {
+          "name": "Visa",
+          "count": 11
+        },
+        {
+          "name": "SAP",
+          "count": 11
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 2
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 38
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 20
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 15
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 3
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 4,
+      "label": "Typical: 4+ years",
+      "sample_size": 5174
+    }
+  },
+  "devops_sre_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 418
+        },
+        {
+          "name": "IBM",
+          "count": 95
+        },
+        {
+          "name": "Wipro",
+          "count": 41
+        },
+        {
+          "name": "Capgemini",
+          "count": 32
+        },
+        {
+          "name": "EY",
+          "count": 30
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 26
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 367
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 418
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 146
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 39
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 4,
+      "label": "Typical: 4+ years",
+      "sample_size": 5174
+    }
+  },
+  "eng_manager_tech_lead_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Cisco",
+          "count": 11
+        },
+        {
+          "name": "Applied Materials",
+          "count": 5
+        },
+        {
+          "name": "Oracle",
+          "count": 5
+        },
+        {
+          "name": "Barclays",
+          "count": 5
+        },
+        {
+          "name": "Google",
+          "count": 4
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 1
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 10
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 8
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 10
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 10
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 5,
+      "label": "Typical: 5+ years",
+      "sample_size": 3332
+    }
+  },
+  "eng_manager_tech_lead_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 1578
+        },
+        {
+          "name": "Wipro",
+          "count": 74
+        },
+        {
+          "name": "SLK Digital",
+          "count": 40
+        },
+        {
+          "name": "Incedo",
+          "count": 34
+        },
+        {
+          "name": "Happiest Minds Technologies",
+          "count": 25
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 11
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 217
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 607
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 170
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 383
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 5,
+      "label": "Typical: 5+ years",
+      "sample_size": 3332
+    }
+  },
+  "frontend_developer_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Oracle",
+          "count": 27
+        },
+        {
+          "name": "Goldman Sachs",
+          "count": 13
+        },
+        {
+          "name": "Siemens",
+          "count": 13
+        },
+        {
+          "name": "Walmart",
+          "count": 12
+        },
+        {
+          "name": "Conduent",
+          "count": 10
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 4
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 20
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 13
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 6
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 3
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 3,
+      "label": "Typical: 3+ years",
+      "sample_size": 8279
+    }
+  },
+  "frontend_developer_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 574
+        },
+        {
+          "name": "IBM",
+          "count": 59
+        },
+        {
+          "name": "Infosys",
+          "count": 45
+        },
+        {
+          "name": "Pradeepit Consulting Services",
+          "count": 43
+        },
+        {
+          "name": "PRADEEPIT CONSULTING SERVICES PVT LTD",
+          "count": 39
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 90
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 549
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 324
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 81
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 66
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 3,
+      "label": "Typical: 3+ years",
+      "sample_size": 8279
+    }
+  },
+  "full_stack_developer_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "JPMorgan Chase Bank",
+          "count": 20
+        },
+        {
+          "name": "Oracle",
+          "count": 14
+        },
+        {
+          "name": "Hsbc",
+          "count": 8
+        },
+        {
+          "name": "Barclays",
+          "count": 7
+        },
+        {
+          "name": "Boeing",
+          "count": 7
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 4
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 25
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 20
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 4
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 1
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 4,
+      "label": "Typical: 4+ years",
+      "sample_size": 4850
+    }
+  },
+  "full_stack_developer_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 133
+        },
+        {
+          "name": "IBM",
+          "count": 118
+        },
+        {
+          "name": "PRADEEPIT CONSULTING SERVICES PVT LTD",
+          "count": 67
+        },
+        {
+          "name": "Infosys",
+          "count": 30
+        },
+        {
+          "name": "Iris Software",
+          "count": 27
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 75
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 550
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 777
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 198
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 62
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 4,
+      "label": "Typical: 4+ years",
+      "sample_size": 4850
+    }
+  },
+  "mobile_developer_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 28
+        },
+        {
+          "name": "Capgemini",
+          "count": 13
+        },
+        {
+          "name": "Infosys",
+          "count": 13
+        },
+        {
+          "name": "Pradeepit Consulting Services",
+          "count": 11
+        },
+        {
+          "name": "EY",
+          "count": 6
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 51
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 172
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 60
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 13
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 2
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 2,
+      "label": "Typical: 2+ years",
+      "sample_size": 4974
+    }
+  },
+  "net_developer_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Conduent",
+          "count": 8
+        },
+        {
+          "name": "Siemens",
+          "count": 6
+        },
+        {
+          "name": "Caterpillar Inc",
+          "count": 3
+        },
+        {
+          "name": "Larsen & Toubro (L&T)",
+          "count": 3
+        },
+        {
+          "name": "S&P Global Market Intelligence",
+          "count": 3
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 0
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 8
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 9
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 4
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 2
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 3,
+      "label": "Typical: 3+ years",
+      "sample_size": 5334
+    }
+  },
+  "net_developer_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Infosys",
+          "count": 100
+        },
+        {
+          "name": "PRADEEPIT CONSULTING SERVICES PVT LTD",
+          "count": 82
+        },
+        {
+          "name": "Accenture",
+          "count": 28
+        },
+        {
+          "name": "IBM",
+          "count": 23
+        },
+        {
+          "name": "Capgemini",
+          "count": 22
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 32
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 314
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 346
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 95
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 25
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 3,
+      "label": "Typical: 3+ years",
+      "sample_size": 5334
+    }
+  },
+  "network_sys_admin_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Capgemini",
+          "count": 12
+        },
+        {
+          "name": "Infogain",
+          "count": 10
+        },
+        {
+          "name": "Incedo",
+          "count": 9
+        },
+        {
+          "name": "Kyndryl",
+          "count": 2
+        },
+        {
+          "name": "Bounteous x Accolite",
+          "count": 2
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 45
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 110
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 63
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 27
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 3
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 3,
+      "label": "Typical: 3+ years",
+      "sample_size": 421
+    }
+  },
+  "product_manager_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Oracle India Pvt. Ltd.",
+          "count": 9
+        },
+        {
+          "name": "Oracle",
+          "count": 8
+        },
+        {
+          "name": "Amazon",
+          "count": 6
+        },
+        {
+          "name": "Google",
+          "count": 6
+        },
+        {
+          "name": "JPMorgan Chase Bank",
+          "count": 5
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 15
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 122
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 110
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 76
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 12
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 5,
+      "label": "Typical: 5+ years",
+      "sample_size": 618
+    }
+  },
+  "qa_test_engineer_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Oracle",
+          "count": 24
+        },
+        {
+          "name": "Conduent",
+          "count": 13
+        },
+        {
+          "name": "Oracle India Pvt. Ltd.",
+          "count": 12
+        },
+        {
+          "name": "Larsen & Toubro (L&T)",
+          "count": 9
+        },
+        {
+          "name": "Siemens",
+          "count": 9
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 6
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 46
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 11
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 9
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 1
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 3,
+      "label": "Typical: 3+ years",
+      "sample_size": 4086
+    }
+  },
+  "qa_test_engineer_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Wipro",
+          "count": 88
+        },
+        {
+          "name": "Infosys",
+          "count": 54
+        },
+        {
+          "name": "Accenture",
+          "count": 52
+        },
+        {
+          "name": "Incedo",
+          "count": 25
+        },
+        {
+          "name": "Iris Software",
+          "count": 20
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 169
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 740
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 469
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 136
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 40
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 3,
+      "label": "Typical: 3+ years",
+      "sample_size": 4086
+    }
+  },
+  "salesforce_developer_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Transunion",
+          "count": 4
+        },
+        {
+          "name": "Salesforce",
+          "count": 3
+        },
+        {
+          "name": "Deutsche Bank",
+          "count": 2
+        },
+        {
+          "name": "Palo Alto Networks",
+          "count": 2
+        },
+        {
+          "name": "Sandoz",
+          "count": 2
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 0
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 2
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 5
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 1
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 0
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 4,
+      "label": "Typical: 4+ years",
+      "sample_size": 1616
+    }
+  },
+  "salesforce_developer_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 206
+        },
+        {
+          "name": "Capgemini",
+          "count": 18
+        },
+        {
+          "name": "Persistent",
+          "count": 9
+        },
+        {
+          "name": "IBM",
+          "count": 8
+        },
+        {
+          "name": "Pradeepit Consulting Services",
+          "count": 8
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 10
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 147
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 145
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 26
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 21
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 4,
+      "label": "Typical: 4+ years",
+      "sample_size": 1616
+    }
+  },
+  "sap_consultant_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "SAP",
+          "count": 13
+        },
+        {
+          "name": "Continental",
+          "count": 6
+        },
+        {
+          "name": "ABB",
+          "count": 4
+        },
+        {
+          "name": "Walmart",
+          "count": 4
+        },
+        {
+          "name": "Apple",
+          "count": 2
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 0
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 9
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 8
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 2
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 1
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 5,
+      "label": "Typical: 5+ years",
+      "sample_size": 7251
+    }
+  },
+  "sap_consultant_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 1344
+        },
+        {
+          "name": "PRADEEPIT CONSULTING SERVICES PVT LTD",
+          "count": 306
+        },
+        {
+          "name": "Infosys",
+          "count": 172
+        },
+        {
+          "name": "IBM",
+          "count": 157
+        },
+        {
+          "name": "Capgemini",
+          "count": 85
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 179
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 841
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 1702
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 545
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 181
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 5,
+      "label": "Typical: 5+ years",
+      "sample_size": 7251
+    }
+  },
+  "security_engineer_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Wells Fargo",
+          "count": 5
+        },
+        {
+          "name": "Visa",
+          "count": 5
+        },
+        {
+          "name": "JPMorgan Chase Bank",
+          "count": 5
+        },
+        {
+          "name": "Cisco",
+          "count": 2
+        },
+        {
+          "name": "ABB",
+          "count": 2
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 0
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 13
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 6
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 3
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 2
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 4,
+      "label": "Typical: 4+ years",
+      "sample_size": 599
+    }
+  },
+  "security_engineer_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 30
+        },
+        {
+          "name": "Wipro",
+          "count": 24
+        },
+        {
+          "name": "Deloitte Consulting",
+          "count": 18
+        },
+        {
+          "name": "KPMG India",
+          "count": 6
+        },
+        {
+          "name": "Capgemini",
+          "count": 4
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 34
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 135
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 118
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 54
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 18
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 4,
+      "label": "Typical: 4+ years",
+      "sample_size": 599
+    }
+  },
+  "software_engineer_general_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "Oracle",
+          "count": 216
+        },
+        {
+          "name": "Walmart",
+          "count": 169
+        },
+        {
+          "name": "JPMorgan Chase Bank",
+          "count": 140
+        },
+        {
+          "name": "Mastercard",
+          "count": 83
+        },
+        {
+          "name": "Siemens",
+          "count": 71
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 22
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 175
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 98
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 41
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 12
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 3,
+      "label": "Typical: 3+ years",
+      "sample_size": 33969
+    }
+  },
+  "software_engineer_general_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 5209
+        },
+        {
+          "name": "Capgemini",
+          "count": 243
+        },
+        {
+          "name": "IBM",
+          "count": 240
+        },
+        {
+          "name": "Wipro",
+          "count": 240
+        },
+        {
+          "name": "Infosys",
+          "count": 212
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 448
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 2746
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 1469
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 367
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 462
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 3,
+      "label": "Typical: 3+ years",
+      "sample_size": 33969
+    }
+  },
+  "solution_tech_architect_gcc": {
+    "top_companies": {
+      "services": [],
+      "gcc": [
+        {
+          "name": "ABB",
+          "count": 15
+        },
+        {
+          "name": "Barclays",
+          "count": 7
+        },
+        {
+          "name": "Nokia",
+          "count": 4
+        },
+        {
+          "name": "Philips",
+          "count": 4
+        },
+        {
+          "name": "Google",
+          "count": 3
+        }
+      ]
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 0
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 5
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 10
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 9
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 7
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 10,
+      "label": "Typical: 10+ years",
+      "sample_size": 1202
+    }
+  },
+  "solution_tech_architect_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 68
+        },
+        {
+          "name": "Wipro",
+          "count": 60
+        },
+        {
+          "name": "IBM",
+          "count": 24
+        },
+        {
+          "name": "Capgemini",
+          "count": 21
+        },
+        {
+          "name": "Infosys",
+          "count": 19
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 1
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 26
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 84
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 316
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 187
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 10,
+      "label": "Typical: 10+ years",
+      "sample_size": 1202
+    }
+  },
+  "ux_ui_designer_services": {
+    "top_companies": {
+      "services": [
+        {
+          "name": "Accenture",
+          "count": 36
+        },
+        {
+          "name": "HCLTech",
+          "count": 3
+        },
+        {
+          "name": "Incedo",
+          "count": 2
+        },
+        {
+          "name": "Hexaware Technologies",
+          "count": 1
+        },
+        {
+          "name": "IBM",
+          "count": 1
+        }
+      ],
+      "gcc": []
+    },
+    "seniority_spread": [
+      {
+        "bracket": "0–2 yrs",
+        "count": 37
+      },
+      {
+        "bracket": "2–5 yrs",
+        "count": 107
+      },
+      {
+        "bracket": "5–8 yrs",
+        "count": 29
+      },
+      {
+        "bracket": "8–12 yrs",
+        "count": 13
+      },
+      {
+        "bracket": "12+ yrs",
+        "count": 26
+      }
+    ],
+    "typical_experience": {
+      "median_min_years": 3,
+      "label": "Typical: 3+ years",
+      "sample_size": 520
+    }
+  }
+}
