@@ -74,7 +74,7 @@ function SectionWhoHiring({ drawerData, stratum }) {
     <Section>
       <div className="drawer-section-title">Who's hiring</div>
       <p className="drawer-section-subtitle">
-        The companies posting the most jobs for this role, split by employer type.
+        Companies with the highest posting volume for this role across the dataset (Naukri, 2019–2026). Shows structural hiring patterns — who dominates this role in the market — not current openings.
         GCC numbers are small — they make up about 5% of this dataset, and that's a real market fact, not a data gap.
       </p>
       <div className="drawer-companies-grid">
@@ -421,11 +421,12 @@ function EdgeDetail({ pf, selectedEdge, onNavigate, onClearEdge }) {
 // Drawer — main component
 // ═══════════════════════════════════════════════════════════════════════════════
 
-export default function Drawer({ nodeId, layoutData, onClose, onNavigate, selectedEdge, onSelectEdge }) {
+export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate, selectedEdge, onSelectEdge }) {
   const [pf, setPf]               = useState(null)
   const [drawerData, setDrawerData] = useState(null)
   const [loading, setLoading]       = useState(true)
   const [error, setError]           = useState(null)
+  const [activeTab, setActiveTab]   = useState('pathfinder')
 
   useEffect(() => {
     if (!nodeId) return
@@ -435,6 +436,7 @@ export default function Drawer({ nodeId, layoutData, onClose, onNavigate, select
     setError(null)
     setPf(null)
     setDrawerData(null)
+    setActiveTab('pathfinder')
 
     Promise.all([
       getPathfinder(nodeId),
@@ -505,19 +507,48 @@ export default function Drawer({ nodeId, layoutData, onClose, onNavigate, select
       {/* Full node content */}
       {!loading && !error && pf && !selectedEdge && (
         <div className="drawer-content">
+
+          {/* Role header — always visible above tabs */}
           <SectionRoleHeader pf={pf} />
-          <div className="divider" />
-          <SectionWhoHiring drawerData={drawerData} stratum={pf.stratum} />
-          {drawerData && <div className="divider" />}
-          <SectionSeniority drawerData={drawerData} />
-          {drawerData && <div className="divider" />}
-          <SectionDoors pf={pf} onSelectEdge={onSelectEdge} nodeId={nodeId} />
-          <div className="divider" />
-          <SectionOnward pf={pf} onNavigate={handleNavigate} />
-          {(pf.onward_region?.length > 0 || pf.is_hub) && <div className="divider" />}
-          <SectionBridgeSkills pf={pf} />
-          <div className="divider" />
-          <SectionTwoDialects pf={pf} layoutNodes={layoutNodes} />
+
+          {/* Tab bar */}
+          <div className="drawer-tabs">
+            <button
+              className={`drawer-tab${activeTab === 'pathfinder' ? ' drawer-tab--active' : ''}`}
+              onClick={() => setActiveTab('pathfinder')}
+            >
+              Pathfinder
+            </button>
+            <button
+              className={`drawer-tab${activeTab === 'profile' ? ' drawer-tab--active' : ''}`}
+              onClick={() => setActiveTab('profile')}
+            >
+              Profile
+            </button>
+          </div>
+
+          {/* Pathfinder tab */}
+          {activeTab === 'pathfinder' && (
+            <>
+              <SectionDoors pf={pf} onSelectEdge={onSelectEdge} nodeId={nodeId} />
+              <div className="divider" />
+              <SectionOnward pf={pf} onNavigate={handleNavigate} />
+              {(pf.onward_region?.length > 0 || pf.is_hub) && <div className="divider" />}
+              <SectionBridgeSkills pf={pf} />
+              {pf.self_twin_id && <div className="divider" />}
+              <SectionTwoDialects pf={pf} layoutNodes={layoutNodes} />
+            </>
+          )}
+
+          {/* Profile tab */}
+          {activeTab === 'profile' && (
+            <>
+              <SectionWhoHiring drawerData={drawerData} stratum={pf.stratum} />
+              {drawerData && <div className="divider" />}
+              <SectionSeniority drawerData={drawerData} />
+            </>
+          )}
+
         </div>
       )}
     </aside>

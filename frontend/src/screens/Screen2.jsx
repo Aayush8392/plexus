@@ -2,6 +2,8 @@ import { useState, useRef, useCallback } from 'react'
 import { parseCV } from '../data/loader.js'
 import '../styles/Screen2.css'
 
+const API_URL = import.meta.env.VITE_API_URL ?? null
+
 // ── SVG icons ──────────────────────────────────────────────────────────────────
 
 function UploadIcon() {
@@ -59,6 +61,116 @@ function GraphIcon() {
       <line x1="30" y1="32" x2="44" y2="44" stroke="rgba(255,255,255,0.18)" strokeWidth="1" />
       <line x1="20" y1="18" x2="42" y2="20" stroke="rgba(255,255,255,0.10)" strokeWidth="0.8" />
     </svg>
+  )
+}
+
+function JdIcon() {
+  return (
+    <svg className="explore-path-icon" width="40" height="40" viewBox="0 0 40 40"
+      fill="none" aria-hidden="true"
+    >
+      <rect x="6" y="5" width="28" height="30" rx="3" stroke="rgba(255,255,255,0.15)" strokeWidth="1.2" fill="none"/>
+      <line x1="11" y1="12" x2="29" y2="12" stroke="rgba(255,255,255,0.25)" strokeWidth="1.2" strokeLinecap="round"/>
+      <line x1="11" y1="17" x2="29" y2="17" stroke="rgba(255,255,255,0.25)" strokeWidth="1.2" strokeLinecap="round"/>
+      <line x1="11" y1="22" x2="22" y2="22" stroke="rgba(255,255,255,0.25)" strokeWidth="1.2" strokeLinecap="round"/>
+      <circle cx="28" cy="28" r="7" fill="rgba(88,166,255,0.12)" stroke="var(--text-accent)" strokeWidth="1.2"/>
+      <line x1="28" y1="25" x2="28" y2="28" stroke="var(--text-accent)" strokeWidth="1.4" strokeLinecap="round"/>
+      <circle cx="28" cy="30.5" r="0.8" fill="var(--text-accent)"/>
+    </svg>
+  )
+}
+
+// ── JD Classify path ─────────────────────────────────────────────────────────
+function JdPath({ nav }) {
+  const [text, setText]       = useState('')
+  const [loading, setLoading] = useState(false)
+  const [result, setResult]   = useState(null)
+  const [error, setError]     = useState(null)
+
+  const STRATUM_LABEL = { services: 'Services', gcc: 'GCC', mixed: 'Mixed' }
+  const STRATUM_CLASS = { services: 'badge-services', gcc: 'badge-gcc', mixed: 'badge-mixed' }
+
+  async function classify() {
+    if (!text.trim()) return
+    setLoading(true)
+    setError(null)
+    setResult(null)
+    try {
+      const res = await fetch(`${API_URL}/jd/classify`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text }),
+      })
+      if (!res.ok) throw new Error(`Server error ${res.status}`)
+      const data = await res.json()
+      if (!data.top_roles?.length) throw new Error('No matching roles found — try a more detailed job description.')
+      setResult(data)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  // No API — show disabled state
+  if (!API_URL) {
+    return (
+      <div className="jd-path-body jd-path-body--disabled">
+        <JdIcon />
+        <p className="explore-path-copy">
+          Paste a job ad to decode its market stratum and closest role match.
+        </p>
+        <p className="jd-disabled-note">Requires the Plexus API server running locally.</p>
+      </div>
+    )
+  }
+
+  if (result) {
+    return (
+      <div className="jd-result">
+        <div className="jd-result-header">
+          <span className="jd-result-label">Predicted market</span>
+          <span className={`badge ${STRATUM_CLASS[result.predicted_stratum] ?? ''}`}>
+            {STRATUM_LABEL[result.predicted_stratum] ?? result.predicted_stratum}
+          </span>
+        </div>
+        <div className="jd-result-roles">
+          {result.top_roles.slice(0, 3).map(r => (
+            <button
+              key={r.node_id}
+              className="jd-result-role-btn"
+              onClick={() => nav('3', { confirmedRole: r.node_id, cvData: null })}
+            >
+              <span className="jd-result-role-name">{r.label}</span>
+              <span className="jd-result-role-cosine">{(r.cosine * 100).toFixed(0)}% match</span>
+            </button>
+          ))}
+        </div>
+        <button className="jd-retry-btn" onClick={() => { setResult(null); setText('') }}>
+          ← Try another
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <div className="jd-path-body">
+      <textarea
+        className="jd-textarea"
+        placeholder="Paste a job description here…"
+        value={text}
+        onChange={e => setText(e.target.value)}
+        rows={6}
+      />
+      {error && <p className="jd-error">{error}</p>}
+      <button
+        className="explore-path-cta"
+        onClick={classify}
+        disabled={loading || !text.trim()}
+      >
+        {loading ? 'Classifying…' : 'Classify job ad'}
+      </button>
+    </div>
   )
 }
 
@@ -200,7 +312,7 @@ export default function Screen2({ nav }) {
           <h1 className="screen-2-title">How would you like to start?</h1>
         </div>
 
-        <div className="screen-2-paths">
+        <div className="screen-2-paths screen-2-paths--three">
           {/* ── Upload CV path ── */}
           <div className="screen-2-path">
             <span className="path-label">Upload CV</span>
@@ -218,7 +330,7 @@ export default function Screen2({ nav }) {
 
           {/* ── Explore path ── */}
           <div className="screen-2-path">
-            <span className="path-label">Explore without CV</span>
+            <span className="path-label">Explore freely</span>
             <div className="explore-path-body">
               <GraphIcon />
               <p className="explore-path-copy">
@@ -228,9 +340,18 @@ export default function Screen2({ nav }) {
                 className="explore-path-cta"
                 onClick={() => nav('3', { cvData: null, confirmedRole: null })}
               >
-                Start role exploring
+                Start exploring
               </button>
             </div>
+          </div>
+
+          {/* ── Mobile divider ── */}
+          <div className="path-or" aria-hidden="true">or</div>
+
+          {/* ── JD classify path ── */}
+          <div className="screen-2-path">
+            <span className="path-label">Decode a job ad</span>
+            <JdPath nav={nav} />
           </div>
         </div>
       </div>

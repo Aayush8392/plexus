@@ -19,6 +19,7 @@ import { getOverviewLayout } from '../data/loader.js'
 import PlexusNode from '../components/PlexusNode.jsx'
 import PlexusEdge from '../components/PlexusEdge.jsx'
 import Drawer from '../components/Drawer.jsx'
+import CvCompare from '../components/CvCompare.jsx'
 import '../styles/Screen3.css'
 
 // ── react-flow custom type registration ──────────────────────────────────────
@@ -566,6 +567,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   const [drawerOpen, setDrawerOpen]       = useState(false)
   const [selectedEdge, setSelectedEdge]   = useState(null)
   const [forcedPositions, setForcedPositions] = useState(null)
+  const [showCvCompare, setShowCvCompare]     = useState(false)
 
   // Load layout data
   useEffect(() => {
@@ -596,7 +598,6 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
     if (resolved) {
       setPinnedId(resolved)
       setDrawerOpen(true)
-      setGhostDismissed(true)
     }
     // If neither _services nor _gcc exists → cold state, no pin
   }, [layoutData, confirmedRole])
@@ -653,7 +654,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   }
 
   return (
-    <div className={`screen screen-3${drawerOpen ? ' drawer-open' : ''}`}>
+    <div className={`screen screen-3${drawerOpen ? ' drawer-open' : ''}${showCvCompare ? ' cv-compare-open' : ''}`}>
 
       {/* ── Graph canvas ── */}
       <div className="s3-graph-area">
@@ -734,7 +735,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
           <button className="s3-info-close" onClick={() => setShowInfo(false)} aria-label="Close">✕</button>
 
           <h3 className="s3-info-heading">What is this?</h3>
-          <p className="s3-info-body">A structural map of the Indian IT job market built from 28,665 real job postings. Each node is a role. Each edge is a measure of skill overlap between two roles — the stronger the overlap, the more reachable one role is from the other. Roles that share more skills tend to sit closer together, but the layout is an approximation — the exact strength of any connection is shown on the edge when you hover it, not by how near two nodes appear. Roles at the edges of the map have few strong connections in this dataset; that's a structural finding, not a data gap.</p>
+          <p className="s3-info-body">A structural map of the Indian IT job market built from 130,757 real job postings. Each node is a role. Each edge is a measure of skill overlap between two roles — the stronger the overlap, the more reachable one role is from the other. Roles that share more skills tend to sit closer together, but the layout is an approximation — the exact strength of any connection is shown on the edge when you hover it, not by how near two nodes appear. Roles at the edges of the map have few strong connections in this dataset; that's a structural finding, not a data gap.</p>
 
           <h3 className="s3-info-heading">Navigating the map</h3>
           <p className="s3-info-body">Hover a node to see its connections. Click to pin it and open a full breakdown — your doors, where they lead, and the skills that bridge the gap.</p>
@@ -745,11 +746,33 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
         </div>
       )}
 
+      {/* ── Right-side controls (top-right stack) ── */}
+      <div className="s3-right-controls">
+        {cvData && (
+          <button
+            className={`s3-nav-btn s3-cv-compare-btn${showCvCompare ? ' active' : ''}`}
+            onClick={() => setShowCvCompare(v => !v)}
+          >
+            Compare my CV
+          </button>
+        )}
+      </div>
+
+      {/* ── CV Compare overlay ── */}
+      {showCvCompare && cvData && (
+        <CvCompare
+          cvData={cvData}
+          canonData={canonData}
+          onClose={() => setShowCvCompare(false)}
+        />
+      )}
+
       {/* ── Drawer ── */}
       {drawerOpen && pinnedId && (
         <Drawer
           nodeId={pinnedId}
           layoutData={layoutData}
+          cvData={cvData}
           onClose={() => { setPinnedId(null); setSelectedEdge(null) }}
           onNavigate={(id) => { setPinnedId(id); setSelectedEdge(null) }}
           selectedEdge={selectedEdge}
