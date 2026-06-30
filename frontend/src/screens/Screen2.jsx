@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback } from 'react'
+import { useState, useRef, useCallback, useEffect } from 'react'
 import { parseCV } from '../data/loader.js'
 import '../styles/Screen2.css'
 
@@ -182,6 +182,8 @@ const ACCEPTED_TYPES = [
 ]
 
 export default function Screen2({ nav }) {
+  useEffect(() => { window.scrollTo(0, 0) }, [])
+
   const [dragOver, setDragOver]     = useState(false)
   const [parsing, setParsing]       = useState(false)
   const [parseFile, setParseFile]   = useState(null)

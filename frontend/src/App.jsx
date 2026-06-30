@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Screen0 from './screens/Screen0.jsx'
 import Screen1 from './screens/Screen1.jsx'
 import Screen2 from './screens/Screen2.jsx'
 import Screen2b from './screens/Screen2b.jsx'
@@ -7,7 +6,6 @@ import Screen3 from './screens/Screen3.jsx'
 import './styles/index.css'
 
 const BREADCRUMBS = {
-  '0':  [],
   '1':  [],
   '2':  ['IT & Engineering', 'Entry'],
   '2b': ['IT & Engineering', 'Entry', 'Confirm Role'],
@@ -15,10 +13,10 @@ const BREADCRUMBS = {
 }
 
 export default function App() {
-  const [screen, setScreen]           = useState('0')
+  const [screen, setScreen]           = useState('1')
   const [cvData, setCvData]           = useState(null)
   const [confirmedRole, setConfirmedRole] = useState(null)
-  const [entryScreen, setEntryScreen] = useState('2')
+  const [entryScreen, setEntryScreen] = useState('1')
 
   const nav = (to, payload = {}) => {
     if (payload.cvData !== undefined) setCvData(payload.cvData)
@@ -41,7 +39,6 @@ export default function App() {
         ))}
       </nav>
 
-      {screen === '0'  && <Screen0 nav={nav} />}
       {screen === '1'  && <Screen1 nav={nav} />}
       {screen === '2'  && <Screen2 nav={nav} />}
       {screen === '2b' && <Screen2b nav={nav} cvData={cvData} />}

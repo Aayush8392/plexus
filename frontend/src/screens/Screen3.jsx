@@ -5,7 +5,7 @@
 // confirmedRole: resolved from _services → _gcc → cold fallback.
 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
-import { forceSimulation, forceLink, forceManyBody, forceCenter, forceCollide } from 'd3-force'
+import { forceSimulation, forceLink, forceManyBody, forceCenter, forceCollide, forceX, forceY } from 'd3-force'
 import ReactFlow, {
   Background,
   useNodesState,
@@ -79,10 +79,10 @@ function prepareGraphData(layoutData) {
 }
 
 // ── Force layout — runs once on all 38 nodes ──────────────────────────────────
-// Twin pairs attract strongly (distance 60) so they cluster together.
-// Larger seed ring + stronger charge spreads 38 nodes without collision.
-function runForceLayout({ nodes: ln, solidEdges, crossEdges, twinEdges }) {
-  const allEdges = [...solidEdges, ...crossEdges, ...twinEdges]
+// Seed from MDS coordinates (topology-derived, no geometric bias).
+// Simulation refines overlap + cross-stratum bridging; MDS does the heavy lifting.
+function runForceLayout({ nodes: ln, solidEdges, crossEdges }) {
+  const allEdges = [...solidEdges, ...crossEdges]
 
   const degree = {}
   ln.forEach(n => degree[n.id] = 0)
@@ -91,30 +91,23 @@ function runForceLayout({ nodes: ln, solidEdges, crossEdges, twinEdges }) {
     degree[e.target] = (degree[e.target] || 0) + 1
   })
 
-  // Ring seed sorted by node ID hash — deterministic but structure-free.
-  // Avoids MDS diagonal artefact while keeping layout stable across reloads.
+  // MDS seed: topology-derived coordinates from plexus_overview_layout.json.
+  // Tiny deterministic jitter breaks exact degeneracies without adding geometry.
   const hashId = str => {
     let h = 5381
     for (let i = 0; i < str.length; i++) h = (((h << 5) + h) ^ str.charCodeAt(i)) >>> 0
     return h
   }
 
-  const SEED_R    = 620
-  const ISOLATE_R = 760
-
-  const sorted = [...ln].sort((a, b) => hashId(a.id) - hashId(b.id))
-  const angleOf = {}
-  sorted.forEach((n, i) => { angleOf[n.id] = (2 * Math.PI * i) / sorted.length })
-
   const simNodes = ln.map(n => {
-    const angle = angleOf[n.id]
     const r = BUCKET_RADIUS[n.volume_bucket] ?? 18
-    if (degree[n.id] === 0) {
-      const x = Math.cos(angle) * ISOLATE_R
-      const y = Math.sin(angle) * ISOLATE_R
-      return { id: n.id, x, y, r, fx: x, fy: y }
+    const jitter = ((hashId(n.id) % 100) / 1000) - 0.05
+    return {
+      id: n.id,
+      x: (n.x * COORD_SCALE) + jitter,
+      y: (n.y * COORD_SCALE) + jitter,
+      r,
     }
-    return { id: n.id, x: Math.cos(angle) * SEED_R, y: Math.sin(angle) * SEED_R, r }
   })
 
   const nodeById = Object.fromEntries(simNodes.map(n => [n.id, n]))
@@ -124,33 +117,80 @@ function runForceLayout({ nodes: ln, solidEdges, crossEdges, twinEdges }) {
       source:  nodeById[e.source],
       target:  nodeById[e.target],
       cosine:  e.cosine,
-      isTwin:  !!e.is_self_twin,
-      isCross: e.is_cross_stratum && !e.is_self_twin,
+      isCross: !!e.is_cross_stratum,
     }))
     .filter(e => e.source && e.target)
 
-  forceSimulation(simNodes)
+  const sim = forceSimulation(simNodes)
     .force('link', forceLink(simEdges)
-      .distance(d => {
-        if (d.isTwin)  return 60
-        if (d.isCross) return 200
-        return 300 - d.cosine * 150
-      })
-      .strength(d => {
-        if (d.isTwin)  return 1.0
-        if (d.isCross) return 0.25
-        return d.cosine * 0.5
-      })
+      .distance(d => d.isCross ? 350 : 240 - d.cosine * 120)
+      .strength(d => d.isCross ? 0.04 : d.cosine * 0.8)
     )
-    .force('charge', forceManyBody().strength(-900))
-    .force('center', forceCenter(0, 0))
-    .force('collide', forceCollide().radius(d => d.r + 90).strength(0.9))
+    .force('charge', forceManyBody().strength(-600))
+    .force('center', forceCenter(0, 0).strength(0.03))
+    .force('x', forceX(0).strength(0.01))
+    .force('y', forceY(0).strength(0.01))
+    .force('collide', forceCollide().radius(d => d.r + 55).strength(0.6))
+    .alphaDecay(0.005)
+    .velocityDecay(0.2)
+    .alphaMin(0.0001)
     .stop()
-    .tick(500)
 
-  // Stretch horizontally — scale x out, compress y in for a landscape layout
+  sim.tick(1200)
+
+  // Post-sim: place isolates near their strongest cross-stratum neighbor.
+  // Force physics can't bound zero-solid-edge nodes reliably — manual placement
+  // guarantees they sit close to the cluster without being inside it.
+  const posMap = Object.fromEntries(simNodes.map(n => [n.id, n]))
+  const isolateIds = new Set(simNodes.filter(n => degree[n.id] === 0).map(n => n.id))
+
+  // Build a lookup: isolateId → best cross-stratum neighbor id (highest cosine)
+  const isolateNeighbor = {}
+  crossEdges.forEach(e => {
+    const isSrcIsolate = isolateIds.has(e.source)
+    const isTgtIsolate = isolateIds.has(e.target)
+    if (!isSrcIsolate && !isTgtIsolate) return
+    const isolateId  = isSrcIsolate ? e.source : e.target
+    const neighborId = isSrcIsolate ? e.target  : e.source
+    if (!isolateNeighbor[isolateId] || e.cosine > isolateNeighbor[isolateId].cosine) {
+      isolateNeighbor[isolateId] = { neighborId, cosine: e.cosine }
+    }
+  })
+
+  // Compute main cluster centroid (connected nodes only) for fallback placement
+  const connectedNodes = simNodes.filter(n => !isolateIds.has(n.id))
+  const cx = connectedNodes.reduce((s, n) => s + n.x, 0) / (connectedNodes.length || 1)
+  const cy = connectedNodes.reduce((s, n) => s + n.y, 0) / (connectedNodes.length || 1)
+
+  isolateIds.forEach(id => {
+    const best = isolateNeighbor[id]
+    let anchorX, anchorY
+    if (best && posMap[best.neighborId]) {
+      anchorX = posMap[best.neighborId].x
+      anchorY = posMap[best.neighborId].y
+    } else {
+      // No edges at all — find nearest connected node by Euclidean distance
+      const self = posMap[id]
+      let minDist = Infinity, nearest = null
+      connectedNodes.forEach(n => {
+        const d = Math.hypot(n.x - self.x, n.y - self.y)
+        if (d < minDist) { minDist = d; nearest = n }
+      })
+      anchorX = nearest ? nearest.x : cx
+      anchorY = nearest ? nearest.y : cy
+    }
+    // Place outward from centroid so isolate never lands inside the cluster.
+    // Small hash jitter (±25°) prevents all isolates stacking on the same ray.
+    const baseAngle = Math.atan2(anchorY - cy, anchorX - cx)
+    const jitter = ((hashId(id) % 1000) / 1000 - 0.5) * (Math.PI / 3.6)
+    const angle = baseAngle + jitter
+    posMap[id].x = anchorX + Math.cos(angle) * 260
+    posMap[id].y = anchorY + Math.sin(angle) * 260
+  })
+
   simNodes.forEach(n => {
-    if (n.fx === undefined) { n.x *= 1.6; n.y *= 0.65 }
+    n.x *= 1.35
+    n.y *= 0.84
   })
 
   return Object.fromEntries(simNodes.map(n => [n.id, { x: n.x, y: n.y }]))
@@ -399,7 +439,8 @@ function GraphCanvas({
   // Fit view on initial load
   useEffect(() => {
     if (layoutData) {
-      setTimeout(() => fitView({ padding: 0.25, duration: 400 }), 100)
+      const isMobile = window.innerWidth < 640
+      setTimeout(() => fitView({ padding: isMobile ? 0.08 : 0.25, duration: 400 }), 100)
     }
   }, [layoutData])
 
@@ -491,7 +532,7 @@ function GraphCanvas({
       onPaneClick={onPaneClick}
       nodeTypes={NODE_TYPES}
       edgeTypes={EDGE_TYPES}
-      minZoom={0.3}
+      minZoom={0.4}
       maxZoom={2.5}
       translateExtent={translateExtent}
       fitView
@@ -765,7 +806,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
 
       {/* ── Nav buttons (top-left) ── */}
       <div className="s3-nav-btns">
-        <button className="s3-nav-btn" onClick={() => nav('0')}>← Home</button>
+        <button className="s3-nav-btn" onClick={() => nav('1')}>← Home</button>
         <button className="s3-nav-btn" onClick={() => nav(entryScreen ?? '2')}>← Back</button>
         <button
           className={`s3-nav-btn s3-info-btn${showInfo ? ' active' : ''}`}
@@ -781,7 +822,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
           <button className="s3-info-close" onClick={() => setShowInfo(false)} aria-label="Close">✕</button>
 
           <h3 className="s3-info-heading">What is this?</h3>
-          <p className="s3-info-body">A structural map of the Indian IT job market built from 130,757 real job postings. Each node is a role. Each edge is a measure of skill overlap between two roles — the stronger the overlap, the more reachable one role is from the other. Roles that share more skills tend to sit closer together, but the layout is an approximation — the exact strength of any connection is shown on the edge when you hover it, not by how near two nodes appear. Roles at the edges of the map have few strong connections in this dataset; that's a structural finding, not a data gap.</p>
+          <p className="s3-info-body">A structural map of the Indian IT job market built from 130,757 real job postings. Each node is a role. Each edge is a measure of skill overlap between two roles — the stronger the overlap, the more reachable one role is from the other. Roles that share more skills tend to sit closer together, but the layout is an approximation — proximity is a guide, not a guarantee. Roles at the edges of the map have few strong connections in this dataset; that's a structural finding, not a data gap.</p>
 
           <h3 className="s3-info-heading">Navigating the map</h3>
           <p className="s3-info-body">Hover a node to see its connections. Click to pin it and open a full breakdown — your doors, where they lead, and the skills that bridge the gap. With a node pinned, shift-click any other node to compare both roles side by side.</p>

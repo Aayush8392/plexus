@@ -117,31 +117,6 @@ function PlexusEdge({
         }}
       />
 
-      {/* Cosine label — hover only */}
-      {isHovered && (
-        <EdgeLabelRenderer>
-          <div
-            style={{
-              position: 'absolute',
-              transform: `translate(-50%, -50%) translate(${labelX}px, ${labelY}px)`,
-              pointerEvents: 'none',
-              zIndex: 10,
-              background: 'rgba(13, 17, 23, 0.88)',
-              color: 'var(--text-secondary)',
-              fontSize: '0.65rem',
-              fontVariantNumeric: 'tabular-nums',
-              padding: '2px 7px',
-              borderRadius: '9999px',
-              border: '1px solid rgba(255,255,255,0.10)',
-              backdropFilter: 'blur(4px)',
-              letterSpacing: '0.03em',
-              whiteSpace: 'nowrap',
-            }}
-          >
-            {cosine.toFixed(3)}
-          </div>
-        </EdgeLabelRenderer>
-      )}
     </>
   )
 }

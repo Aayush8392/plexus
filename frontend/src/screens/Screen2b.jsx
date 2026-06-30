@@ -19,6 +19,8 @@ function roleColor(roleSlug) {
 // ── Component ──────────────────────────────────────────────────────────────────
 
 export default function Screen2b({ nav, cvData }) {
+  useEffect(() => { window.scrollTo(0, 0) }, [])
+
   const [roles, setRoles]               = useState([])       // 23 canonical roles
   const [selectedSlug, setSelectedSlug] = useState(null)     // role_slug (no stratum)
   const [loading, setLoading]           = useState(true)
