@@ -1,0 +1,10 @@
+{
+  "buildCommand": "cd frontend && npm install && npm run build",
+  "outputDirectory": "frontend/dist",
+  "rewrites": [
+    { "source": "/cv/snap",    "destination": "/api/index.py" },
+    { "source": "/jd/classify","destination": "/api/index.py" },
+    { "source": "/health",     "destination": "/api/index.py" },
+    { "source": "/(.*)",       "destination": "/index.html"   }
+  ]
+}
