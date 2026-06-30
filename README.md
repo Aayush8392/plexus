@@ -81,10 +81,3 @@ Raw data files are not included in this repository. The pipeline expects:
 
 See [DISCLOSURE.md](DISCLOSURE.md) for full data sourcing, methodology, and known limitations.
 
----
-
-## Status
-
-**v1 complete. Deployment: Vercel (pending).**
-
-Pipeline modules 01–07 validated. Frontend screens 1, 2, 2b, 3 locked. FastAPI backend live locally.
