@@ -752,14 +752,6 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
         >ⓘ How to read this map</button>
       </div>
 
-      {/* ── Annotation bar ── */}
-      <div className="s3-annotation">
-        <span>
-          edges shown: cosine ≥ {threshold.toFixed(2)} · {withinCount} connections
-        </span>
-        <span className="s3-annotation-sep">·</span>
-        <span>layout is approximate · edges carry exact similarities · clustering finds no stable partition</span>
-      </div>
 
       {/* ── Info panel ── */}
       {showInfo && (
