@@ -11,7 +11,7 @@
 import { useState, useEffect } from 'react'
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts'
 import { X, ChevronDown, ChevronUp } from 'lucide-react'
-import { getPathfinder, getDrawerData, getOverviewLayout } from '../data/loader.js'
+import { getPathfinder, getDrawerData, getOverviewLayout, getSeniorityProfiles } from '../data/loader.js'
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function roleSlug(nodeId) {
@@ -40,9 +40,29 @@ function Section({ children, className = '' }) {
   )
 }
 
+const SENIORITY_BUCKETS = [
+  { key: 'all',    label: 'All' },
+  { key: 'junior', label: 'Junior' },
+  { key: 'mid',    label: 'Mid' },
+  { key: 'senior', label: 'Senior' },
+  { key: 'staff',  label: 'Staff' },
+]
+
 // ── Section 1 — Role header ───────────────────────────────────────────────────
-function SectionRoleHeader({ pf }) {
+function SectionRoleHeader({ pf, seniorityProfiles, layoutNode }) {
+  const [activeBucket, setActiveBucket] = useState('all')
   const color = `var(--role-${roleSlug(pf.node_id)})`
+
+  const slug = roleSlug(pf.node_id)
+  const profile = seniorityProfiles?.[slug]
+
+  // Skills to display — from seniority profile bucket if available, else pf.top_skills
+  const displaySkills = profile
+    ? (profile[activeBucket]?.top_skills ?? pf.top_skills ?? [])
+    : (pf.top_skills ?? [])
+
+  const sigSkills = layoutNode?.signature_skills ?? []
+
   return (
     <Section className="drawer-section-header">
       <div className="drawer-role-name" style={{ color }}>{pf.label}</div>
@@ -52,11 +72,50 @@ function SectionRoleHeader({ pf }) {
           {pf.posting_count.toLocaleString()} postings
         </span>
       </div>
-      {pf.top_skills?.length > 0 && (
-        <div className="drawer-top-skills">
-          {pf.top_skills.map(s => (
-            <span key={s} className="chip">{s}</span>
-          ))}
+
+      {/* Signature skills */}
+      {sigSkills.length > 0 && (
+        <div className="drawer-sig-skills">
+          <span className="drawer-sig-label">Signature skills</span>
+          <div className="drawer-sig-chips">
+            {sigSkills.slice(0, 4).map(s => (
+              <span key={s} className="chip chip--sig">{s}</span>
+            ))}
+          </div>
+          <span className="drawer-sig-caption">Rare market-wide, common in this role</span>
+        </div>
+      )}
+
+      {/* Seniority toggle + top skills */}
+      {displaySkills.length > 0 && (
+        <div className="drawer-skills-block">
+          {profile && (
+            <div className="drawer-seniority-toggle">
+              {SENIORITY_BUCKETS.map(b => {
+                const hasData = profile[b.key]?.count >= 25
+                if (!hasData && b.key !== 'all') return null
+                return (
+                  <button
+                    key={b.key}
+                    className={`drawer-seniority-btn${activeBucket === b.key ? ' drawer-seniority-btn--active' : ''}`}
+                    onClick={() => setActiveBucket(b.key)}
+                  >
+                    {b.label}
+                  </button>
+                )
+              })}
+            </div>
+          )}
+          <div className="drawer-top-skills">
+            {displaySkills.map(s => (
+              <span key={s} className="chip">{s}</span>
+            ))}
+          </div>
+          {profile && activeBucket !== 'all' && profile[activeBucket]?.count && (
+            <span className="drawer-bucket-count">
+              {profile[activeBucket].count.toLocaleString()} postings at this level
+            </span>
+          )}
         </div>
       )}
     </Section>
@@ -162,7 +221,7 @@ function SectionSeniority({ drawerData }) {
 }
 
 // ── Section 4 — Your doors ────────────────────────────────────────────────────
-function SectionDoors({ pf, onSelectEdge, nodeId }) {
+function SectionDoors({ pf, onSelectEdge, nodeId, allDrawerData }) {
   const [expanded, setExpanded] = useState(false)
   const allDoors  = pf.doors_full  ?? []
   const top5      = pf.doors_top5  ?? []
@@ -198,25 +257,33 @@ function SectionDoors({ pf, onSelectEdge, nodeId }) {
       </div>
 
       <ul className="drawer-doors-list">
-        {shown.map(door => (
-          <li key={door.node_id} className="drawer-door-item">
-            <button
-              className="drawer-door-btn"
-              onClick={() => onSelectEdge({ sourceId: nodeId, targetId: door.node_id })}
-              style={{ '--door-color': `var(--role-${roleSlug(door.node_id)})` }}
-            >
-              <span className="drawer-door-name">{door.label}</span>
-              <ProximityTag tag={door.proximity_tag} />
-            </button>
-            {Array.isArray(door.bridge_skills) && door.bridge_skills.length > 0 && (
-              <div className="drawer-door-skills">
-                {door.bridge_skills.slice(0, 3).map(s => (
-                  <span key={s} className="chip">{s}</span>
-                ))}
-              </div>
-            )}
-          </li>
-        ))}
+        {shown.map(door => {
+          const doorExp = allDrawerData?.[door.node_id]?.typical_experience
+          return (
+            <li key={door.node_id} className="drawer-door-item">
+              <button
+                className="drawer-door-btn"
+                onClick={() => onSelectEdge({ sourceId: nodeId, targetId: door.node_id })}
+                style={{ '--door-color': `var(--role-${roleSlug(door.node_id)})` }}
+              >
+                <span className="drawer-door-name">{door.label}</span>
+                <div className="drawer-door-btn-right">
+                  {doorExp && (
+                    <span className="drawer-exp-badge">{doorExp.label}</span>
+                  )}
+                  <ProximityTag tag={door.proximity_tag} />
+                </div>
+              </button>
+              {Array.isArray(door.bridge_skills) && door.bridge_skills.length > 0 && (
+                <div className="drawer-door-skills">
+                  {door.bridge_skills.slice(0, 3).map(s => (
+                    <span key={s} className="chip">{s}</span>
+                  ))}
+                </div>
+              )}
+            </li>
+          )
+        })}
       </ul>
 
       {extra > 0 && (
@@ -422,11 +489,13 @@ function EdgeDetail({ pf, selectedEdge, onNavigate, onClearEdge }) {
 // ═══════════════════════════════════════════════════════════════════════════════
 
 export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate, selectedEdge, onSelectEdge, onCompare }) {
-  const [pf, setPf]               = useState(null)
-  const [drawerData, setDrawerData] = useState(null)
-  const [loading, setLoading]       = useState(true)
-  const [error, setError]           = useState(null)
-  const [activeTab, setActiveTab]   = useState('pathfinder')
+  const [pf, setPf]                       = useState(null)
+  const [drawerData, setDrawerData]       = useState(null)
+  const [allDrawerData, setAllDrawerData] = useState(null)
+  const [seniorityProfiles, setSeniorityProfiles] = useState(null)
+  const [loading, setLoading]             = useState(true)
+  const [error, setError]                 = useState(null)
+  const [activeTab, setActiveTab]         = useState('pathfinder')
 
   useEffect(() => {
     if (!nodeId) return
@@ -440,13 +509,17 @@ export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate
 
     Promise.all([
       getPathfinder(nodeId),
-      // getDrawerData returns null gracefully if node missing
       getDrawerData(nodeId),
+      // fetch full drawer map + seniority profiles (both cached after first call)
+      fetch('/data/plexus_drawer_data.json').then(r => r.json()),
+      getSeniorityProfiles(),
     ])
-      .then(([pfData, ddData]) => {
+      .then(([pfData, ddData, allDd, senProfiles]) => {
         if (cancelled) return
         setPf(pfData)
         setDrawerData(ddData)
+        setAllDrawerData(allDd)
+        setSeniorityProfiles(senProfiles)
         setLoading(false)
       })
       .catch(err => {
@@ -509,7 +582,11 @@ export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate
         <div className="drawer-content">
 
           {/* Role header — always visible above tabs */}
-          <SectionRoleHeader pf={pf} />
+          <SectionRoleHeader
+            pf={pf}
+            seniorityProfiles={seniorityProfiles}
+            layoutNode={layoutNodes.find(n => n.id === nodeId)}
+          />
 
           {/* Tab bar + compare button */}
           <div className="drawer-tabs">
@@ -535,7 +612,7 @@ export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate
           {/* Pathfinder tab */}
           {activeTab === 'pathfinder' && (
             <>
-              <SectionDoors pf={pf} onSelectEdge={onSelectEdge} nodeId={nodeId} />
+              <SectionDoors pf={pf} onSelectEdge={onSelectEdge} nodeId={nodeId} allDrawerData={allDrawerData} />
               <div className="divider" />
               <SectionOnward pf={pf} onNavigate={handleNavigate} />
               {(pf.onward_region?.length > 0 || pf.is_hub) && <div className="divider" />}
