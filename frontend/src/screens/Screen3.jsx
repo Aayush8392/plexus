@@ -42,34 +42,90 @@ function roleColorVar(nodeId) {
   return `var(--role-${roleSlug(nodeId)})`
 }
 
-// ── Force layout — runs once on layoutData, returns settled node positions ────
-function runForceLayout(layoutData) {
-  const { nodes: ln, edges: le } = layoutData
+// ── Build canonical 23-node dataset from full stratified layout ───────────────
+// Prefers services node per role; falls back to gcc if no services node exists.
+// Solid edges = within-stratum mapped to canonical pairs.
+// Cross edges = cross-stratum cross-role pairs (shown as dotted on toggle).
+function buildCanonicalData(layoutData) {
+  const { nodes: ln, edges: le, metadata } = layoutData
 
-  // Compute centroid of all seed positions so everything starts around (0,0)
-  const rawPositions = ln.map(n => ({
-    x: n.x * COORD_SCALE + (n.stratum === 'gcc' && !n.low_connectivity ? GCC_OFFSET_X : 0),
-    y: n.y * COORD_SCALE + (n.stratum === 'gcc' && !n.low_connectivity ? GCC_OFFSET_Y : 0),
-  }))
-  const cx = rawPositions.reduce((s, p) => s + p.x, 0) / rawPositions.length
-  const cy = rawPositions.reduce((s, p) => s + p.y, 0) / rawPositions.length
+  const bySlug = {}
+  ln.forEach(n => {
+    const slug = roleSlug(n.id)
+    if (!bySlug[slug] || n.stratum === 'services') bySlug[slug] = n
+  })
+  const canonNodes = Object.values(bySlug)
+  const canonIdOf  = id => bySlug[roleSlug(id)]?.id
 
-  const simNodes = ln.map((n, i) => {
-    const x = rawPositions[i].x - cx
-    const y = rawPositions[i].y - cy
+  const solidMap = new Map()
+  le.filter(e => !e.is_cross_stratum).forEach(e => {
+    const s = canonIdOf(e.source), t = canonIdOf(e.target)
+    if (!s || !t || s === t) return
+    const key = [s, t].sort().join('||')
+    if (!solidMap.has(key) || e.cosine > solidMap.get(key).cosine)
+      solidMap.set(key, { source: s, target: t, cosine: e.cosine, is_cross_stratum: false })
+  })
+
+  const crossMap = new Map()
+  le.filter(e => e.is_cross_stratum && roleSlug(e.source) !== roleSlug(e.target)).forEach(e => {
+    const s = canonIdOf(e.source), t = canonIdOf(e.target)
+    if (!s || !t || s === t) return
+    const key = [s, t].sort().join('||')
+    if (solidMap.has(key)) return
+    if (!crossMap.has(key) || e.cosine > crossMap.get(key).cosine)
+      crossMap.set(key, { source: s, target: t, cosine: e.cosine, is_cross_stratum: true })
+  })
+
+  return {
+    nodes:      canonNodes,
+    solidEdges: [...solidMap.values()],
+    crossEdges: [...crossMap.values()],
+    metadata,
+  }
+}
+
+// ── Force layout — runs once on canonical nodes + solid edges ─────────────────
+function runForceLayout({ nodes: ln, edges: le }) {
+
+  // Degree from solid (canonical) edges
+  const degree = {}
+  ln.forEach(n => degree[n.id] = 0)
+  le.forEach(e => { degree[e.source] = (degree[e.source]||0)+1; degree[e.target] = (degree[e.target]||0)+1 })
+
+  // Circular seed — nodes placed evenly on a ring sorted by MDS angle from centroid.
+  // Gives force simulation maximum room; connected nodes converge naturally.
+  // Deterministic: sorted by MDS angle so layout is stable across reloads.
+  const SEED_R     = 500   // initial ring radius
+  const ISOLATE_R  = 650   // degree-0 nodes pinned outside the settled cluster
+
+  const mdsCx = ln.reduce((s, n) => s + n.x, 0) / ln.length
+  const mdsCy = ln.reduce((s, n) => s + n.y, 0) / ln.length
+
+  // Sort by MDS angle so angularly-close nodes start close on the ring
+  const sorted = [...ln].sort((a, b) =>
+    Math.atan2(a.y - mdsCy, a.x - mdsCx) - Math.atan2(b.y - mdsCy, b.x - mdsCx)
+  )
+  const angleOf = {}
+  sorted.forEach((n, i) => { angleOf[n.id] = (2 * Math.PI * i) / sorted.length })
+
+  const simNodes = ln.map(n => {
+    const angle = angleOf[n.id]
+    const r = BUCKET_RADIUS[n.volume_bucket] ?? 18
+
+    if (degree[n.id] === 0) {
+      const x = Math.cos(angle) * ISOLATE_R
+      const y = Math.sin(angle) * ISOLATE_R
+      return { id: n.id, x, y, r, fx: x, fy: y }
+    }
+
     return {
       id: n.id,
-      x,
-      y,
-      r: BUCKET_RADIUS[n.volume_bucket] ?? 18,
-      // Pin isolated nodes near their centred MDS position — no edges means
-      // charge would otherwise blow them to infinity
-      ...(n.low_connectivity ? { fx: x, fy: y } : {}),
+      x: Math.cos(angle) * SEED_R,
+      y: Math.sin(angle) * SEED_R,
+      r,
     }
   })
 
-  // Build id→node map so forceLink gets direct object refs — string lookup
-  // can fail silently in d3-force, leaving cross-stratum edges unresolved.
   const nodeById = Object.fromEntries(simNodes.map(n => [n.id, n]))
 
   const simEdges = le
@@ -79,16 +135,16 @@ function runForceLayout(layoutData) {
       cosine:  e.cosine,
       isCross: e.is_cross_stratum,
     }))
-    .filter(e => e.source && e.target)  // drop any unresolved refs
+    .filter(e => e.source && e.target)
 
   forceSimulation(simNodes)
     .force('link', forceLink(simEdges)
-      .distance(d => d.isCross ? 160 : 260 - d.cosine * 150)
-      .strength(d => d.isCross ? 0.25 : d.cosine * 0.45)
+      .distance(d => d.isCross ? 80 : 260 - d.cosine * 150)
+      .strength(d => d.isCross ? 0.6 : d.cosine * 0.6)
     )
-    .force('charge', forceManyBody().strength(-380))
+    .force('charge', forceManyBody().strength(-600))
     .force('center', forceCenter(0, 0))
-    .force('collide', forceCollide().radius(d => d.r + 55).strength(0.9))
+    .force('collide', forceCollide().radius(d => d.r + 70).strength(0.9))
     .stop()
     .tick(500)
 
@@ -170,6 +226,7 @@ function resolveConfirmedRole(confirmedRole, nodeMap) {
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function GraphCanvas({
+  canonData,
   layoutData,
   forcedPositions,
   confirmedRole,
@@ -206,10 +263,10 @@ function GraphCanvas({
   const hoverTimer = useRef(null)
   const [hoveredEdgeId, setHoveredEdgeId] = useState(null)
 
-  // Build nodes with visual states
+  // Build nodes + edges with visual states from canonical data
   useEffect(() => {
-    if (!layoutData || !forcedPositions) return
-    const { nodes: ln, edges: le } = layoutData
+    if (!canonData || !forcedPositions) return
+    const { nodes: ln, solidEdges, crossEdges } = canonData
     const nodeMap = Object.fromEntries(ln.map(n => [n.id, n]))
 
     const rfNodes = ln.map(n => {
@@ -224,23 +281,17 @@ function GraphCanvas({
         else visualState = 'faded'
       } else if (pinnedId) {
         if (n.id === pinnedId) visualState = 'pinned'
-        else if (adjacentIds.has(n.id)) {
-          visualState = onwardIds.has(n.id) ? 'onward' : 'door'
-        }
+        else if (adjacentIds.has(n.id)) visualState = onwardIds.has(n.id) ? 'onward' : 'door'
         else visualState = 'faded'
       } else if (hoveredId) {
         if (n.id === hoveredId) visualState = 'hovered'
         else visualState = 'dimmed'
       }
 
-      const isGcc = n.stratum === 'gcc'
       return {
         id: n.id,
         type: 'plexusNode',
-        position: forcedPositions?.[n.id] ?? {
-          x: n.x * COORD_SCALE + (isGcc ? GCC_OFFSET_X : 0),
-          y: n.y * COORD_SCALE + (isGcc ? GCC_OFFSET_Y : 0),
-        },
+        position: forcedPositions[n.id] ?? { x: n.x * COORD_SCALE, y: n.y * COORD_SCALE },
         draggable: false,
         selectable: true,
         data: {
@@ -258,70 +309,72 @@ function GraphCanvas({
       }
     })
 
-    // Build node list with settled positions for obstacle avoidance
+    // Positions list for obstacle avoidance
     const nodesWithPos = ln.map(n => ({
       ...n,
-      x: forcedPositions?.[n.id]?.x ?? n.x * COORD_SCALE,
-      y: forcedPositions?.[n.id]?.y ?? n.y * COORD_SCALE,
+      x: forcedPositions[n.id]?.x ?? n.x * COORD_SCALE,
+      y: forcedPositions[n.id]?.y ?? n.y * COORD_SCALE,
     }))
 
-    const rfEdges = le
-      .filter(e => showCrossStratum ? true : !e.is_cross_stratum)
-      .map(e => {
-        const srcColor = `var(--role-${roleSlug(e.source)})`
-        const tgtColor = `var(--role-${roleSlug(e.target)})`
+    // Active edges: solid always; cross only when toggle is on
+    const activeEdges = showCrossStratum
+      ? [...solidEdges, ...crossEdges]
+      : solidEdges
 
-        const isColdCrossVisible = !pinnedId && !hoveredId && showCrossStratum && e.is_cross_stratum
-        let edgeState = (!pinnedId && !hoveredId) ? (isColdCrossVisible ? 'default' : 'faded') : 'default'
-        if (selectedEdge) {
-          const isSelected =
-            (e.source === selectedEdge.sourceId && e.target === selectedEdge.targetId) ||
-            (e.source === selectedEdge.targetId && e.target === selectedEdge.sourceId)
-          edgeState = isSelected ? 'active' : 'faded'
-        } else if (pinnedId) {
-          const touchesPinned = e.source === pinnedId || e.target === pinnedId
-          edgeState = touchesPinned ? 'active' : 'faded'
-        } else if (hoveredId) {
-          const touchesHovered = e.source === hoveredId || e.target === hoveredId
-          edgeState = touchesHovered ? 'active' : 'faded'
-        }
+    const rfEdges = activeEdges.map(e => {
+      const srcColor = `var(--role-${roleSlug(e.source)})`
+      const tgtColor = `var(--role-${roleSlug(e.target)})`
 
-        return {
-          id: `${e.source}--${e.target}`,
-          source: e.source,
-          target: e.target,
-          type: 'plexusEdge',
-          data: {
-            cosine: e.cosine,
-            isCrossStratum: e.is_cross_stratum,
-            srcColor,
-            tgtColor,
-            edgeState,
-            srcRadius: BUCKET_RADIUS[nodeMap[e.source]?.volume_bucket] ?? 18,
-            tgtRadius: BUCKET_RADIUS[nodeMap[e.target]?.volume_bucket] ?? 18,
-            ...(() => {
-              const sp = forcedPositions?.[e.source]
-              const tp = forcedPositions?.[e.target]
-              if (!sp || !tp) return {}
-              const srcR = BUCKET_RADIUS[nodeMap[e.source]?.volume_bucket] ?? 18
-              const tgtR = BUCKET_RADIUS[nodeMap[e.target]?.volume_bucket] ?? 18
-              const ddx = tp.x - sp.x, ddy = tp.y - sp.y
-              const ll = Math.sqrt(ddx*ddx + ddy*ddy) || 1
-              const uux = ddx/ll, uuy = ddy/ll
-              return computeControlPoint(
-                sp.x + uux * srcR, sp.y + uuy * srcR,
-                tp.x - uux * tgtR, tp.y - uuy * tgtR,
-                nodesWithPos, e.source, e.target
-              )
-            })(),
-            isHovered: !!pinnedId && edgeState === 'active' && (hoveredEdgeId === `${e.source}--${e.target}` || hoveredEdgeId === `${e.target}--${e.source}`),
-          },
-        }
-      })
+      let edgeState = (!pinnedId && !hoveredId) ? 'cold' : 'default'
+      if (selectedEdge) {
+        const isSelected =
+          (e.source === selectedEdge.sourceId && e.target === selectedEdge.targetId) ||
+          (e.source === selectedEdge.targetId && e.target === selectedEdge.sourceId)
+        edgeState = isSelected ? 'active' : 'faded'
+      } else if (pinnedId) {
+        edgeState = (e.source === pinnedId || e.target === pinnedId) ? 'active' : 'faded'
+      } else if (hoveredId) {
+        edgeState = (e.source === hoveredId || e.target === hoveredId) ? 'active' : 'faded'
+      }
+
+      const srcR = BUCKET_RADIUS[nodeMap[e.source]?.volume_bucket] ?? 18
+      const tgtR = BUCKET_RADIUS[nodeMap[e.target]?.volume_bucket] ?? 18
+      const sp = forcedPositions[e.source]
+      const tp = forcedPositions[e.target]
+      const cp = (() => {
+        if (!sp || !tp) return {}
+        const ddx = tp.x - sp.x, ddy = tp.y - sp.y
+        const ll = Math.sqrt(ddx*ddx + ddy*ddy) || 1
+        return computeControlPoint(
+          sp.x + ddx/ll * srcR, sp.y + ddy/ll * srcR,
+          tp.x - ddx/ll * tgtR, tp.y - ddy/ll * tgtR,
+          nodesWithPos, e.source, e.target
+        )
+      })()
+
+      return {
+        id: `${e.source}--${e.target}`,
+        source: e.source,
+        target: e.target,
+        type: 'plexusEdge',
+        data: {
+          cosine: e.cosine,
+          isCrossStratum: e.is_cross_stratum,
+          srcColor,
+          tgtColor,
+          edgeState,
+          srcRadius: srcR,
+          tgtRadius: tgtR,
+          ...cp,
+          isHovered: !!pinnedId && edgeState === 'active' &&
+            (hoveredEdgeId === `${e.source}--${e.target}` || hoveredEdgeId === `${e.target}--${e.source}`),
+        },
+      }
+    })
 
     setNodes(rfNodes)
     setEdges(rfEdges)
-  }, [layoutData, forcedPositions, pinnedId, hoveredId, hoveredEdgeId, showCrossStratum, adjacentIds, onwardIds, selectedEdge])
+  }, [canonData, forcedPositions, pinnedId, hoveredId, hoveredEdgeId, showCrossStratum, adjacentIds, onwardIds, selectedEdge])
 
   // Fit view on initial load
   useEffect(() => {
@@ -504,11 +557,11 @@ function MapControls() {
 
 export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   const [layoutData, setLayoutData]       = useState(null)
+  const [canonData, setCanonData]         = useState(null)
   const [loading, setLoading]             = useState(true)
   const [error, setError]                 = useState(null)
   const [pinnedId, setPinnedId]           = useState(null)
   const [hoveredId, setHoveredId]         = useState(null)
-  const [showCrossStratum, setShowCrossStratum] = useState(false)
   const [showInfo, setShowInfo]           = useState(false)
   const [drawerOpen, setDrawerOpen]       = useState(false)
   const [selectedEdge, setSelectedEdge]   = useState(null)
@@ -520,8 +573,10 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
     getOverviewLayout()
       .then(data => {
         if (cancelled) return
+        const canon = buildCanonicalData(data)
         setLayoutData(data)
-        setForcedPositions(runForceLayout(data))
+        setCanonData(canon)
+        setForcedPositions(runForceLayout({ nodes: canon.nodes, edges: canon.solidEdges }))
         setLoading(false)
       })
       .catch(err => {
@@ -548,27 +603,19 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
 
   // Derive adjacency for visual rings when a node is pinned
   const { adjacentIds, onwardIds } = useMemo(() => {
-    if (!layoutData || !pinnedId) return { adjacentIds: new Set(), onwardIds: new Set() }
-    // Door nodes = direct within-stratum neighbours
+    if (!canonData || !pinnedId) return { adjacentIds: new Set(), onwardIds: new Set() }
     const doorSet = new Set()
     const onwardSet = new Set()
-    for (const e of layoutData.edges) {
-      if (e.is_cross_stratum) continue
+    for (const e of canonData.solidEdges) {
       if (e.source === pinnedId) doorSet.add(e.target)
       if (e.target === pinnedId) doorSet.add(e.source)
     }
-    // Onward = 2-hop nodes reachable through doors (not direct neighbours, not pinned)
-    for (const e of layoutData.edges) {
-      if (e.is_cross_stratum) continue
-      if (doorSet.has(e.source) && !doorSet.has(e.target) && e.target !== pinnedId) {
-        onwardSet.add(e.target)
-      }
-      if (doorSet.has(e.target) && !doorSet.has(e.source) && e.source !== pinnedId) {
-        onwardSet.add(e.source)
-      }
+    for (const e of canonData.solidEdges) {
+      if (doorSet.has(e.source) && !doorSet.has(e.target) && e.target !== pinnedId) onwardSet.add(e.target)
+      if (doorSet.has(e.target) && !doorSet.has(e.source) && e.source !== pinnedId) onwardSet.add(e.source)
     }
     return { adjacentIds: doorSet, onwardIds: onwardSet }
-  }, [layoutData, pinnedId])
+  }, [canonData, pinnedId])
 
   // Open/close drawer with pin
   useEffect(() => {
@@ -580,8 +627,8 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   }, [pinnedId])
 
   // Metadata for annotation bar
-  const meta = layoutData?.metadata ?? {}
-  const withinCount = meta.within_stratum_edges ?? 88
+  const meta        = canonData?.metadata ?? {}
+  const withinCount = canonData?.solidEdges.length ?? 0
   const threshold   = meta.threshold ?? 0.20
 
   // ── Loading ────────────────────────────────────────────────────────────────
@@ -635,20 +682,15 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
           <div className="graph-legend-item">
             <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
               <circle cx="7" cy="7" r="5" fill="rgba(139,148,158,0.15)" stroke="#8b949e" strokeWidth="1.5"/>
-            </svg>
-            <span>Role (Services)</span>
-          </div>
-          <div className="graph-legend-item">
-            <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
-              <circle cx="7" cy="7" r="5" fill="rgba(139,148,158,0.15)" stroke="#8b949e" strokeWidth="1.5"/>
               <circle cx="7" cy="7" r="6.5" fill="none" stroke="#e8d5a3" strokeWidth="1.5"/>
             </svg>
-            <span>Role (GCC)</span>
+            <span>Also active in GCCs</span>
           </div>
         </div>
 
         <ReactFlowProvider>
           <GraphCanvas
+            canonData={canonData}
             layoutData={layoutData}
             forcedPositions={forcedPositions}
             confirmedRole={confirmedRole}
@@ -656,7 +698,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
             setPinnedId={setPinnedId}
             hoveredId={hoveredId}
             setHoveredId={setHoveredId}
-            showCrossStratum={showCrossStratum}
+            showCrossStratum={false}
             adjacentIds={adjacentIds}
             onwardIds={onwardIds}
             selectedEdge={selectedEdge}
@@ -680,21 +722,11 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
       {/* ── Annotation bar ── */}
       <div className="s3-annotation">
         <span>
-          edges shown: cosine ≥ {threshold.toFixed(2)} · {withinCount} within-stratum
-          {showCrossStratum && ` + cross-stratum`}
+          edges shown: cosine ≥ {threshold.toFixed(2)} · {withinCount} connections
         </span>
         <span className="s3-annotation-sep">·</span>
         <span>layout is approximate · edges carry exact similarities · clustering finds no stable partition</span>
       </div>
-
-      {/* ── Cross-stratum toggle ── */}
-      <button
-        className={`s3-cross-toggle${showCrossStratum ? ' active' : ''}`}
-        onClick={() => setShowCrossStratum(v => !v)}
-        aria-pressed={showCrossStratum}
-      >
-        {showCrossStratum ? 'Hide GCC overlaps' : 'Show GCC overlaps'}
-      </button>
 
       {/* ── Info panel ── */}
       {showInfo && (

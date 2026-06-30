@@ -92,6 +92,7 @@ function PlexusNode({ id, data }) {
     color,
     radius,
     degree,
+    hasGccTwin,
     lowConnectivity,
     visualState = 'default',
     isPinned,
@@ -102,7 +103,7 @@ function PlexusNode({ id, data }) {
   const lines    = LABEL_LINES[slug]
   const style    = STATE_STYLES[visualState] ?? STATE_STYLES.default
   const diameter = radius * 2
-  const isGcc      = stratum === 'gcc'
+  const isGcc      = stratum === 'gcc' || hasGccTwin
   const isIsolated = lowConnectivity
   const isActive   = visualState !== 'faded' && visualState !== 'dimmed'
 

@@ -8,6 +8,7 @@ import { EdgeLabelRenderer } from 'reactflow'
 
 // ── Opacity by edge state ─────────────────────────────────────────────────────
 const STATE_OPACITY = {
+  cold:      0.15,
   default:   0.60,
   active:    0.90,
   secondary: 0.55,
@@ -96,7 +97,7 @@ function PlexusEdge({
         style={{
           opacity: crossOpacity,
           transition: 'opacity 200ms ease',
-          pointerEvents: edgeState === 'faded' ? 'none' : 'stroke',
+          pointerEvents: (edgeState === 'faded' || edgeState === 'cold') ? 'none' : 'stroke',
         }}
       />
 
