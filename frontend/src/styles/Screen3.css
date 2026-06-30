@@ -655,9 +655,11 @@
     z-index: 110;
   }
 
-  /* Also hide legend on mobile — too cramped */
   .graph-legend {
-    display: none;
+    top: auto;
+    bottom: var(--space-md);
+    right: auto;
+    left: var(--space-md);
   }
 
   .s3-info-panel {
