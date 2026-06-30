@@ -43,11 +43,15 @@ class RoleVectoriser:
         with open(path, encoding="utf-8") as f:
             state = json.load(f)
         self._vocabulary = state["vocabulary"]
+        self._vocab_lower = {k.lower(): v for k, v in self._vocabulary.items()}
         self._idf = np.array(state["idf"], dtype=np.float64)
         self._node_ids = state["node_ids"]
         self._node_matrix = np.array(state["node_matrix"], dtype=np.float64)
         self._node_labels = state["node_labels"]
         print(f"[vectoriser] ready — {len(self._node_ids)} nodes, {len(self._vocabulary)} terms")
+
+    def _build_vocab_lower(self) -> None:
+        self._vocab_lower = {k.lower(): v for k, v in self._vocabulary.items()}
 
     def _load_from_parquet(self) -> None:
         import re
@@ -88,6 +92,7 @@ class RoleVectoriser:
         matrix = vectorizer.fit_transform(docs.values)
 
         self._vocabulary = vectorizer.vocabulary_
+        self._build_vocab_lower()
         self._idf = vectorizer.idf_
         self._node_ids = docs.index.tolist()
         self._node_matrix = matrix.toarray()
@@ -101,14 +106,15 @@ class RoleVectoriser:
     # ── Query ─────────────────────────────────────────────────────────────────
 
     def _query_vector(self, skills: list) -> np.ndarray:
-        """Build a sublinear-TF, IDF-weighted, L2-normalised query vector."""
+        """Build a sublinear-TF, IDF-weighted, L2-normalised query vector.
+        Lookup is case-insensitive so browser Title Case matches pipeline casing."""
         vec = np.zeros(len(self._vocabulary), dtype=np.float64)
         counts: dict = {}
         for s in skills:
-            counts[s] = counts.get(s, 0) + 1
-        for term, count in counts.items():
-            if term in self._vocabulary:
-                idx = self._vocabulary[term]
+            counts[s.lower()] = counts.get(s.lower(), 0) + 1
+        for term_lower, count in counts.items():
+            idx = self._vocab_lower.get(term_lower)
+            if idx is not None:
                 vec[idx] = (1.0 + np.log(count)) * self._idf[idx]
         norm = np.linalg.norm(vec)
         if norm > 0:
