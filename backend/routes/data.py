@@ -17,6 +17,7 @@ ALLOWED = {
     "plexus_pathfinder.json",
     "plexus_drawer_data.json",
     "plexus_graph.json",
+    "plexus_seniority_profiles.json",
 }
 
 
