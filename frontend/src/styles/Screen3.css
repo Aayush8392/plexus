@@ -637,11 +637,7 @@
   }
 
   .s3-annotation {
-    font-size: 0.6rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-    bottom: 45dvh;
+    display: none;
   }
 
   .s3-annotation-sep {
