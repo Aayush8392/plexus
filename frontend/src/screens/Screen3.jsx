@@ -706,17 +706,6 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
           </defs>
         </svg>
 
-        {/* Canvas legend — top-centre, explains Services vs GCC */}
-        <div className="graph-legend">
-          <div className="graph-legend-item">
-            <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
-              <circle cx="7" cy="7" r="5" fill="rgba(139,148,158,0.15)" stroke="#8b949e" strokeWidth="1.5"/>
-              <circle cx="7" cy="7" r="6.5" fill="none" stroke="#e8d5a3" strokeWidth="1.5"/>
-            </svg>
-            <span>Also active in GCCs</span>
-          </div>
-        </div>
-
         <ReactFlowProvider>
           <GraphCanvas
             canonData={canonData}
@@ -739,6 +728,17 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
           />
           <MapControls />
         </ReactFlowProvider>
+      </div>
+
+      {/* ── Legend ── */}
+      <div className="graph-legend">
+        <div className="graph-legend-item">
+          <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
+            <circle cx="7" cy="7" r="5" fill="rgba(139,148,158,0.15)" stroke="#8b949e" strokeWidth="1.5"/>
+            <circle cx="7" cy="7" r="6.5" fill="none" stroke="#e8d5a3" strokeWidth="1.5"/>
+          </svg>
+          <span>Also active in GCCs</span>
+        </div>
       </div>
 
       {/* ── Nav buttons (top-left) ── */}
