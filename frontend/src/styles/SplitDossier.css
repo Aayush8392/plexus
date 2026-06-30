@@ -187,6 +187,8 @@
   display: flex;
   flex-wrap: wrap;
   gap: var(--space-xs);
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .sd-chip-shared {
@@ -302,14 +304,18 @@
 
   .sd-panels {
     flex-direction: column;
+    overflow: hidden;
   }
 
   .sd-panel-slot {
     display: none;
+    overflow-y: auto;
   }
 
   .sd-panel-slot--active {
     display: block;
+    flex: 1;
+    min-height: 0;
   }
 
   .sd-divider { display: none; }

@@ -474,17 +474,10 @@ export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate
         <div className="drawer-drag-handle-pill" />
       </div>
 
-      {/* Header row: compare button + close */}
-      <div className="drawer-header-row">
-        {onCompare && (
-          <button className="drawer-compare-btn" onClick={onCompare} aria-label="Compare with another role">
-            Compare with…
-          </button>
-        )}
-        <button className="drawer-close" onClick={onClose} aria-label="Close drawer">
-          <X size={16} />
-        </button>
-      </div>
+      {/* Close button */}
+      <button className="drawer-close" onClick={onClose} aria-label="Close drawer">
+        <X size={16} />
+      </button>
 
       {/* Loading */}
       {loading && (
@@ -518,7 +511,7 @@ export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate
           {/* Role header — always visible above tabs */}
           <SectionRoleHeader pf={pf} />
 
-          {/* Tab bar */}
+          {/* Tab bar + compare button */}
           <div className="drawer-tabs">
             <button
               className={`drawer-tab${activeTab === 'pathfinder' ? ' drawer-tab--active' : ''}`}
@@ -532,6 +525,11 @@ export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate
             >
               Profile
             </button>
+            {onCompare && (
+              <button className="drawer-compare-btn" onClick={onCompare} aria-label="Compare with another role">
+                Compare with…
+              </button>
+            )}
           </div>
 
           {/* Pathfinder tab */}
