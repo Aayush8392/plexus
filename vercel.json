@@ -1,10 +1,11 @@
 {
   "buildCommand": "cd frontend && npm install && npm run build",
   "outputDirectory": "frontend/dist",
-  "rewrites": [
-    { "source": "/cv/snap",    "destination": "/api/index.py" },
-    { "source": "/jd/classify","destination": "/api/index.py" },
-    { "source": "/health",     "destination": "/api/index.py" },
-    { "source": "/(.*)",       "destination": "/index.html"   }
+  "routes": [
+    { "src": "/cv/snap",     "dest": "/api/index.py" },
+    { "src": "/jd/classify", "dest": "/api/index.py" },
+    { "src": "/health",      "dest": "/api/index.py" },
+    { "handle": "filesystem" },
+    { "src": "/(.*)",        "dest": "/index.html"   }
   ]
 }
