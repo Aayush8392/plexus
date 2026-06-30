@@ -301,11 +301,14 @@
     color: var(--text-primary);
   }
 
+  .sd-container {
+    overflow-y: auto;
+  }
+
   .sd-panels {
     flex-direction: column;
-    flex: 1;
-    min-height: 0;
-    overflow: hidden;
+    flex: none;
+    overflow: visible;
   }
 
   .sd-panel-slot {
@@ -313,11 +316,7 @@
   }
 
   .sd-panel-slot--active {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
+    display: block;
   }
 
   .sd-divider { display: none; }

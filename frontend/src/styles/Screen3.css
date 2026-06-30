@@ -143,6 +143,7 @@
   border: 1px solid rgba(88, 166, 255, 0.30);
   border-radius: var(--radius-pill);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.50);
+  max-width: calc(100% - var(--space-lg) * 2);
   animation: pick-banner-in 180ms ease both;
 }
 
