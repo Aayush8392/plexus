@@ -1,7 +1,7 @@
 // ─── Plexus · src/screens/Screen3.jsx ───────────────────────────────────────
 // Screen 3 — Graph / Pathfinder
-// Cold state: full 32-node MDS map, all 88 within-stratum edges.
-// Pinned state: node clicked → drawer opens, visual rings applied.
+// Cold state: all 38 stratified nodes, no edges.
+// Pinned state: node clicked → drawer opens, ego-network edges + self-twin edge shown.
 // confirmedRole: resolved from _services → _gcc → cold fallback.
 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
@@ -44,111 +44,114 @@ function roleColorVar(nodeId) {
   return `var(--role-${roleSlug(nodeId)})`
 }
 
-// ── Build canonical 23-node dataset from full stratified layout ───────────────
-// Prefers services node per role; falls back to gcc if no services node exists.
-// Solid edges = within-stratum mapped to canonical pairs.
-// Cross edges = cross-stratum cross-role pairs (shown as dotted on toggle).
-function buildCanonicalData(layoutData) {
+// ── Prepare all 38 stratified nodes + separated edge sets ─────────────────────
+// solidEdges  = within-stratum (163 edges)
+// crossEdges  = cross-stratum cross-role (excludes self-twin pairs)
+// twinEdges   = services↔gcc pairs for the same role (shown only on pin)
+// canonNodes  = 22-node canonical list (services preferred) for overlay components
+function prepareGraphData(layoutData) {
   const { nodes: ln, edges: le, metadata } = layoutData
+
+  const solidEdges = le.filter(e => !e.is_cross_stratum)
+  const crossEdges = le.filter(e => e.is_cross_stratum && roleSlug(e.source) !== roleSlug(e.target))
 
   const bySlug = {}
   ln.forEach(n => {
     const slug = roleSlug(n.id)
-    if (!bySlug[slug] || n.stratum === 'services') bySlug[slug] = n
+    if (!bySlug[slug]) bySlug[slug] = []
+    bySlug[slug].push(n)
   })
-  const canonNodes = Object.values(bySlug)
-  const canonIdOf  = id => bySlug[roleSlug(id)]?.id
-
-  const solidMap = new Map()
-  le.filter(e => !e.is_cross_stratum).forEach(e => {
-    const s = canonIdOf(e.source), t = canonIdOf(e.target)
-    if (!s || !t || s === t) return
-    const key = [s, t].sort().join('||')
-    if (!solidMap.has(key) || e.cosine > solidMap.get(key).cosine)
-      solidMap.set(key, { source: s, target: t, cosine: e.cosine, is_cross_stratum: false })
+  const twinEdges = []
+  Object.values(bySlug).forEach(pair => {
+    if (pair.length !== 2) return
+    const svc = pair.find(n => n.stratum === 'services') ?? pair[0]
+    const gcc = pair.find(n => n.stratum === 'gcc')      ?? pair[1]
+    twinEdges.push({ source: svc.id, target: gcc.id, cosine: 0.5, is_cross_stratum: true, is_self_twin: true })
   })
 
-  const crossMap = new Map()
-  le.filter(e => e.is_cross_stratum && roleSlug(e.source) !== roleSlug(e.target)).forEach(e => {
-    const s = canonIdOf(e.source), t = canonIdOf(e.target)
-    if (!s || !t || s === t) return
-    const key = [s, t].sort().join('||')
-    if (solidMap.has(key)) return
-    if (!crossMap.has(key) || e.cosine > crossMap.get(key).cosine)
-      crossMap.set(key, { source: s, target: t, cosine: e.cosine, is_cross_stratum: true })
+  const canonBySlug = {}
+  ln.forEach(n => {
+    const slug = roleSlug(n.id)
+    if (!canonBySlug[slug] || n.stratum === 'services') canonBySlug[slug] = n
   })
 
-  return {
-    nodes:      canonNodes,
-    solidEdges: [...solidMap.values()],
-    crossEdges: [...crossMap.values()],
-    metadata,
-  }
+  return { nodes: ln, canonNodes: Object.values(canonBySlug), solidEdges, crossEdges, twinEdges, metadata }
 }
 
-// ── Force layout — runs once on canonical nodes + solid edges ─────────────────
-function runForceLayout({ nodes: ln, edges: le }) {
+// ── Force layout — runs once on all 38 nodes ──────────────────────────────────
+// Twin pairs attract strongly (distance 60) so they cluster together.
+// Larger seed ring + stronger charge spreads 38 nodes without collision.
+function runForceLayout({ nodes: ln, solidEdges, crossEdges, twinEdges }) {
+  const allEdges = [...solidEdges, ...crossEdges, ...twinEdges]
 
-  // Degree from solid (canonical) edges
   const degree = {}
   ln.forEach(n => degree[n.id] = 0)
-  le.forEach(e => { degree[e.source] = (degree[e.source]||0)+1; degree[e.target] = (degree[e.target]||0)+1 })
+  solidEdges.forEach(e => {
+    degree[e.source] = (degree[e.source] || 0) + 1
+    degree[e.target] = (degree[e.target] || 0) + 1
+  })
 
-  // Circular seed — nodes placed evenly on a ring sorted by MDS angle from centroid.
-  // Gives force simulation maximum room; connected nodes converge naturally.
-  // Deterministic: sorted by MDS angle so layout is stable across reloads.
-  const SEED_R     = 500   // initial ring radius
-  const ISOLATE_R  = 650   // degree-0 nodes pinned outside the settled cluster
+  // Ring seed sorted by node ID hash — deterministic but structure-free.
+  // Avoids MDS diagonal artefact while keeping layout stable across reloads.
+  const hashId = str => {
+    let h = 5381
+    for (let i = 0; i < str.length; i++) h = (((h << 5) + h) ^ str.charCodeAt(i)) >>> 0
+    return h
+  }
 
-  const mdsCx = ln.reduce((s, n) => s + n.x, 0) / ln.length
-  const mdsCy = ln.reduce((s, n) => s + n.y, 0) / ln.length
+  const SEED_R    = 620
+  const ISOLATE_R = 760
 
-  // Sort by MDS angle so angularly-close nodes start close on the ring
-  const sorted = [...ln].sort((a, b) =>
-    Math.atan2(a.y - mdsCy, a.x - mdsCx) - Math.atan2(b.y - mdsCy, b.x - mdsCx)
-  )
+  const sorted = [...ln].sort((a, b) => hashId(a.id) - hashId(b.id))
   const angleOf = {}
   sorted.forEach((n, i) => { angleOf[n.id] = (2 * Math.PI * i) / sorted.length })
 
   const simNodes = ln.map(n => {
     const angle = angleOf[n.id]
     const r = BUCKET_RADIUS[n.volume_bucket] ?? 18
-
     if (degree[n.id] === 0) {
       const x = Math.cos(angle) * ISOLATE_R
       const y = Math.sin(angle) * ISOLATE_R
       return { id: n.id, x, y, r, fx: x, fy: y }
     }
-
-    return {
-      id: n.id,
-      x: Math.cos(angle) * SEED_R,
-      y: Math.sin(angle) * SEED_R,
-      r,
-    }
+    return { id: n.id, x: Math.cos(angle) * SEED_R, y: Math.sin(angle) * SEED_R, r }
   })
 
   const nodeById = Object.fromEntries(simNodes.map(n => [n.id, n]))
 
-  const simEdges = le
+  const simEdges = allEdges
     .map(e => ({
       source:  nodeById[e.source],
       target:  nodeById[e.target],
       cosine:  e.cosine,
-      isCross: e.is_cross_stratum,
+      isTwin:  !!e.is_self_twin,
+      isCross: e.is_cross_stratum && !e.is_self_twin,
     }))
     .filter(e => e.source && e.target)
 
   forceSimulation(simNodes)
     .force('link', forceLink(simEdges)
-      .distance(d => d.isCross ? 80 : 260 - d.cosine * 150)
-      .strength(d => d.isCross ? 0.6 : d.cosine * 0.6)
+      .distance(d => {
+        if (d.isTwin)  return 60
+        if (d.isCross) return 200
+        return 300 - d.cosine * 150
+      })
+      .strength(d => {
+        if (d.isTwin)  return 1.0
+        if (d.isCross) return 0.25
+        return d.cosine * 0.5
+      })
     )
-    .force('charge', forceManyBody().strength(-600))
+    .force('charge', forceManyBody().strength(-900))
     .force('center', forceCenter(0, 0))
-    .force('collide', forceCollide().radius(d => d.r + 70).strength(0.9))
+    .force('collide', forceCollide().radius(d => d.r + 90).strength(0.9))
     .stop()
     .tick(500)
+
+  // Stretch horizontally — scale x out, compress y in for a landscape layout
+  simNodes.forEach(n => {
+    if (n.fx === undefined) { n.x *= 1.6; n.y *= 0.65 }
+  })
 
   return Object.fromEntries(simNodes.map(n => [n.id, { x: n.x, y: n.y }]))
 }
@@ -228,7 +231,7 @@ function resolveConfirmedRole(confirmedRole, nodeMap) {
 // ═══════════════════════════════════════════════════════════════════════════════
 
 function GraphCanvas({
-  canonData,
+  graphData,
   layoutData,
   forcedPositions,
   confirmedRole,
@@ -236,7 +239,6 @@ function GraphCanvas({
   setPinnedId,
   hoveredId,
   setHoveredId,
-  showCrossStratum,
   adjacentIds,
   onwardIds,
   selectedEdge,
@@ -269,10 +271,10 @@ function GraphCanvas({
   const hoverTimer = useRef(null)
   const [hoveredEdgeId, setHoveredEdgeId] = useState(null)
 
-  // Build nodes + edges with visual states from canonical data
+  // Build nodes + edges with visual states from all 38 stratified nodes
   useEffect(() => {
-    if (!canonData || !forcedPositions) return
-    const { nodes: ln, solidEdges, crossEdges } = canonData
+    if (!graphData || !forcedPositions) return
+    const { nodes: ln, solidEdges, crossEdges, twinEdges } = graphData
     const nodeMap = Object.fromEntries(ln.map(n => [n.id, n]))
 
     const rfNodes = ln.map(n => {
@@ -318,21 +320,25 @@ function GraphCanvas({
       }
     })
 
-    // Positions list for obstacle avoidance
     const nodesWithPos = ln.map(n => ({
       ...n,
       x: forcedPositions[n.id]?.x ?? n.x * COORD_SCALE,
       y: forcedPositions[n.id]?.y ?? n.y * COORD_SCALE,
     }))
 
-    // Active edges: solid always; cross only when toggle is on
-    const activeEdges = showCrossStratum
-      ? [...solidEdges, ...crossEdges]
-      : solidEdges
+    // All solid + cross edges visible on hover/pin; cold state = no edges rendered
+    const regularEdges = [...solidEdges, ...crossEdges]
 
-    const rfEdges = activeEdges.map(e => {
+    // Self-twin edges — only shown when pinnedId touches one of the pair
+    const activeTwinEdges = pinnedId
+      ? twinEdges.filter(e => e.source === pinnedId || e.target === pinnedId)
+      : []
+
+    const buildRfEdge = (e) => {
+      const slug = roleSlug(e.source)
       const srcColor = `var(--role-${roleSlug(e.source)})`
       const tgtColor = `var(--role-${roleSlug(e.target)})`
+      const isTwin = !!e.is_self_twin
 
       let edgeState = (!pinnedId && !hoveredId) ? 'cold' : 'default'
       if (selectedEdge) {
@@ -345,13 +351,17 @@ function GraphCanvas({
       } else if (hoveredId) {
         edgeState = (e.source === hoveredId || e.target === hoveredId) ? 'active' : 'faded'
       }
+      if (isTwin) edgeState = 'active'
 
       const srcR = BUCKET_RADIUS[nodeMap[e.source]?.volume_bucket] ?? 18
       const tgtR = BUCKET_RADIUS[nodeMap[e.target]?.volume_bucket] ?? 18
       const sp = forcedPositions[e.source]
       const tp = forcedPositions[e.target]
+
+      // Self-twin edges are very short — skip obstacle avoidance, use midpoint
       const cp = (() => {
         if (!sp || !tp) return {}
+        if (isTwin) return { cpx: (sp.x + tp.x) / 2, cpy: (sp.y + tp.y) / 2 }
         const ddx = tp.x - sp.x, ddy = tp.y - sp.y
         const ll = Math.sqrt(ddx*ddx + ddy*ddy) || 1
         return computeControlPoint(
@@ -369,21 +379,22 @@ function GraphCanvas({
         data: {
           cosine: e.cosine,
           isCrossStratum: e.is_cross_stratum,
+          isSelfTwin: isTwin,
           srcColor,
           tgtColor,
           edgeState,
           srcRadius: srcR,
           tgtRadius: tgtR,
           ...cp,
-          isHovered: !!pinnedId && edgeState === 'active' &&
+          isHovered: !!pinnedId && edgeState === 'active' && !isTwin &&
             (hoveredEdgeId === `${e.source}--${e.target}` || hoveredEdgeId === `${e.target}--${e.source}`),
         },
       }
-    })
+    }
 
     setNodes(rfNodes)
-    setEdges(rfEdges)
-  }, [canonData, forcedPositions, pinnedId, hoveredId, hoveredEdgeId, showCrossStratum, adjacentIds, onwardIds, selectedEdge, compareId])
+    setEdges([...regularEdges.map(buildRfEdge), ...activeTwinEdges.map(buildRfEdge)])
+  }, [graphData, forcedPositions, pinnedId, hoveredId, hoveredEdgeId, adjacentIds, onwardIds, selectedEdge, compareId])
 
   // Fit view on initial load
   useEffect(() => {
@@ -582,7 +593,8 @@ function MapControls() {
 
 export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   const [layoutData, setLayoutData]       = useState(null)
-  const [canonData, setCanonData]         = useState(null)
+  const [graphData, setGraphData]         = useState(null)   // 38-node data for canvas
+  const [canonData, setCanonData]         = useState(null)   // 22-node data for overlays
   const [loading, setLoading]             = useState(true)
   const [error, setError]                 = useState(null)
   const [pinnedId, setPinnedId]           = useState(null)
@@ -601,17 +613,22 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
     getOverviewLayout()
       .then(data => {
         if (cancelled) return
-        const canon = buildCanonicalData(data)
+        const prepared = prepareGraphData(data)
         setLayoutData(data)
-        setCanonData(canon)
-        setForcedPositions(runForceLayout({ nodes: canon.nodes, edges: canon.solidEdges }))
+        setGraphData(prepared)
+        // Canonical 22-node shape for overlay components (CvCompare, SplitDossier)
+        const canonIds = new Set(prepared.canonNodes.map(n => n.id))
+        setCanonData({
+          nodes: prepared.canonNodes,
+          solidEdges: prepared.solidEdges.filter(e => canonIds.has(e.source) && canonIds.has(e.target)),
+          crossEdges: [],
+          metadata: prepared.metadata,
+        })
+        setForcedPositions(runForceLayout(prepared))
         setLoading(false)
       })
       .catch(err => {
-        if (!cancelled) {
-          setError(err.message)
-          setLoading(false)
-        }
+        if (!cancelled) { setError(err.message); setLoading(false) }
       })
     return () => { cancelled = true }
   }, [])
@@ -625,24 +642,24 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
       setPinnedId(resolved)
       setDrawerOpen(true)
     }
-    // If neither _services nor _gcc exists → cold state, no pin
   }, [layoutData, confirmedRole])
 
-  // Derive adjacency for visual rings when a node is pinned
+  // Derive adjacency for visual rings — uses all non-twin edges (solid + cross)
   const { adjacentIds, onwardIds } = useMemo(() => {
-    if (!canonData || !pinnedId) return { adjacentIds: new Set(), onwardIds: new Set() }
+    if (!graphData || !pinnedId) return { adjacentIds: new Set(), onwardIds: new Set() }
+    const allEdges = [...graphData.solidEdges, ...graphData.crossEdges]
     const doorSet = new Set()
     const onwardSet = new Set()
-    for (const e of canonData.solidEdges) {
+    for (const e of allEdges) {
       if (e.source === pinnedId) doorSet.add(e.target)
       if (e.target === pinnedId) doorSet.add(e.source)
     }
-    for (const e of canonData.solidEdges) {
+    for (const e of allEdges) {
       if (doorSet.has(e.source) && !doorSet.has(e.target) && e.target !== pinnedId) onwardSet.add(e.target)
       if (doorSet.has(e.target) && !doorSet.has(e.source) && e.source !== pinnedId) onwardSet.add(e.source)
     }
     return { adjacentIds: doorSet, onwardIds: onwardSet }
-  }, [canonData, pinnedId])
+  }, [graphData, pinnedId])
 
   // Open/close drawer with pin; clear compare when pin clears
   useEffect(() => {
@@ -656,8 +673,8 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   }, [pinnedId])
 
   // Metadata for annotation bar
-  const meta        = canonData?.metadata ?? {}
-  const withinCount = canonData?.solidEdges.length ?? 0
+  const meta        = graphData?.metadata ?? {}
+  const withinCount = graphData?.solidEdges.length ?? 0
   const threshold   = meta.threshold ?? 0.20
 
   // ── Loading ────────────────────────────────────────────────────────────────
@@ -708,7 +725,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
 
         <ReactFlowProvider>
           <GraphCanvas
-            canonData={canonData}
+            graphData={graphData}
             layoutData={layoutData}
             forcedPositions={forcedPositions}
             confirmedRole={confirmedRole}
@@ -716,7 +733,6 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
             setPinnedId={setPinnedId}
             hoveredId={hoveredId}
             setHoveredId={setHoveredId}
-            showCrossStratum={false}
             adjacentIds={adjacentIds}
             onwardIds={onwardIds}
             selectedEdge={selectedEdge}
@@ -735,9 +751,15 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
         <div className="graph-legend-item">
           <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
             <circle cx="7" cy="7" r="5" fill="rgba(139,148,158,0.15)" stroke="#8b949e" strokeWidth="1.5"/>
+          </svg>
+          <span>Services</span>
+        </div>
+        <div className="graph-legend-item">
+          <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
+            <circle cx="7" cy="7" r="4" fill="rgba(139,148,158,0.15)" stroke="#8b949e" strokeWidth="1.5"/>
             <circle cx="7" cy="7" r="6.5" fill="none" stroke="#e8d5a3" strokeWidth="1.5"/>
           </svg>
-          <span>Also active in GCCs</span>
+          <span>GCC</span>
         </div>
       </div>
 
@@ -766,7 +788,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
 
           <h3 className="s3-info-heading">How it works</h3>
           <p className="s3-info-body">Edges are weighted by cosine similarity — how much two roles share the same skills. 0 means nothing in common, 1 means identical skill profiles. This map shows edges at 0.20 and above. A score of 0.20–0.35 is a stretch move. 0.35–0.50 is a natural door. Above 0.50, the roles are nearly interchangeable.</p>
-          <p className="s3-info-body">One of the map's core findings is that the same job title means a different role depending on who's hiring. Indian IT services firms (Wipro, Infosys, TCS) and Global Capability Centres — multinationals running their own in-house tech teams in India (Walmart Tech, JP Morgan, Google) — hire for the same titles but with meaningfully different skill profiles. The "Show GCC overlaps" toggle reveals the cross-connections between the two.</p>
+          <p className="s3-info-body">One of the map's core findings is that the same job title means a different role depending on who's hiring. Indian IT services firms (Wipro, Infosys, TCS) and Global Capability Centres — multinationals running their own in-house tech teams in India (Walmart Tech, JP Morgan, Google) — hire for the same titles but with meaningfully different skill profiles. Both employer-type nodes are on the map: plain circles are Services roles, gold-ringed circles are GCC roles. Pin either to explore its specific doors and skill profile.</p>
         </div>
       )}
 

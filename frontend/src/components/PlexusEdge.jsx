@@ -8,7 +8,7 @@ import { EdgeLabelRenderer } from 'reactflow'
 
 // ── Opacity by edge state ─────────────────────────────────────────────────────
 const STATE_OPACITY = {
-  cold:      0.15,
+  cold:      0.00,
   default:   0.60,
   active:    0.90,
   secondary: 0.55,
@@ -37,6 +37,7 @@ function PlexusEdge({
   const {
     cosine = 0.25,
     isCrossStratum = false,
+    isSelfTwin = false,
     srcColor = 'var(--text-muted)',
     tgtColor = 'var(--text-muted)',
     edgeState = 'default',
@@ -63,10 +64,26 @@ function PlexusEdge({
   const labelX = cx
   const labelY = cy
 
-  const opacity  = STATE_OPACITY[edgeState] ?? 0.55
-  const width    = cosineToWidth(cosine)
+  const opacity = STATE_OPACITY[edgeState] ?? 0.55
+  const width   = cosineToWidth(cosine)
 
-  // Cross-stratum edges: slightly different visual — dashed, lower base opacity
+  // Self-twin edge: thin dashed line in role hue, no gradient, no cosine label
+  if (isSelfTwin) {
+    return (
+      <path
+        id={id}
+        d={edgePath}
+        fill="none"
+        stroke={srcColor}
+        strokeWidth={1.5}
+        strokeDasharray="4 3"
+        strokeLinecap="round"
+        style={{ opacity: 0.55, pointerEvents: 'none' }}
+      />
+    )
+  }
+
+  // Cross-stratum cross-role edges: slightly dashed, lower opacity
   const dashArray    = isCrossStratum ? '5 4' : undefined
   const crossOpacity = isCrossStratum ? opacity * 0.75 : opacity
 
@@ -83,7 +100,6 @@ function PlexusEdge({
           <stop offset="100%" stopColor={tgtColor} />
         </linearGradient>
       </defs>
-
 
       {/* Filament — thin precise line, interactive */}
       <path

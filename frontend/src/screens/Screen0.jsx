@@ -12,7 +12,7 @@ export default function Screen0({ nav }) {
         <span className="s0-header-metric">⚑ 130,757 JOB ADS DECODED</span>
       </div>
 
-      {/* ── Headline + graph — same width container ───────────────────────── */}
+      {/* ── Headline ─────────────────────────────────────────────────────── */}
       <div className="s0-hero-block">
         <h1 className="s0-headline">
           The structure of the Indian tech market,{' '}
@@ -25,20 +25,27 @@ export default function Screen0({ nav }) {
           spectrum of 22 canonical roles connected by skill-overlap, stratified
           by employer-type. Every node below is real. So is every edge.
         </p>
-        <div className="s0-eyebrow" style={{ marginTop: 'var(--space-sm)' }}>THE MARKET · 38 STRATIFIED NODES · 275 SKILL-OVERLAP EDGES</div>
-        <GhostGraph />
+      </div>
+
+      {/* ── Ghost graph + Moat side by side ──────────────────────────────── */}
+      <div className="s0-section">
+        <div className="s0-split-eyebrows">
+          <div className="s0-eyebrow">THE MARKET · 38 STRATIFIED NODES · 275 SKILL-OVERLAP EDGES</div>
+          <div className="s0-eyebrow">SAME TITLE · DIFFERENT MARKET</div>
+        </div>
+        <div className="s0-split">
+          <GhostGraph />
+          <div className="s0-split-divider" />
+          <MoatDemo />
+        </div>
       </div>
 
       {/* ── Role volume bar chart ─────────────────────────────────────────── */}
       <div className="s0-section">
         <div className="s0-eyebrow">POSTING VOLUME · 22 CANONICAL ROLES · NAUKRI 2019–2026</div>
-        <RoleVolumePlot />
-      </div>
-
-      {/* ── Moat demo ────────────────────────────────────────────────────── */}
-      <div className="s0-section">
-        <div className="s0-eyebrow">SAME TITLE · DIFFERENT MARKET</div>
-        <MoatDemo />
+        <div className="rvp-scroll">
+          <RoleVolumePlot />
+        </div>
       </div>
 
       {/* ── Paths ────────────────────────────────────────────────────────── */}

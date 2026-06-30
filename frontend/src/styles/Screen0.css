@@ -7,6 +7,8 @@
   padding: var(--space-lg) clamp(24px, 8vw, 120px);
   background: #0d1117;
   width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
   box-sizing: border-box;
 }
 
@@ -246,6 +248,53 @@
   transform: translateY(0);
 }
 
+/* ── Split row (ghost graph + moat) ─────────────────────────────────────── */
+.s0-split-eyebrows {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 0;
+  margin-bottom: var(--space-sm);
+  padding: 0 1px;
+}
+
+.s0-split {
+  display: grid;
+  grid-template-columns: 3fr 1px 2fr;
+  gap: 0;
+  align-items: stretch;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-height: 340px;
+}
+
+.s0-split-divider {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* inside the split, ghost graph fills naturally */
+.s0-split .ghost-graph-wrapper {
+  border: none;
+  border-radius: 0;
+  background: none;
+  height: 100%;
+}
+
+.s0-split .ghost-graph-svg {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* inside the split, moat is vertically centered */
+.s0-split .mdt-wrap {
+  padding: clamp(16px, 2vw, 24px) clamp(16px, 2vw, 28px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
 /* ── Ghost graph ─────────────────────────────────────────────────────────── */
 .ghost-graph-wrapper {
   width: 100%;
@@ -273,13 +322,32 @@
 }
 
 /* ── Role volume bar chart ───────────────────────────────────────────────── */
+.rvp-scroll {
+  max-height: 260px;
+  overflow-y: auto;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius-lg);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.12) transparent;
+}
+
+.rvp-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+
+.rvp-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.rvp-scroll::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.14);
+  border-radius: 2px;
+}
+
 .rvp-wrap {
   display: flex;
   flex-direction: column;
   gap: 0;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
 }
 
 .rvp-row {
@@ -558,6 +626,29 @@
     display: none;
   }
 
+  .s0-split {
+    grid-template-columns: 1fr;
+  }
+
+  .s0-split-divider {
+    width: 100%;
+    height: 1px;
+  }
+
+  .s0-split-eyebrows {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+
+  .s0-split {
+    max-height: none;
+  }
+
+  .s0-split .mdt-wrap {
+    padding: var(--space-md);
+    justify-content: flex-start;
+  }
+
   .mdt-grid {
     grid-template-columns: 1fr auto 1fr;
   }
@@ -568,20 +659,3 @@
   .role-label   { font-size: 11px; }
 }
 
-@media (max-width: 400px) {
-  .mdt-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .mdt-sep {
-    width: 100%;
-    height: 1px;
-    margin: var(--space-sm) 0;
-  }
-
-  .mdt-col {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 5px;
-  }
-}
