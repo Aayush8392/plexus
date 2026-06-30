@@ -41,8 +41,12 @@ class _Tee:
         self.streams = streams
     def write(self, data):
         for s in self.streams:
-            s.write(data)
-            s.flush()
+            try:
+                s.write(data)
+                s.flush()
+            except UnicodeEncodeError:
+                s.write(data.encode("ascii", "replace").decode("ascii"))
+                s.flush()
     def flush(self):
         for s in self.streams:
             s.flush()
