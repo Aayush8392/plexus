@@ -477,9 +477,8 @@
   background: rgba(210, 153, 34, 0.08);
 }
 
-/* Shift toggle + legend left when drawer is open */
-.screen-3.drawer-open .s3-cross-toggle,
-.screen-3.drawer-open .graph-legend {
+/* Shift toggle left when drawer is open */
+.screen-3.drawer-open .s3-cross-toggle {
   right: calc(380px + var(--space-md));
 }
 
