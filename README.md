@@ -25,7 +25,7 @@ A seven-module Python pipeline processes raw Naukri job posting data:
 
 1. **Ingest** — IT subset extraction (dual-field keyword filter), salary cleaning
 2. **Skill normalisation** — embedding-based resolution via `sentence-transformers` (local inference)
-3. **Role assignment** — 23 canonical IT roles, rule-based with KMeans cross-check, seeded from O*NET titles
+3. **Role assignment** — 22 canonical IT roles, rule-based with KMeans cross-check, seeded from O*NET titles
 4. **Employer classification** — token-boundary matching against GCC Journal India list; agency heuristic (staffing-specific)
 5. **Graph construction** — 38 stratified nodes, TF-IDF skill vectors, symmetric cosine edges at threshold ≥ 0.20, MDS layout
 6. **Pathfinder engine** — precomputed adjacency, bridge skills, onward region, seniority stopword guard per node

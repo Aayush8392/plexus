@@ -24,7 +24,7 @@ Raw data files are not included in this repository and are not redistributed. Th
 
 ## What the graph encodes
 
-**Nodes** — 38 stratified role nodes across 23 canonical IT roles. Each role appears as up to two nodes: one for the services labour market (`Role@Services`) and one for the GCC labour market (`Role@GCC`). Services and GCC nodes of the same role share an identity colour but are analytically separate — they have different skill vectors, different posting volumes, and different edges.
+**Nodes** — 38 stratified role nodes across 22 canonical IT roles. Each role appears as up to two nodes: one for the services labour market (`Role@Services`) and one for the GCC labour market (`Role@GCC`). Services and GCC nodes of the same role share an identity colour but are analytically separate — they have different skill vectors, different posting volumes, and different edges.
 
 **Edges** — symmetric cosine similarity between TF-IDF skill vectors. An edge exists when cosine ≥ 0.20. Edge width encodes cosine weight. Edges are a proxy for skill-overlap reachability — not a guarantee of career movement, not a measure of salary gain, not a prediction of hiring probability.
 
