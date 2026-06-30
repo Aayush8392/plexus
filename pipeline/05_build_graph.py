@@ -197,6 +197,33 @@ for i, node_id in enumerate(node_ids):
     top_skills = [feature_names[j] for j in top_idx if row[j] > 0]
     nodes[node_id]["top_skills"] = top_skills
 
+# Signature skills: high TF-IDF weight in this node + low global document frequency
+# Appear in <= 20% of role-documents (<=6 of 32 nodes) — distinguishes role from generic IT
+doc_freq = np.asarray((tfidf_matrix > 0).sum(axis=0)).flatten()
+MAX_DF_FOR_SIGNATURE = max(1, int(n_nodes * 0.20))
+
+SIGNATURE_STOPWORDS = {
+    'agile', 'scrum', 'git', 'rest', 'documentation', 'communication',
+    'leadership', 'teamwork', 'problem solving', 'analytical', 'interpersonal',
+    'microsoft office', 'presentation', 'negotiation', 'pan', 'pharmaceutical',
+    'salesforce', 'ms office', 'ms excel', 'excel',
+}
+
+print(f"\n--- Signature skills (max_df={MAX_DF_FOR_SIGNATURE} of {n_nodes} nodes) ---")
+for i, node_id in enumerate(node_ids):
+    row = dense[i]
+    candidates = [
+        (row[j], feature_names[j])
+        for j in range(len(feature_names))
+        if row[j] > 0
+        and doc_freq[j] <= MAX_DF_FOR_SIGNATURE
+        and feature_names[j].lower() not in SIGNATURE_STOPWORDS
+    ]
+    candidates.sort(reverse=True)
+    sig_skills = [skill for _, skill in candidates[:5]]
+    nodes[node_id]["signature_skills"] = sig_skills
+    print(f"  {node_id:<45}  {sig_skills}")
+
 
 # ── Cosine similarity + edges ─────────────────────────────────────────────────
 
@@ -365,6 +392,93 @@ for i, nid in enumerate(node_ids):
     nodes[nid]["x"] = round(float(x_final[i]), 2)
     nodes[nid]["y"] = round(float(y_final[i]), 2)
 
+
+# ── Seniority profiles ───────────────────────────────────────────────────────
+# Parse `experience` text across ALL classified rows (not just services/gcc)
+# to maximise per-bucket coverage. Uses the same fitted vectorizer vocabulary.
+
+print("\n--- Seniority profiles ---")
+
+import re as _re
+
+SENIORITY_BUCKETS = [
+    ("junior", 0,  2),
+    ("mid",    3,  5),
+    ("senior", 6, 10),
+    ("staff",  11, 999),
+]
+MIN_BUCKET_POSTINGS = 25  # below this → skip bucket (unstable vector)
+
+def _parse_exp_min(exp_str):
+    if pd.isna(exp_str):
+        return None
+    m = _re.search(r'(\d+)', str(exp_str))
+    return int(m.group(1)) if m else None
+
+# Work on all classified rows (any employer_type)
+df_classified = df[df["role"] != "unclassified"].copy()
+df_classified["exp_min"] = df_classified["experience"].apply(_parse_exp_min)
+
+seniority_profiles = {}
+
+# Get unique canonical roles from the node registry
+canonical_roles = {}  # role_label → role_slug
+for nid, meta in nodes.items():
+    canonical_roles[meta["role"]] = meta["role_slug"]
+
+for role_label, role_slug in canonical_roles.items():
+    role_rows = df_classified[df_classified["role"] == role_label]
+    if len(role_rows) == 0:
+        continue
+
+    buckets_out = {}
+
+    # "all" bucket — full role TF-IDF (use existing node vector if services exists,
+    # else gcc; same top_skills already computed)
+    svc_nid = f"{role_slug}_services"
+    gcc_nid = f"{role_slug}_gcc"
+    canon_nid = svc_nid if svc_nid in nodes else gcc_nid if gcc_nid in nodes else None
+    if canon_nid:
+        buckets_out["all"] = {
+            "top_skills": nodes[canon_nid]["top_skills"],
+            "count": int(len(role_rows)),
+        }
+
+    for bucket_label, lo, hi in SENIORITY_BUCKETS:
+        bucket_rows = role_rows[
+            role_rows["exp_min"].notna() &
+            (role_rows["exp_min"] >= lo) &
+            (role_rows["exp_min"] <= hi)
+        ]
+        count = len(bucket_rows)
+        if count < MIN_BUCKET_POSTINGS:
+            buckets_out[bucket_label] = {"top_skills": [], "count": count}
+            continue
+
+        # Build skill list for this bucket
+        all_skills = []
+        for cell in bucket_rows["normalised_skills"]:
+            all_skills.extend(extract_skills(cell))
+
+        if not all_skills:
+            buckets_out[bucket_label] = {"top_skills": [], "count": count}
+            continue
+
+        # Transform using the already-fitted vectorizer (same vocabulary)
+        bucket_vec = vectorizer.transform([all_skills])
+        bucket_dense = bucket_vec.toarray()[0]
+        top_idx = bucket_dense.argsort()[-8:][::-1]
+        top_skills = [feature_names[j] for j in top_idx if bucket_dense[j] > 0]
+
+        buckets_out[bucket_label] = {"top_skills": top_skills, "count": count}
+
+    seniority_profiles[role_slug] = buckets_out
+    bucket_summary = {k: v["count"] for k, v in buckets_out.items()}
+    print(f"  {role_slug:<45}  {bucket_summary}")
+
+with open("../output/plexus_seniority_profiles.json", "w", encoding="utf-8") as f:
+    json.dump(seniority_profiles, f, indent=2)
+print(f"Written: output/plexus_seniority_profiles.json  ({len(seniority_profiles)} roles)")
 
 # ── Write JSON outputs ────────────────────────────────────────────────────────
 

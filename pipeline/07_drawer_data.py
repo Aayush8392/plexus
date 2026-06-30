@@ -9,6 +9,7 @@ Run from: pipeline/ directory
 import os
 import sys
 import json
+import re
 from collections import defaultdict
 
 import pandas as pd
@@ -202,14 +203,55 @@ for nid in sample_nodes:
     print(f"  {nid}: total bracketed={total} | spread={seniority_spread[nid]}")
 
 # ---------------------------------------------------------------------------
+# Typical experience per canonical role (parsed from `experience` text column)
+# "3-8 Yrs" → min_years=3. Grouped by role_slug across all strata.
+# ---------------------------------------------------------------------------
+print("\nComputing typical experience ...")
+
+def parse_exp_min(exp_str):
+    if pd.isna(exp_str):
+        return None
+    m = re.search(r'(\d+)', str(exp_str))
+    return int(m.group(1)) if m else None
+
+exp_df = df[df["node_id"].notna()].copy()
+exp_df["exp_min"] = exp_df["experience"].apply(parse_exp_min)
+
+node_to_role_slug = {nid: nodes[nid]["role_slug"] for nid in nodes}
+exp_df["role_slug"] = exp_df["node_id"].map(node_to_role_slug)
+
+role_exp_stats = (
+    exp_df[exp_df["exp_min"].notna()]
+    .groupby("role_slug")["exp_min"]
+    .agg(["median", "mean", "count"])
+)
+
+typical_experience = {}
+for nid in nodes:
+    role_slug = nodes[nid]["role_slug"]
+    if role_slug in role_exp_stats.index:
+        median_yrs = role_exp_stats.loc[role_slug, "median"]
+        count      = int(role_exp_stats.loc[role_slug, "count"])
+        typical_experience[nid] = {
+            "median_min_years": int(median_yrs),
+            "label": f"Typical: {int(median_yrs)}+ years",
+            "sample_size": count,
+        }
+        print(f"  {nid:<45}  median={int(median_yrs)} yrs  (n={count})")
+    else:
+        typical_experience[nid] = None
+        print(f"  {nid:<45}  no experience data")
+
+# ---------------------------------------------------------------------------
 # Assemble output
 # ---------------------------------------------------------------------------
 print("\nAssembling output ...")
 drawer_data = {}
 for nid in nodes:
     drawer_data[nid] = {
-        "top_companies":   top_companies[nid],
-        "seniority_spread": seniority_spread[nid],
+        "top_companies":      top_companies[nid],
+        "seniority_spread":   seniority_spread[nid],
+        "typical_experience": typical_experience.get(nid),
     }
 
 # ---------------------------------------------------------------------------
