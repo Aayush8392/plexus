@@ -366,13 +366,25 @@ function GraphCanvas({
       y: forcedPositions[n.id]?.y ?? n.y * COORD_SCALE,
     }))
 
-    // All solid + cross edges visible on hover/pin; cold state = no edges rendered
+    // Skeleton: strongest within-stratum neighbour per node (cold-state hint)
+    const bestForNode = {}
+    solidEdges.forEach(e => {
+      if (!bestForNode[e.source] || e.cosine > bestForNode[e.source].cosine) bestForNode[e.source] = e
+      if (!bestForNode[e.target] || e.cosine > bestForNode[e.target].cosine) bestForNode[e.target] = e
+    })
+    const skeletonEdgeIds = new Set(
+      Object.values(bestForNode).map(e => `${e.source}--${e.target}`)
+    )
+
+    // All solid + cross edges visible on hover/pin; cold state = skeleton only
     const regularEdges = [...solidEdges, ...crossEdges]
 
-    // Self-twin edges — only shown when pinnedId touches one of the pair
+    // Self-twin edges — all visible as skeleton in cold state only; filtered on pin/hover
     const activeTwinEdges = pinnedId
       ? twinEdges.filter(e => e.source === pinnedId || e.target === pinnedId)
-      : []
+      : hoveredId
+        ? twinEdges.filter(e => e.source === hoveredId || e.target === hoveredId)
+        : twinEdges
 
     const buildRfEdge = (e) => {
       const slug = roleSlug(e.source)
@@ -380,7 +392,11 @@ function GraphCanvas({
       const tgtColor = `var(--role-${roleSlug(e.target)})`
       const isTwin = !!e.is_self_twin
 
-      let edgeState = (!pinnedId && !hoveredId) ? 'cold' : 'default'
+      const eid = `${e.source}--${e.target}`
+      const isSkeletonEdge = skeletonEdgeIds.has(eid)
+      let edgeState = (!pinnedId && !hoveredId)
+        ? (isSkeletonEdge ? 'skeleton' : 'cold')
+        : 'default'
       if (selectedEdge) {
         const isSelected =
           (e.source === selectedEdge.sourceId && e.target === selectedEdge.targetId) ||
@@ -391,7 +407,8 @@ function GraphCanvas({
       } else if (hoveredId) {
         edgeState = (e.source === hoveredId || e.target === hoveredId) ? 'active' : 'faded'
       }
-      if (isTwin) edgeState = 'active'
+      if (isTwin && (pinnedId || hoveredId)) edgeState = 'active'
+      if (isTwin && !pinnedId && !hoveredId) edgeState = 'skeleton'
 
       const srcR = BUCKET_RADIUS[nodeMap[e.source]?.volume_bucket] ?? 18
       const tgtR = BUCKET_RADIUS[nodeMap[e.target]?.volume_bucket] ?? 18

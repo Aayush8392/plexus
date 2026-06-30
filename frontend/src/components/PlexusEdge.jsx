@@ -9,6 +9,7 @@ import { EdgeLabelRenderer } from 'reactflow'
 // ── Opacity by edge state ─────────────────────────────────────────────────────
 const STATE_OPACITY = {
   cold:      0.00,
+  skeleton:  0.10,
   default:   0.60,
   active:    0.90,
   secondary: 0.55,
@@ -69,16 +70,18 @@ function PlexusEdge({
 
   // Self-twin edge: thin dashed line in role hue, no gradient, no cosine label
   if (isSelfTwin) {
+    const twinColor = edgeState === 'skeleton' ? 'var(--text-muted)' : srcColor
+    const twinOpacity = edgeState === 'skeleton' ? STATE_OPACITY.skeleton : 0.55
     return (
       <path
         id={id}
         d={edgePath}
         fill="none"
-        stroke={srcColor}
+        stroke={twinColor}
         strokeWidth={1.5}
         strokeDasharray="4 3"
         strokeLinecap="round"
-        style={{ opacity: 0.55, pointerEvents: 'none' }}
+        style={{ opacity: twinOpacity, pointerEvents: 'none' }}
       />
     )
   }
@@ -113,7 +116,7 @@ function PlexusEdge({
         style={{
           opacity: crossOpacity,
           transition: 'opacity 200ms ease',
-          pointerEvents: (edgeState === 'faded' || edgeState === 'cold') ? 'none' : 'stroke',
+          pointerEvents: (edgeState === 'faded' || edgeState === 'cold' || edgeState === 'skeleton') ? 'none' : 'stroke',
         }}
       />
 
