@@ -302,20 +302,22 @@
     color: var(--text-primary);
   }
 
+  .sd-container {
+    overflow-y: auto;
+  }
+
   .sd-panels {
     flex-direction: column;
-    overflow: hidden;
+    overflow: visible;
   }
 
   .sd-panel-slot {
     display: none;
-    overflow-y: auto;
+    overflow: visible;
   }
 
   .sd-panel-slot--active {
     display: block;
-    flex: 1;
-    min-height: 0;
   }
 
   .sd-divider { display: none; }

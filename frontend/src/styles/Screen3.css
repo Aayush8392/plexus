@@ -143,14 +143,28 @@
   border: 1px solid rgba(88, 166, 255, 0.30);
   border-radius: var(--radius-pill);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.50);
-  white-space: nowrap;
-  max-width: calc(100vw - var(--space-lg) * 2);
   animation: pick-banner-in 180ms ease both;
 }
 
 @keyframes pick-banner-in {
   from { opacity: 0; transform: translateX(-50%) translateY(8px); }
   to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@media (max-width: 680px) {
+  .s3-pick-banner {
+    left: var(--space-md);
+    right: var(--space-md);
+    transform: none;
+    border-radius: var(--radius-md);
+    bottom: clamp(60px, 12vh, 96px);
+    justify-content: space-between;
+  }
+
+  @keyframes pick-banner-in {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
 }
 
 .s3-pick-banner span {
