@@ -273,7 +273,7 @@
     width: 100%;
     margin: 0;
     border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-    max-height: 85dvh;
+    height: 85dvh;
   }
 
   .sd-mobile-tabs {
