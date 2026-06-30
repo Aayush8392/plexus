@@ -656,6 +656,7 @@
   }
 
   .graph-legend {
+    position: fixed;
     top: auto;
     bottom: var(--space-md);
     right: auto;
