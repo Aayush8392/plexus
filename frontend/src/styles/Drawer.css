@@ -23,11 +23,38 @@
   to   { transform: translateX(0);    opacity: 1; }
 }
 
-/* ── Close button ───────────────────────────────────────────────────────────── */
-.drawer-close {
+/* ── Header row (compare + close) ──────────────────────────────────────────── */
+.drawer-header-row {
   position: absolute;
   top: var(--space-md);
   right: var(--space-md);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.drawer-compare-btn {
+  padding: 3px var(--space-sm);
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: var(--radius-pill);
+  color: var(--text-muted);
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+  white-space: nowrap;
+}
+
+.drawer-compare-btn:hover {
+  border-color: rgba(255, 255, 255, 0.28);
+  color: var(--text-secondary);
+}
+
+/* ── Close button ───────────────────────────────────────────────────────────── */
+.drawer-close {
+  position: static;
   z-index: 10;
   display: flex;
   align-items: center;

@@ -243,6 +243,8 @@ function GraphCanvas({
   onSelectEdge,
   compareId,
   setCompareId,
+  comparePickMode,
+  setComparePickMode,
 }) {
   const [nodes, setNodes, onNodesChange] = useNodesState([])
   const [edges, setEdges, onEdgesChange] = useEdgesState([])
@@ -410,20 +412,27 @@ function GraphCanvas({
   }, [pinnedId])
 
   const onNodeClick = useCallback((event, node) => {
-    // Shift-click with a pinned node → compare mode
+    // Pick mode (mobile compare) — tap any other node to compare
+    if (comparePickMode && pinnedId && node.id !== pinnedId) {
+      setCompareId(node.id)
+      setComparePickMode(false)
+      return
+    }
+    // Shift-click with a pinned node → compare mode (desktop)
     if (event.shiftKey && pinnedId && node.id !== pinnedId) {
       setCompareId(node.id)
       return
     }
-    // Clear compare if clicking anything without shift
+    // Normal click — clear compare state
     setCompareId(null)
+    setComparePickMode(false)
     if (node.id === pinnedId) {
       setPinnedId(null)
     } else {
       setPinnedId(node.id)
       onSelectEdge(null)
     }
-  }, [pinnedId, setPinnedId, onSelectEdge, setCompareId])
+  }, [pinnedId, setPinnedId, onSelectEdge, setCompareId, comparePickMode, setComparePickMode])
 
   const onNodeMouseEnter = useCallback((_, node) => {
     if (pinnedId) return
@@ -437,10 +446,11 @@ function GraphCanvas({
   }, [setHoveredId])
 
   const onPaneClick = useCallback(() => {
+    if (comparePickMode) { setComparePickMode(false); return }
     setPinnedId(null)
     setCompareId(null)
     onSelectEdge(null)
-  }, [setPinnedId, setCompareId, onSelectEdge])
+  }, [setPinnedId, setCompareId, onSelectEdge, comparePickMode, setComparePickMode])
 
   const onEdgeClick = useCallback((_, edge) => {
     let sourceId, targetId
@@ -583,6 +593,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   const [forcedPositions, setForcedPositions] = useState(null)
   const [showCvCompare, setShowCvCompare]     = useState(false)
   const [compareId, setCompareId]             = useState(null)
+  const [comparePickMode, setComparePickMode] = useState(false)
 
   // Load layout data
   useEffect(() => {
@@ -640,6 +651,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
     } else {
       setDrawerOpen(false)
       setCompareId(null)
+      setComparePickMode(false)
     }
   }, [pinnedId])
 
@@ -722,6 +734,8 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
             onSelectEdge={setSelectedEdge}
             compareId={compareId}
             setCompareId={setCompareId}
+            comparePickMode={comparePickMode}
+            setComparePickMode={setComparePickMode}
           />
           <MapControls />
         </ReactFlowProvider>
@@ -785,8 +799,16 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
         />
       )}
 
+      {/* ── Compare pick-mode banner ── */}
+      {comparePickMode && (
+        <div className="s3-pick-banner">
+          <span>Tap any role to compare</span>
+          <button className="s3-pick-cancel" onClick={() => setComparePickMode(false)}>Cancel</button>
+        </div>
+      )}
+
       {/* ── Drawer (hidden when compare mode active) ── */}
-      {drawerOpen && pinnedId && !compareId && (
+      {drawerOpen && pinnedId && !compareId && !comparePickMode && (
         <Drawer
           nodeId={pinnedId}
           layoutData={layoutData}
@@ -795,6 +817,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
           onNavigate={(id) => { setPinnedId(id); setSelectedEdge(null) }}
           selectedEdge={selectedEdge}
           onSelectEdge={setSelectedEdge}
+          onCompare={() => setComparePickMode(true)}
         />
       )}
 

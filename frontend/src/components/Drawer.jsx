@@ -421,7 +421,7 @@ function EdgeDetail({ pf, selectedEdge, onNavigate, onClearEdge }) {
 // Drawer — main component
 // ═══════════════════════════════════════════════════════════════════════════════
 
-export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate, selectedEdge, onSelectEdge }) {
+export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate, selectedEdge, onSelectEdge, onCompare }) {
   const [pf, setPf]               = useState(null)
   const [drawerData, setDrawerData] = useState(null)
   const [loading, setLoading]       = useState(true)
@@ -474,10 +474,17 @@ export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate
         <div className="drawer-drag-handle-pill" />
       </div>
 
-      {/* Close button */}
-      <button className="drawer-close" onClick={onClose} aria-label="Close drawer">
-        <X size={16} />
-      </button>
+      {/* Header row: compare button + close */}
+      <div className="drawer-header-row">
+        {onCompare && (
+          <button className="drawer-compare-btn" onClick={onCompare} aria-label="Compare with another role">
+            Compare with…
+          </button>
+        )}
+        <button className="drawer-close" onClick={onClose} aria-label="Close drawer">
+          <X size={16} />
+        </button>
+      </div>
 
       {/* Loading */}
       {loading && (
