@@ -21,6 +21,7 @@ import PlexusEdge from '../components/PlexusEdge.jsx'
 import Drawer from '../components/Drawer.jsx'
 import CvCompare from '../components/CvCompare.jsx'
 import SplitDossier from '../components/SplitDossier.jsx'
+import TutorialTour from '../components/TutorialTour.jsx'
 import '../styles/Screen3.css'
 
 // ── react-flow custom type registration ──────────────────────────────────────
@@ -34,6 +35,8 @@ const BUCKET_RADIUS = { v1: 18, v2: 24, v3: 30, v4: 38 }
 const COORD_SCALE  = 1.6   // MDS coords are tight — scale up for legibility
 const GCC_OFFSET_X = 20    // nudge GCC twins right so labels don't collide
 const GCC_OFFSET_Y = -15   // nudge GCC twins up
+const MIN_ZOOM     = 0.4   // matches <ReactFlow minZoom>; used to size the pan boundary
+const DRAWER_WIDTH = 380   // matches Drawer.css — side panel width on desktop + landscape
 
 // ── Role slug → CSS hue variable ─────────────────────────────────────────────
 function roleSlug(nodeId) {
@@ -293,13 +296,18 @@ function GraphCanvas({
 
   const translateExtent = useMemo(() => {
     if (!forcedPositions) return [[-Infinity, -Infinity], [Infinity, Infinity]]
-    const pad = 300
+    // Pad = full viewport size at the most-zoomed-out level (minZoom). This is what lets
+    // panning carry the outermost node all the way to the opposite edge of the screen —
+    // a small margin only keeps it barely in frame, it doesn't leave room to traverse
+    // a full screen-width past the node's own position.
+    const padX = window.innerWidth / MIN_ZOOM / 2.5
+    const padY = window.innerHeight / MIN_ZOOM / 2.5
     const positions = Object.values(forcedPositions)
     const xs = positions.map(p => p.x)
     const ys = positions.map(p => p.y)
     return [
-      [Math.min(...xs) - pad, Math.min(...ys) - pad],
-      [Math.max(...xs) + pad, Math.max(...ys) + pad],
+      [Math.min(...xs) - padX, Math.min(...ys) - padY],
+      [Math.max(...xs) + padX, Math.max(...ys) + padY],
     ]
   }, [forcedPositions])
   const { fitView, setCenter, getZoom, getNode, zoomIn, zoomOut, getViewport, setViewport } = useReactFlow()
@@ -310,6 +318,7 @@ function GraphCanvas({
   }
   const hoverTimer = useRef(null)
   const [hoveredEdgeId, setHoveredEdgeId] = useState(null)
+  const userPannedRef = useRef(false)
 
   // Build nodes + edges with visual states from all 38 stratified nodes
   useEffect(() => {
@@ -464,20 +473,36 @@ function GraphCanvas({
   // Pan to pinned node — on mobile offset upward so node sits in the graph area above the sheet
   useEffect(() => {
     if (!pinnedId) return
-    setTimeout(() => {
+    userPannedRef.current = false
+    // Short delay only to let React re-render and register the newly pinned node with
+    // react-flow (getNode would return undefined a tick too early). This does NOT need
+    // to wait for the drawer's CSS width transition — the drawer's final width is a
+    // known constant (DRAWER_WIDTH), so we compute the target directly instead of
+    // measuring a container that may still be mid-animation.
+    const t = setTimeout(() => {
+      // If the user already panned/zoomed manually during the wait, don't fight them —
+      // stomping their input with a delayed auto-center is what caused the "snap back".
+      if (userPannedRef.current) return
       const node = getNode(pinnedId)
       if (!node) return
       const r = BUCKET_RADIUS[node.data.volumeBucket] ?? 14
-      const isMobile = window.innerWidth <= 680
-      // On mobile the bottom sheet takes 45dvh — shift the target y up by ~25% of screen
-      // so the pinned node lands in the visible graph area, not behind the sheet
-      const yOffset = isMobile ? window.innerHeight * 0.225 : 0
+      const isMobilePortrait = window.innerWidth <= 680
+      // On mobile portrait the bottom sheet takes 45dvh — shift the target y up by ~25%
+      // of screen so the pinned node lands above the sheet, not behind it.
+      const yOffset = isMobilePortrait ? window.innerHeight * 0.225 : 0
       const zoom = Math.max(getZoom(), 1.0)
-      setCenter(node.position.x + r, node.position.y + r + yOffset / zoom, {
+      const targetX = node.position.x + r
+      const targetY = node.position.y + r + yOffset / zoom
+      // Desktop + landscape mobile: drawer is a fixed-width side panel eating the right
+      // DRAWER_WIDTH px. Mobile portrait: drawer is a bottom sheet, full width unaffected.
+      const availableWidth = isMobilePortrait ? window.innerWidth : window.innerWidth - DRAWER_WIDTH
+      setViewport({
+        x: availableWidth / 2 - targetX * zoom,
+        y: window.innerHeight / 2 - targetY * zoom,
         zoom,
-        duration: 600,
-      })
-    }, 120)
+      }, { duration: 600 })
+    }, 50)
+    return () => clearTimeout(t)
   }, [pinnedId])
 
   const onNodeClick = useCallback((event, node) => {
@@ -547,9 +572,10 @@ function GraphCanvas({
       onNodeMouseEnter={onNodeMouseEnter}
       onNodeMouseLeave={onNodeMouseLeave}
       onPaneClick={onPaneClick}
+      onMoveStart={(event) => { if (event) userPannedRef.current = true }}
       nodeTypes={NODE_TYPES}
       edgeTypes={EDGE_TYPES}
-      minZoom={0.4}
+      minZoom={MIN_ZOOM}
       maxZoom={2.5}
       translateExtent={translateExtent}
       fitView
@@ -664,6 +690,39 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   const [showCvCompare, setShowCvCompare]     = useState(false)
   const [compareId, setCompareId]             = useState(null)
   const [comparePickMode, setComparePickMode] = useState(false)
+  const [legendOpen, setLegendOpen]           = useState(false)
+  const [tourGateOpen, setTourGateOpen]       = useState(false) // CV auto-pin waits for the tour's popup decision
+  const [tourReplayToken, setTourReplayToken] = useState(0)
+  const [cvBtnOffset, setCvBtnOffset]         = useState(null) // mobile: tracks the legend's real top edge
+
+  // Compare-my-CV button — mobile only — sits just above the legend and
+  // moves up when the legend expands, tracking its actual measured position.
+  // Legend itself is untouched (plain CSS, no JS) — only CV is derived from
+  // it, so there's no circularity. Tracks regardless of drawerOpen (cold
+  // state included) so they stay stacked whether or not a node is pinned.
+  useEffect(() => {
+    function measure() {
+      if (window.innerWidth > 680) { setCvBtnOffset(null); return }
+      const el = document.getElementById('graph-legend-tour-target')
+      if (!el) { setCvBtnOffset(null); return }
+      const r = el.getBoundingClientRect()
+      setCvBtnOffset(window.innerHeight - r.top + 8)
+    }
+    measure()
+    // Re-measure after the browser's actual layout settles, not just once
+    // synchronously on mount — the very first measurement (e.g. right as
+    // the CV-path tour popup appears, before any pin/unpin cycle) can land
+    // before layout is fully ready. Same double-rAF fix already used for
+    // the tutorial's own spotlight cutout targeting.
+    let raf1 = requestAnimationFrame(() => {
+      raf1 = requestAnimationFrame(measure)
+    })
+    window.addEventListener('resize', measure)
+    return () => {
+      cancelAnimationFrame(raf1)
+      window.removeEventListener('resize', measure)
+    }
+  }, [legendOpen, drawerOpen, cvData])
 
   // Load layout data
   useEffect(() => {
@@ -691,16 +750,17 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
     return () => { cancelled = true }
   }, [])
 
-  // Resolve confirmedRole once layout is loaded
+  // Resolve confirmedRole once layout is loaded — waits for the tour popup
+  // decision (Start/Skip) so the CV-path auto-pin doesn't fire underneath it.
   useEffect(() => {
-    if (!layoutData || !confirmedRole) return
+    if (!layoutData || !confirmedRole || !tourGateOpen) return
     const nodeMap = Object.fromEntries(layoutData.nodes.map(n => [n.id, n]))
     const resolved = resolveConfirmedRole(confirmedRole, nodeMap)
     if (resolved) {
       setPinnedId(resolved)
       setDrawerOpen(true)
     }
-  }, [layoutData, confirmedRole])
+  }, [layoutData, confirmedRole, tourGateOpen])
 
   // Derive adjacency for visual rings — includes twin edges so self-twin lights up on pin
   const { adjacentIds, onwardIds } = useMemo(() => {
@@ -717,6 +777,12 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
       if (doorSet.has(e.target) && !doorSet.has(e.source) && e.source !== pinnedId) onwardSet.add(e.source)
     }
     return { adjacentIds: doorSet, onwardIds: onwardSet }
+  }, [graphData, pinnedId])
+
+  // Does the pinned node have a services<->gcc twin? (drives tour step skip)
+  const pinnedHasTwin = useMemo(() => {
+    if (!graphData || !pinnedId) return false
+    return graphData.twinEdges.some(e => e.source === pinnedId || e.target === pinnedId)
   }, [graphData, pinnedId])
 
   // Open/close drawer with pin; clear compare when pin clears
@@ -757,7 +823,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   }
 
   return (
-    <div className={`screen screen-3${drawerOpen && !compareId ? ' drawer-open' : ''}${showCvCompare ? ' cv-compare-open' : ''}${compareId ? ' compare-open' : ''}`}>
+    <div className={`screen screen-3${drawerOpen && !compareId ? ' drawer-open' : ''}${showCvCompare ? ' cv-compare-open' : ''}${compareId ? ' compare-open' : ''}${cvData ? ' has-cv-btn' : ''}`}>
 
       {/* ── Graph canvas ── */}
       <div className="s3-graph-area">
@@ -805,20 +871,46 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
       </div>
 
       {/* ── Legend ── */}
-      <div className="graph-legend">
-        <div className="graph-legend-item">
-          <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
-            <circle cx="7" cy="7" r="5" fill="rgba(139,148,158,0.15)" stroke="#8b949e" strokeWidth="1.5"/>
-          </svg>
-          <span>Services</span>
-        </div>
-        <div className="graph-legend-item">
-          <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
-            <circle cx="7" cy="7" r="4" fill="rgba(139,148,158,0.15)" stroke="#8b949e" strokeWidth="1.5"/>
-            <circle cx="7" cy="7" r="6.5" fill="none" stroke="#e8d5a3" strokeWidth="1.5"/>
-          </svg>
-          <span>GCC</span>
-        </div>
+      <div
+        id="graph-legend-tour-target"
+        className={`graph-legend${legendOpen ? ' graph-legend--open' : ''}`}
+      >
+        <button
+          className="graph-legend-trigger"
+          onClick={() => setLegendOpen(v => !v)}
+          aria-expanded={legendOpen}
+        >
+          Legend
+        </button>
+        {legendOpen && (
+          <div className="graph-legend-panel">
+            <div className="graph-legend-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
+                <circle cx="7" cy="7" r="5" fill="rgba(139,148,158,0.15)" stroke="#8b949e" strokeWidth="1.5"/>
+              </svg>
+              <span>Services</span>
+            </div>
+            <div className="graph-legend-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
+                <circle cx="7" cy="7" r="4" fill="rgba(139,148,158,0.15)" stroke="#8b949e" strokeWidth="1.5"/>
+                <circle cx="7" cy="7" r="6.5" fill="none" stroke="#e8d5a3" strokeWidth="1.5"/>
+              </svg>
+              <span>GCC (gold ring)</span>
+            </div>
+            <div className="graph-legend-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
+                <line x1="1" y1="7" x2="13" y2="7" stroke="#8b949e" strokeWidth="1.5"/>
+              </svg>
+              <span>Within-stratum</span>
+            </div>
+            <div className="graph-legend-item">
+              <svg width="14" height="14" viewBox="0 0 14 14" style={{ flexShrink: 0 }}>
+                <line x1="1" y1="7" x2="13" y2="7" stroke="#8b949e" strokeWidth="1.5" strokeDasharray="3,2"/>
+              </svg>
+              <span>Cross-stratum / twin</span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* ── Nav buttons (top-left) ── */}
@@ -829,7 +921,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
           className={`s3-nav-btn s3-info-btn${showInfo ? ' active' : ''}`}
           onClick={() => setShowInfo(v => !v)}
           aria-label="About this map"
-        >ⓘ How to read this map</button>
+        >ⓘ Map guide</button>
       </div>
 
 
@@ -837,6 +929,13 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
       {showInfo && (
         <div className="s3-info-panel">
           <button className="s3-info-close" onClick={() => setShowInfo(false)} aria-label="Close">✕</button>
+
+          <button
+            className="s3-info-replay-tour"
+            onClick={() => { setTourReplayToken(t => t + 1); setShowInfo(false) }}
+          >
+            Watch tutorial →
+          </button>
 
           <h3 className="s3-info-heading">What is this?</h3>
           <p className="s3-info-body">A structural map of the Indian IT job market built from 130,757 real job postings. Each node is a role. Each edge is a measure of skill overlap between two roles — the stronger the overlap, the more reachable one role is from the other. Roles that share more skills tend to sit closer together, but the layout is an approximation — proximity is a guide, not a guarantee. Roles at the edges of the map have few strong connections in this dataset; that's a structural finding, not a data gap.</p>
@@ -851,9 +950,13 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
       )}
 
       {/* ── Right-side controls (top-right stack) ── */}
-      <div className="s3-right-controls">
+      <div
+        className="s3-right-controls"
+        style={cvBtnOffset != null ? { bottom: cvBtnOffset } : undefined}
+      >
         {cvData && (
           <button
+            id="s3-cv-compare-btn"
             className={`s3-nav-btn s3-cv-compare-btn${showCvCompare ? ' active' : ''}`}
             onClick={() => setShowCvCompare(v => !v)}
           >
@@ -903,6 +1006,19 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
           onNavigate={(id) => { setCompareId(null); setPinnedId(id); setSelectedEdge(null) }}
         />
       )}
+
+      {/* ── Onboarding tour ── */}
+      <TutorialTour
+        pinnedId={pinnedId}
+        hasTwin={pinnedHasTwin}
+        hasCv={!!cvData}
+        legendOpen={legendOpen}
+        setLegendOpen={setLegendOpen}
+        legendTargetId="graph-legend-tour-target"
+        drawerOpen={drawerOpen}
+        onGateOpen={() => setTourGateOpen(true)}
+        replayToken={tourReplayToken}
+      />
 
     </div>
   )

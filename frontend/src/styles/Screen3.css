@@ -1,5 +1,6 @@
 /* ─── Plexus · src/styles/Screen3.css ──────────────────────────────────────── */
 @import './Drawer.css';
+@import './TutorialTour.css';
 
 /* ── Screen shell ───────────────────────────────────────────────────────────── */
 .screen-3 {
@@ -9,6 +10,25 @@
   display: flex;
   overflow: hidden;
   background: var(--bg-base);
+}
+
+/* .screen-3 also carries the base .screen class (index.css), which sets
+   padding-top: var(--nav-height) and min-height: 100dvh for normal-flow
+   screens. That inherited min-height over-constrains this fixed/inset:0 box
+   (top+bottom computed height < min-height), so the browser expands it past
+   the actual viewport bottom. Absolutely-positioned children then anchor
+   their `bottom` to that phantom extended edge instead of the real viewport
+   bottom, while position:fixed children anchor to the true viewport — same
+   `bottom` value, two different physical results (confirmed via live
+   getBoundingClientRect() vs computed style — .screen-3 was rendering
+   ~44px, exactly one nav-height, past the real viewport bottom).
+   `.screen-3` alone has the same specificity as `.screen` (both single
+   class selectors) — which one wins is a coin flip based on CSS load
+   order, and in practice `.screen` was winning. `.screen.screen-3` is
+   more specific and wins unconditionally regardless of load order. */
+.screen.screen-3 {
+  min-height: auto;
+  padding-top: 0;
 }
 
 /* ── Graph area ─────────────────────────────────────────────────────────────── */
@@ -365,13 +385,23 @@
   .s3-right-controls {
     top: auto;
     bottom: clamp(48px, 10vh, 80px);
+    left: var(--space-md);
+    right: auto;
     z-index: 120;
   }
 
-  .screen-3.drawer-open .s3-right-controls,
   .screen-3.cv-compare-open .s3-right-controls,
   .screen-3.compare-open .s3-right-controls {
     display: none;
+  }
+
+  /* Stacked directly above the legend, same left-anchored column — not
+     the drawer's own float-above-sheet treatment (right side is unused
+     here), height comes from the JS-computed cvBtnOffset (see Screen3.jsx). */
+  .screen-3.drawer-open .s3-right-controls {
+    left: var(--space-md);
+    right: auto;
+    z-index: 110;
   }
 
   .cv-compare-overlay {
@@ -423,6 +453,24 @@
 
 .s3-info-close:hover {
   color: var(--text-primary);
+}
+
+.s3-info-replay-tour {
+  align-self: flex-start;
+  padding: var(--space-xs) var(--space-md);
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(88, 166, 255, 0.35);
+  background: rgba(88, 166, 255, 0.10);
+  color: var(--text-accent);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+
+.s3-info-replay-tour:hover {
+  background: rgba(88, 166, 255, 0.18);
+  border-color: rgba(88, 166, 255, 0.5);
 }
 
 .s3-info-heading {
@@ -556,24 +604,65 @@
 /* ── Canvas legend ───────────────────────────────────────────────────────────── */
 .graph-legend {
   position: absolute;
-  top: calc(var(--space-md) + 40px + var(--space-sm));
+  top: var(--space-md);
   right: var(--space-md);
   z-index: 100;
-  display: flex;
-  gap: var(--space-sm);
-  background: rgba(13, 17, 23, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Stack below the CV Compare pill when it's present (CV entry path only) */
+.screen-3.has-cv-btn .graph-legend {
+  top: calc(var(--space-md) + 40px + var(--space-sm));
+}
+
+.screen-3.drawer-open .graph-legend {
+  right: calc(380px + var(--space-md));
+}
+
+/* The CV Compare panel occupies the exact same top-right slot as the legend
+   when has-cv-btn is set — hide the legend rather than let them collide. */
+.screen-3.cv-compare-open .graph-legend {
+  display: none;
+}
+
+/* Matches .s3-nav-btn exactly so it reads as part of the same button set as
+   Compare my CV, rather than its own distinct (dimmer) style. */
+.graph-legend-trigger {
+  padding: var(--space-xs) var(--space-md);
   border-radius: var(--radius-pill);
-  padding: 5px 12px;
-  backdrop-filter: blur(6px);
-  pointer-events: none;
-  transform: none;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+  background: rgba(22, 27, 34, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  transition: color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.graph-legend-trigger:hover,
+.graph-legend--open .graph-legend-trigger {
+  color: var(--text-primary);
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.graph-legend-panel {
+  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(13, 17, 23, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  backdrop-filter: blur(8px);
 }
 
 .graph-legend-item {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   font-size: 10px;
   color: var(--text-muted);
   letter-spacing: 0.02em;
@@ -629,6 +718,14 @@
     width: 100%;
   }
 
+  /* Compare-my-CV overlay and the pinned bottom sheet both want the lower
+     half of a short screen — collapse the sheet while the overlay is open
+     rather than let them collide. Node stays pinned underneath; the sheet
+     reappears automatically once the overlay closes (plain CSS, no state). */
+  .screen-3.cv-compare-open .drawer {
+    display: none;
+  }
+
   .s3-cross-toggle {
     top: auto;
     bottom: clamp(48px, 10vh, 80px);
@@ -661,6 +758,28 @@
     bottom: var(--space-md);
     right: auto;
     left: var(--space-md);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .screen-3.has-cv-btn .graph-legend {
+    top: auto;
+  }
+
+  /* Expand upward — trigger stays anchored at the bottom, panel appears above it */
+  .graph-legend-panel {
+    order: -1;
+    margin-top: 0;
+    margin-bottom: 6px;
+  }
+
+  /* Float above the bottom sheet when a node is pinned, same treatment the
+     GCC toggle used before it */
+  .screen-3.drawer-open .graph-legend {
+    right: auto;
+    left: var(--space-md);
+    bottom: calc(45dvh + var(--space-md));
+    z-index: 110;
   }
 
   .s3-info-panel {

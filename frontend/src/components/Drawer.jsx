@@ -32,9 +32,9 @@ function ProximityTag({ tag }) {
 }
 
 // ── Section wrapper ───────────────────────────────────────────────────────────
-function Section({ children, className = '' }) {
+function Section({ children, className = '', id }) {
   return (
-    <div className={`drawer-section ${className}`}>
+    <div id={id} className={`drawer-section ${className}`}>
       {children}
     </div>
   )
@@ -89,6 +89,11 @@ function SectionRoleHeader({ pf, seniorityProfiles, layoutNode }) {
       {/* Seniority toggle + top skills */}
       {displaySkills.length > 0 && (
         <div className="drawer-skills-block">
+          {profile && (
+            <p className="drawer-section-subtitle" style={{ marginBottom: 'var(--space-xs)' }}>
+              Top skills this role asks for, filtered by experience level — tap a level to see how it shifts.
+            </p>
+          )}
           {profile && (
             <div className="drawer-seniority-toggle">
               {SENIORITY_BUCKETS.map(b => {
@@ -206,6 +211,8 @@ function SectionSeniority({ drawerData }) {
                 fontSize: 11,
                 color: 'var(--text-primary)',
               }}
+              itemStyle={{ color: 'var(--text-primary)' }}
+              labelStyle={{ color: 'var(--text-primary)' }}
               formatter={(v) => [v, 'postings']}
             />
             <Bar dataKey="count" radius={[0, 3, 3, 0]} barSize={10}>
@@ -231,7 +238,7 @@ function SectionDoors({ pf, onSelectEdge, nodeId, allDrawerData }) {
   if (!top5.length) {
     if (pf.low_connectivity) {
       return (
-        <Section>
+        <Section id="drawer-section-doors">
           <div className="drawer-section-title">Your doors</div>
           <p className="drawer-low-conn-note">
             This role has few structural connections in the current dataset — it represents a genuine boundary in the market.
@@ -243,7 +250,7 @@ function SectionDoors({ pf, onSelectEdge, nodeId, allDrawerData }) {
   }
 
   return (
-    <Section>
+    <Section id="drawer-section-doors">
       <div className="drawer-section-title">
         Your doors
         <span className="drawer-door-count">{allDoors.length} total</span>
@@ -305,7 +312,7 @@ function SectionDoors({ pf, onSelectEdge, nodeId, allDrawerData }) {
 function SectionOnward({ pf, onNavigate }) {
   if (pf.is_hub) {
     return (
-      <Section>
+      <Section id="drawer-section-onward">
         <div className="drawer-section-title">Where this opens toward</div>
         <p className="drawer-hub-note">
           This role connects broadly — explore its doors directly.
@@ -320,7 +327,7 @@ function SectionOnward({ pf, onNavigate }) {
   const combinedVolume = region.reduce((sum, r) => sum + (r.posting_count ?? 0), 0)
 
   return (
-    <Section>
+    <Section id="drawer-section-onward">
       <div className="drawer-section-title">
         Where this opens toward
         <span className="drawer-onward-volume">{combinedVolume.toLocaleString()} combined postings</span>
@@ -363,7 +370,7 @@ function SectionBridgeSkills({ pf }) {
   const skills = [...allBridgeSkills].slice(0, 20)
 
   return (
-    <Section>
+    <Section id="drawer-section-bridge">
       <button
         className="drawer-collapse-toggle"
         onClick={() => setOpen(v => !v)}
@@ -405,7 +412,7 @@ function SectionTwoDialects({ pf, layoutNodes }) {
   const gccSkills    = isMyServices ? twinSkills : mySkills
 
   return (
-    <Section>
+    <Section id="drawer-section-dialects">
       <div className="drawer-section-title">Same title, different market</div>
       <p className="drawer-section-subtitle">
         The same job title asks for different skills depending on who's hiring.
@@ -603,7 +610,7 @@ export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate
               Profile
             </button>
             {onCompare && (
-              <button className="drawer-compare-btn" onClick={onCompare} aria-label="Compare with another role">
+              <button id="drawer-compare-btn" className="drawer-compare-btn" onClick={onCompare} aria-label="Compare with another role">
                 Compare with…
               </button>
             )}
