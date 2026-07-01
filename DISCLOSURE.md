@@ -91,7 +91,7 @@ Only services and GCC postings contribute to stratified role nodes. Agency and u
 
 These are findings that emerged from the data and in some cases contradicted the original hypotheses:
 
-1. **Obsolescence direction is backwards.** Seniors show higher demand for modern stacks; juniors show higher demand for legacy. The original hypothesis was reversed.
+1. **Obsolescence direction is backwards — verified.** Seniors show higher demand for modern stacks; juniors show higher demand for legacy. The original hypothesis was reversed. Verified objectively via technology release-year proxy (86 dateable skills, n = 91,383 postings): Pearson r = +0.068, Spearman r = +0.089, p < 10⁻⁹⁴. Effect is real but small — mean stack recency rises ~2 years from the 0–2 yr bracket (1995.8) to the 9–12 yr bracket (1997.9), then plateaus. The finding is directional; it is not a large-magnitude gap.
 2. **No stable partition exists.** The market does not cluster into clean districts. Absence of structure is the finding.
 3. **GCC is genuinely 4.7% of public postings.** Not a scraping failure — a channel-stratification finding.
 4. **Manufactured islands from bad metrics.** An asymmetric top-K metric reported 7 structurally isolated roles. Symmetric cosine found 0. The islands were a metric artifact, not a market fact.

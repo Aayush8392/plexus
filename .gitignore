@@ -19,6 +19,8 @@ pipeline/scan_unclassified.py
 pipeline/probe_experience.py
 pipeline/probe_linkedin.py
 pipeline/probe_location.py
+pipeline/probe_cohiring_validation.py
+pipeline/probe_obsolescence_verification.py
 
 # Python cache
 __pycache__/
