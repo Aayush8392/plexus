@@ -409,9 +409,21 @@
 }
 
 .jd-result-role-name {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px var(--space-xs);
   font-size: var(--text-sm);
   color: var(--text-primary);
   font-weight: 500;
+}
+
+.jd-result-role-badge {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 1px 5px;
+  letter-spacing: 0.02em;
+  flex-shrink: 0;
 }
 
 .jd-result-role-cosine {

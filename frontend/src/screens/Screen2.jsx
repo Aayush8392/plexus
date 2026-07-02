@@ -135,16 +135,24 @@ function JdPath({ nav }) {
           </span>
         </div>
         <div className="jd-result-roles">
-          {result.top_roles.slice(0, 3).map(r => (
-            <button
-              key={r.node_id}
-              className="jd-result-role-btn"
-              onClick={() => nav('3', { confirmedRole: r.node_id, cvData: null })}
-            >
-              <span className="jd-result-role-name">{r.label}</span>
-              <span className="jd-result-role-cosine">{(r.cosine * 100).toFixed(0)}% match</span>
-            </button>
-          ))}
+          {result.top_roles.slice(0, 3).map(r => {
+            const stratum = r.node_id.endsWith('_gcc') ? 'gcc' : 'services'
+            return (
+              <button
+                key={r.node_id}
+                className="jd-result-role-btn"
+                onClick={() => nav('3', { confirmedRole: r.node_id, cvData: null })}
+              >
+                <span className="jd-result-role-name">
+                  {r.label}
+                  <span className={`badge badge-${stratum} jd-result-role-badge`}>
+                    {stratum === 'gcc' ? 'GCC' : 'Services'}
+                  </span>
+                </span>
+                <span className="jd-result-role-cosine">{(r.cosine * 100).toFixed(0)}% match</span>
+              </button>
+            )
+          })}
         </div>
         <button className="jd-retry-btn" onClick={() => { setResult(null); setText('') }}>
           ← Try another

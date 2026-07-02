@@ -121,6 +121,26 @@ class RoleVectoriser:
             vec /= norm
         return vec
 
+    def _label_for(self, node_id: str) -> str:
+        """
+        The vectoriser is fit on every node_id with enough postings for a
+        TF-IDF row, which is not the same set as the graph's nodes (a role
+        can fall below MIN_STRATUM on one stratum and still get fitted here,
+        e.g. product_manager_services). For those, borrow the label from the
+        sibling stratum node instead of falling back to the raw slug.
+        """
+        label = self._node_labels.get(node_id)
+        if label:
+            return label
+        for suffix in ("_services", "_gcc"):
+            if node_id.endswith(suffix):
+                slug = node_id[: -len(suffix)]
+                for sib_suffix in ("_services", "_gcc"):
+                    sib_label = self._node_labels.get(f"{slug}{sib_suffix}")
+                    if sib_label:
+                        return sib_label
+        return node_id
+
     # ── Public API ────────────────────────────────────────────────────────────
 
     def snap(self, skills: list) -> list:
@@ -135,7 +155,7 @@ class RoleVectoriser:
         results = [
             {
                 "node_id": self._node_ids[i],
-                "label": self._node_labels.get(self._node_ids[i], self._node_ids[i]),
+                "label": self._label_for(self._node_ids[i]),
                 "cosine": round(float(scores[i]), 4),
             }
             for i in range(len(self._node_ids))
