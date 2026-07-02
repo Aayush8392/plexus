@@ -21,6 +21,9 @@ pipeline/probe_linkedin.py
 pipeline/probe_location.py
 pipeline/probe_cohiring_validation.py
 pipeline/probe_obsolescence_verification.py
+pipeline/probe_gravity_well.py
+pipeline/probe_city_divergence.py
+pipeline/probe_unused_sources_city_yield.py
 
 # Python cache
 __pycache__/

@@ -397,7 +397,44 @@ function SectionBridgeSkills({ pf }) {
 
 // ── Section 7 — Two dialects ──────────────────────────────────────────────────
 // Fires for roles with a self_twin_id. Fetches twin's top_skills from layout.
-function SectionTwoDialects({ pf, layoutNodes }) {
+function DotBar({ filled, label, tone }) {
+  const dots = Array.from({ length: 10 }, (_, i) => i < filled)
+  return (
+    <div className={`drawer-dotbar drawer-dotbar--${tone}`}>
+      <span className="drawer-dotbar-label">{label}</span>
+      <span className="drawer-dotbar-dots">
+        {dots.map((on, i) => (
+          <span key={i} className={`drawer-dot ${on ? 'drawer-dot--on' : 'drawer-dot--off'}`} />
+        ))}
+      </span>
+      <span className="drawer-dotbar-count">{filled} in 10</span>
+    </div>
+  )
+}
+
+function SectionBiggestDifferences({ divergence }) {
+  if (!divergence || !divergence.skills?.length) return null
+
+  return (
+    <div className="drawer-biggest-diffs">
+      <div className="drawer-subsection-title">Biggest differences</div>
+      <p className="drawer-section-subtitle">
+        Same job title, same skill — but how often it actually shows up in the ad depends on who's hiring.
+      </p>
+      <ul className="drawer-diff-list">
+        {divergence.skills.map(s => (
+          <li key={s.skill} className="drawer-diff-item">
+            <div className="drawer-diff-skill">{s.skill}</div>
+            <DotBar filled={s.services_in_10} label="Services" tone="services" />
+            <DotBar filled={s.gcc_in_10} label="GCC" tone="gcc" />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+
+function SectionTwoDialects({ pf, layoutNodes, drawerData }) {
   if (!pf.self_twin_id) return null
 
   const twin = layoutNodes?.find(n => n.id === pf.self_twin_id)
@@ -436,6 +473,7 @@ function SectionTwoDialects({ pf, layoutNodes }) {
           </ul>
         </div>
       </div>
+      <SectionBiggestDifferences divergence={drawerData?.dialect_divergence} />
     </Section>
   )
 }
@@ -625,7 +663,7 @@ export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate
               {(pf.onward_region?.length > 0 || pf.is_hub) && <div className="divider" />}
               <SectionBridgeSkills pf={pf} />
               {pf.self_twin_id && <div className="divider" />}
-              <SectionTwoDialects pf={pf} layoutNodes={layoutNodes} />
+              <SectionTwoDialects pf={pf} layoutNodes={layoutNodes} drawerData={drawerData} />
             </>
           )}
 

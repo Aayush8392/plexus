@@ -438,6 +438,83 @@
   color: var(--text-secondary);
 }
 
+/* ── Biggest differences (dialect divergence, dot bars) ───────────────────── */
+.drawer-biggest-diffs {
+  margin-top: var(--space-lg);
+  padding-top: var(--space-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.drawer-subsection-title {
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-xs);
+}
+
+.drawer-diff-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  margin-top: var(--space-sm);
+}
+
+.drawer-diff-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.drawer-diff-skill {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+}
+
+.drawer-dotbar {
+  display: grid;
+  grid-template-columns: 64px auto 1fr;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: var(--text-xs);
+}
+
+.drawer-dotbar-label {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.drawer-dotbar-dots {
+  display: flex;
+  gap: 3px;
+}
+
+.drawer-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.drawer-dot--off {
+  background: rgba(255, 255, 255, 0.10);
+}
+
+.drawer-dotbar--services .drawer-dot--on {
+  background: rgb(63, 185, 80);
+}
+
+.drawer-dotbar--gcc .drawer-dot--on {
+  background: rgb(210, 153, 34);
+}
+
+.drawer-dotbar-count {
+  color: var(--text-muted);
+  text-align: right;
+  white-space: nowrap;
+}
+
 /* ── Edge detail view ───────────────────────────────────────────────────────── */
 .drawer-edge-detail {
   padding: var(--space-xl) var(--space-lg);

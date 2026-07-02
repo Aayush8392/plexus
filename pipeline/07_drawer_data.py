@@ -10,7 +10,7 @@ import os
 import sys
 import json
 import re
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 import pandas as pd
 
@@ -43,6 +43,8 @@ sys.stdout = _Tee("../output/07_drawer_data_log.txt")
 # Constants
 # ---------------------------------------------------------------------------
 TOP_COMPANIES_K = 5
+MIN_STRATUM = 25          # same floor used everywhere else in the pipeline
+DIVERGENCE_TOP_K = 5      # skills shown per role in "biggest differences"
 
 EXPERIENCE_BRACKETS = [
     ("0–2 yrs",   0,   2),
@@ -243,15 +245,89 @@ for nid in nodes:
         print(f"  {nid:<45}  no experience data")
 
 # ---------------------------------------------------------------------------
+# Dialect divergence — "biggest differences" (Gravity Well finding, caveman-simple)
+# For each splittable role (has_gcc_twin), rank skills by how far apart their
+# presence-rate is between services and GCC postings of the SAME role.
+# Verified via pipeline/probe_gravity_well.py — all splittable roles clear
+# MIN_STRATUM on the GCC side, divergence is real (15-55pp swings).
+# ---------------------------------------------------------------------------
+print("\nComputing dialect divergence ...")
+
+splittable_slugs = sorted({
+    n["role_slug"] for n in nodes.values() if n.get("has_gcc_twin")
+})
+
+svc_gcc_df = df[df["employer_type"].isin(["services", "gcc"])].copy()
+
+def skill_presence_rate(rows):
+    """Fraction of postings (0-1) mentioning each skill at least once."""
+    counts = Counter()
+    for skills in rows["normalised_skills"]:
+        counts.update(set(skills))
+    total = len(rows)
+    return {k: v / total for k, v in counts.items()}, total
+
+dialect_divergence_by_slug = {}
+for slug in splittable_slugs:
+    role_label = nodes[f"{slug}_services"]["role"] if f"{slug}_services" in nodes else nodes[f"{slug}_gcc"]["role"]
+    role_rows = svc_gcc_df[svc_gcc_df["role"] == role_label]
+    svc_rows = role_rows[role_rows["employer_type"] == "services"]
+    gcc_rows = role_rows[role_rows["employer_type"] == "gcc"]
+
+    if len(svc_rows) < MIN_STRATUM or len(gcc_rows) < MIN_STRATUM:
+        dialect_divergence_by_slug[slug] = None
+        continue
+
+    svc_freq, svc_n = skill_presence_rate(svc_rows)
+    gcc_freq, gcc_n = skill_presence_rate(gcc_rows)
+
+    top_svc = sorted(svc_freq, key=svc_freq.get, reverse=True)[:15]
+    top_gcc = sorted(gcc_freq, key=gcc_freq.get, reverse=True)[:15]
+    pool = set(top_svc) | set(top_gcc)
+
+    diffs = []
+    for skill in pool:
+        s = svc_freq.get(skill, 0.0)
+        g = gcc_freq.get(skill, 0.0)
+        diffs.append((skill, s, g, abs(s - g)))
+    diffs.sort(key=lambda x: x[3], reverse=True)
+
+    entries = []
+    for skill, s, g, d in diffs[:DIVERGENCE_TOP_K]:
+        svc_in10 = round(s * 10)
+        gcc_in10 = round(g * 10)
+        higher_side = "services" if s > g else "gcc"
+        entries.append({
+            "skill": skill,
+            "services_in_10": svc_in10,
+            "gcc_in_10": gcc_in10,
+            "diff_in_10": abs(svc_in10 - gcc_in10),
+            "higher_side": higher_side,
+            "sentence": (
+                f"Services job ads mention {skill} in {svc_in10} out of 10 postings. "
+                f"GCC job ads mention it in {gcc_in10} out of 10."
+            ),
+        })
+
+    dialect_divergence_by_slug[slug] = {
+        "services_n": int(svc_n),
+        "gcc_n": int(gcc_n),
+        "skills": entries,
+    }
+    print(f"  {role_label:<28} services_n={svc_n:>5}  gcc_n={gcc_n:>5}  top_diff={entries[0]['skill'] if entries else '—'}")
+
+# ---------------------------------------------------------------------------
 # Assemble output
 # ---------------------------------------------------------------------------
 print("\nAssembling output ...")
 drawer_data = {}
 for nid in nodes:
+    role_slug = nodes[nid]["role_slug"]
     drawer_data[nid] = {
-        "top_companies":      top_companies[nid],
-        "seniority_spread":   seniority_spread[nid],
-        "typical_experience": typical_experience.get(nid),
+        "top_companies":       top_companies[nid],
+        "seniority_spread":    seniority_spread[nid],
+        "typical_experience":  typical_experience.get(nid),
+        "dialect_divergence":  dialect_divergence_by_slug.get(role_slug),
     }
 
 # ---------------------------------------------------------------------------
@@ -271,6 +347,8 @@ print(f"Total nodes in output        : {len(drawer_data)}")
 print(f"Nodes with services companies: {nodes_with_svc_companies}")
 print(f"Nodes with gcc companies     : {nodes_with_gcc_companies}")
 print(f"Nodes with seniority data    : {nodes_with_seniority}")
+nodes_with_divergence = sum(1 for nid in nodes if drawer_data[nid]["dialect_divergence"])
+print(f"Nodes with dialect divergence: {nodes_with_divergence}")
 
 # ---------------------------------------------------------------------------
 # Write output

@@ -918,6 +918,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
         <button className="s3-nav-btn" onClick={() => nav('1')}>← Home</button>
         <button className="s3-nav-btn" onClick={() => nav(entryScreen ?? '2')}>← Back</button>
         <button
+          id="s3-map-guide-btn"
           className={`s3-nav-btn s3-info-btn${showInfo ? ' active' : ''}`}
           onClick={() => setShowInfo(v => !v)}
           aria-label="About this map"
@@ -938,10 +939,10 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
           </button>
 
           <h3 className="s3-info-heading">What is this?</h3>
-          <p className="s3-info-body">A structural map of the Indian IT job market built from 130,757 real job postings. Each node is a role. Each edge is a measure of skill overlap between two roles — the stronger the overlap, the more reachable one role is from the other. Roles that share more skills tend to sit closer together, but the layout is an approximation — proximity is a guide, not a guarantee. Roles at the edges of the map have few strong connections in this dataset; that's a structural finding, not a data gap.</p>
+          <p className="s3-info-body">A structural map of the Indian IT job market built from 130,757 real job postings. Each node is a role. Each edge is a measure of skill overlap between two roles — the stronger the overlap, the more reachable one role is from the other. Roles that share more skills tend to sit closer together, but the positions are approximate — trust the edges, not the distance. Roles at the edges of the map have few strong connections in this dataset; that's a structural finding, not a data gap.</p>
 
           <h3 className="s3-info-heading">Navigating the map</h3>
-          <p className="s3-info-body">Hover a node to see its connections. Click to pin it and open a full breakdown — your doors, where they lead, and the skills that bridge the gap. With a node pinned, shift-click any other node to compare both roles side by side.</p>
+          <p className="s3-info-body">Hover a node to see its connections. Click to pin it and open a full breakdown — your doors, where they lead, and the skills that bridge the gap. With a node pinned, shift-click any other node to compare both roles side by side (desktop only).</p>
 
           <h3 className="s3-info-heading">How it works</h3>
           <p className="s3-info-body">Edges are weighted by cosine similarity — how much two roles share the same skills. 0 means nothing in common, 1 means identical skill profiles. This map shows edges at 0.20 and above. A score of 0.20–0.35 is a stretch move. 0.35–0.50 is a natural door. Above 0.50, the roles are nearly interchangeable.</p>

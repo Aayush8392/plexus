@@ -51,6 +51,52 @@
       "median_min_years": 4,
       "label": "Typical: 4+ years",
       "sample_size": 8473
+    },
+    "dialect_divergence": {
+      "services_n": 865,
+      "gcc_n": 205,
+      "skills": [
+        {
+          "skill": "Spring Boot",
+          "services_in_10": 6,
+          "gcc_in_10": 3,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Spring Boot in 6 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "Microservices",
+          "services_in_10": 5,
+          "gcc_in_10": 3,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Microservices in 5 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "Java",
+          "services_in_10": 6,
+          "gcc_in_10": 4,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Java in 6 out of 10 postings. GCC job ads mention it in 4 out of 10."
+        },
+        {
+          "skill": "Boot",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Boot in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Hibernate",
+          "services_in_10": 4,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Hibernate in 4 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        }
+      ]
     }
   },
   "backend_java_developer_services": {
@@ -105,6 +151,52 @@
       "median_min_years": 4,
       "label": "Typical: 4+ years",
       "sample_size": 8473
+    },
+    "dialect_divergence": {
+      "services_n": 865,
+      "gcc_n": 205,
+      "skills": [
+        {
+          "skill": "Spring Boot",
+          "services_in_10": 6,
+          "gcc_in_10": 3,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Spring Boot in 6 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "Microservices",
+          "services_in_10": 5,
+          "gcc_in_10": 3,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Microservices in 5 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "Java",
+          "services_in_10": 6,
+          "gcc_in_10": 4,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Java in 6 out of 10 postings. GCC job ads mention it in 4 out of 10."
+        },
+        {
+          "skill": "Boot",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Boot in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Hibernate",
+          "services_in_10": 4,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Hibernate in 4 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        }
+      ]
     }
   },
   "cloud_engineer_architect_gcc": {
@@ -159,7 +251,8 @@
       "median_min_years": 4,
       "label": "Typical: 4+ years",
       "sample_size": 465
-    }
+    },
+    "dialect_divergence": null
   },
   "data_bi_analyst_gcc": {
     "top_companies": {
@@ -213,6 +306,52 @@
       "median_min_years": 3,
       "label": "Typical: 3+ years",
       "sample_size": 4002
+    },
+    "dialect_divergence": {
+      "services_n": 363,
+      "gcc_n": 147,
+      "skills": [
+        {
+          "skill": "Project Management",
+          "services_in_10": 4,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Project Management in 4 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Business Analysis",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Business Analysis in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Analytical",
+          "services_in_10": 0,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Analytical in 0 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Gap Analysis",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Gap Analysis in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Business Requirement Analysis",
+          "services_in_10": 1,
+          "gcc_in_10": 0,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Business Requirement Analysis in 1 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "data_bi_analyst_services": {
@@ -267,6 +406,52 @@
       "median_min_years": 3,
       "label": "Typical: 3+ years",
       "sample_size": 4002
+    },
+    "dialect_divergence": {
+      "services_n": 363,
+      "gcc_n": 147,
+      "skills": [
+        {
+          "skill": "Project Management",
+          "services_in_10": 4,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Project Management in 4 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Business Analysis",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Business Analysis in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Analytical",
+          "services_in_10": 0,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Analytical in 0 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Gap Analysis",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Gap Analysis in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Business Requirement Analysis",
+          "services_in_10": 1,
+          "gcc_in_10": 0,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Business Requirement Analysis in 1 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "data_engineer_gcc": {
@@ -321,6 +506,52 @@
       "median_min_years": 5,
       "label": "Typical: 5+ years",
       "sample_size": 5993
+    },
+    "dialect_divergence": {
+      "services_n": 890,
+      "gcc_n": 194,
+      "skills": [
+        {
+          "skill": "Python",
+          "services_in_10": 5,
+          "gcc_in_10": 2,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Python in 5 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Hive",
+          "services_in_10": 4,
+          "gcc_in_10": 1,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Hive in 4 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "ETL",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention ETL in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Data Warehousing",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Data Warehousing in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Pyspark",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Pyspark in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "data_engineer_services": {
@@ -375,6 +606,52 @@
       "median_min_years": 5,
       "label": "Typical: 5+ years",
       "sample_size": 5993
+    },
+    "dialect_divergence": {
+      "services_n": 890,
+      "gcc_n": 194,
+      "skills": [
+        {
+          "skill": "Python",
+          "services_in_10": 5,
+          "gcc_in_10": 2,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Python in 5 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Hive",
+          "services_in_10": 4,
+          "gcc_in_10": 1,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Hive in 4 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "ETL",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention ETL in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Data Warehousing",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Data Warehousing in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Pyspark",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Pyspark in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "data_scientist_ml_gcc": {
@@ -429,6 +706,52 @@
       "median_min_years": 4,
       "label": "Typical: 4+ years",
       "sample_size": 3759
+    },
+    "dialect_divergence": {
+      "services_n": 413,
+      "gcc_n": 230,
+      "skills": [
+        {
+          "skill": "Python",
+          "services_in_10": 7,
+          "gcc_in_10": 2,
+          "diff_in_10": 5,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Python in 7 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Chatbot",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Chatbot in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Image Processing",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Image Processing in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "TensorFlow",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention TensorFlow in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "PyTorch",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention PyTorch in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "data_scientist_ml_services": {
@@ -483,6 +806,52 @@
       "median_min_years": 4,
       "label": "Typical: 4+ years",
       "sample_size": 3759
+    },
+    "dialect_divergence": {
+      "services_n": 413,
+      "gcc_n": 230,
+      "skills": [
+        {
+          "skill": "Python",
+          "services_in_10": 7,
+          "gcc_in_10": 2,
+          "diff_in_10": 5,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Python in 7 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Chatbot",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Chatbot in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Image Processing",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Image Processing in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "TensorFlow",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention TensorFlow in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "PyTorch",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention PyTorch in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "database_administrator_gcc": {
@@ -537,6 +906,52 @@
       "median_min_years": 5,
       "label": "Typical: 5+ years",
       "sample_size": 483
+    },
+    "dialect_divergence": {
+      "services_n": 46,
+      "gcc_n": 25,
+      "skills": [
+        {
+          "skill": "Dbms",
+          "services_in_10": 4,
+          "gcc_in_10": 1,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Dbms in 4 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Database Administration",
+          "services_in_10": 4,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Database Administration in 4 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "It Software - Dba",
+          "services_in_10": 0,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention It Software - Dba in 0 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Automation",
+          "services_in_10": 0,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Automation in 0 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Database Management System",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Database Management System in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "database_administrator_services": {
@@ -591,6 +1006,52 @@
       "median_min_years": 5,
       "label": "Typical: 5+ years",
       "sample_size": 483
+    },
+    "dialect_divergence": {
+      "services_n": 46,
+      "gcc_n": 25,
+      "skills": [
+        {
+          "skill": "Dbms",
+          "services_in_10": 4,
+          "gcc_in_10": 1,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Dbms in 4 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Database Administration",
+          "services_in_10": 4,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Database Administration in 4 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "It Software - Dba",
+          "services_in_10": 0,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention It Software - Dba in 0 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Automation",
+          "services_in_10": 0,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Automation in 0 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Database Management System",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Database Management System in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "database_architect_services": {
@@ -645,7 +1106,8 @@
       "median_min_years": 8,
       "label": "Typical: 8+ years",
       "sample_size": 272
-    }
+    },
+    "dialect_divergence": null
   },
   "devops_sre_gcc": {
     "top_companies": {
@@ -699,6 +1161,52 @@
       "median_min_years": 4,
       "label": "Typical: 4+ years",
       "sample_size": 5174
+    },
+    "dialect_divergence": {
+      "services_n": 756,
+      "gcc_n": 275,
+      "skills": [
+        {
+          "skill": "Python",
+          "services_in_10": 5,
+          "gcc_in_10": 2,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Python in 5 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Kubernetes",
+          "services_in_10": 5,
+          "gcc_in_10": 3,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Kubernetes in 5 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "CI/CD",
+          "services_in_10": 4,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CI/CD in 4 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Azure",
+          "services_in_10": 2,
+          "gcc_in_10": 1,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Azure in 2 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Automation",
+          "services_in_10": 1,
+          "gcc_in_10": 2,
+          "diff_in_10": 1,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Automation in 1 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        }
+      ]
     }
   },
   "devops_sre_services": {
@@ -753,6 +1261,52 @@
       "median_min_years": 4,
       "label": "Typical: 4+ years",
       "sample_size": 5174
+    },
+    "dialect_divergence": {
+      "services_n": 756,
+      "gcc_n": 275,
+      "skills": [
+        {
+          "skill": "Python",
+          "services_in_10": 5,
+          "gcc_in_10": 2,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Python in 5 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Kubernetes",
+          "services_in_10": 5,
+          "gcc_in_10": 3,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Kubernetes in 5 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "CI/CD",
+          "services_in_10": 4,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CI/CD in 4 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Azure",
+          "services_in_10": 2,
+          "gcc_in_10": 1,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Azure in 2 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Automation",
+          "services_in_10": 1,
+          "gcc_in_10": 2,
+          "diff_in_10": 1,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Automation in 1 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        }
+      ]
     }
   },
   "eng_manager_tech_lead_gcc": {
@@ -807,6 +1361,52 @@
       "median_min_years": 5,
       "label": "Typical: 5+ years",
       "sample_size": 3332
+    },
+    "dialect_divergence": {
+      "services_n": 1806,
+      "gcc_n": 97,
+      "skills": [
+        {
+          "skill": "C#",
+          "services_in_10": 4,
+          "gcc_in_10": 0,
+          "diff_in_10": 4,
+          "higher_side": "services",
+          "sentence": "Services job ads mention C# in 4 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Software Engineering",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Software Engineering in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "CSS",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CSS in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "SAP",
+          "services_in_10": 1,
+          "gcc_in_10": 0,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention SAP in 1 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Ado.Net",
+          "services_in_10": 1,
+          "gcc_in_10": 0,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Ado.Net in 1 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "eng_manager_tech_lead_services": {
@@ -861,6 +1461,52 @@
       "median_min_years": 5,
       "label": "Typical: 5+ years",
       "sample_size": 3332
+    },
+    "dialect_divergence": {
+      "services_n": 1806,
+      "gcc_n": 97,
+      "skills": [
+        {
+          "skill": "C#",
+          "services_in_10": 4,
+          "gcc_in_10": 0,
+          "diff_in_10": 4,
+          "higher_side": "services",
+          "sentence": "Services job ads mention C# in 4 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Software Engineering",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Software Engineering in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "CSS",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CSS in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "SAP",
+          "services_in_10": 1,
+          "gcc_in_10": 0,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention SAP in 1 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Ado.Net",
+          "services_in_10": 1,
+          "gcc_in_10": 0,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Ado.Net in 1 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "frontend_developer_gcc": {
@@ -915,6 +1561,52 @@
       "median_min_years": 3,
       "label": "Typical: 3+ years",
       "sample_size": 8279
+    },
+    "dialect_divergence": {
+      "services_n": 916,
+      "gcc_n": 159,
+      "skills": [
+        {
+          "skill": "CSS",
+          "services_in_10": 8,
+          "gcc_in_10": 4,
+          "diff_in_10": 4,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CSS in 8 out of 10 postings. GCC job ads mention it in 4 out of 10."
+        },
+        {
+          "skill": "Agile",
+          "services_in_10": 1,
+          "gcc_in_10": 2,
+          "diff_in_10": 1,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Agile in 1 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Web Services",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Web Services in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "REST",
+          "services_in_10": 2,
+          "gcc_in_10": 1,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention REST in 2 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "HTML",
+          "services_in_10": 5,
+          "gcc_in_10": 6,
+          "diff_in_10": 1,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention HTML in 5 out of 10 postings. GCC job ads mention it in 6 out of 10."
+        }
+      ]
     }
   },
   "frontend_developer_services": {
@@ -969,6 +1661,52 @@
       "median_min_years": 3,
       "label": "Typical: 3+ years",
       "sample_size": 8279
+    },
+    "dialect_divergence": {
+      "services_n": 916,
+      "gcc_n": 159,
+      "skills": [
+        {
+          "skill": "CSS",
+          "services_in_10": 8,
+          "gcc_in_10": 4,
+          "diff_in_10": 4,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CSS in 8 out of 10 postings. GCC job ads mention it in 4 out of 10."
+        },
+        {
+          "skill": "Agile",
+          "services_in_10": 1,
+          "gcc_in_10": 2,
+          "diff_in_10": 1,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Agile in 1 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Web Services",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Web Services in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "REST",
+          "services_in_10": 2,
+          "gcc_in_10": 1,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention REST in 2 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "HTML",
+          "services_in_10": 5,
+          "gcc_in_10": 6,
+          "diff_in_10": 1,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention HTML in 5 out of 10 postings. GCC job ads mention it in 6 out of 10."
+        }
+      ]
     }
   },
   "full_stack_developer_gcc": {
@@ -1023,6 +1761,52 @@
       "median_min_years": 4,
       "label": "Typical: 4+ years",
       "sample_size": 4850
+    },
+    "dialect_divergence": {
+      "services_n": 567,
+      "gcc_n": 139,
+      "skills": [
+        {
+          "skill": "CSS",
+          "services_in_10": 5,
+          "gcc_in_10": 1,
+          "diff_in_10": 4,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CSS in 5 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Java",
+          "services_in_10": 6,
+          "gcc_in_10": 3,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Java in 6 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "Coding",
+          "services_in_10": 0,
+          "gcc_in_10": 3,
+          "diff_in_10": 3,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Coding in 0 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "Full Stack",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Full Stack in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Agile",
+          "services_in_10": 1,
+          "gcc_in_10": 3,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Agile in 1 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        }
+      ]
     }
   },
   "full_stack_developer_services": {
@@ -1077,6 +1861,52 @@
       "median_min_years": 4,
       "label": "Typical: 4+ years",
       "sample_size": 4850
+    },
+    "dialect_divergence": {
+      "services_n": 567,
+      "gcc_n": 139,
+      "skills": [
+        {
+          "skill": "CSS",
+          "services_in_10": 5,
+          "gcc_in_10": 1,
+          "diff_in_10": 4,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CSS in 5 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Java",
+          "services_in_10": 6,
+          "gcc_in_10": 3,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Java in 6 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "Coding",
+          "services_in_10": 0,
+          "gcc_in_10": 3,
+          "diff_in_10": 3,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Coding in 0 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "Full Stack",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Full Stack in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Agile",
+          "services_in_10": 1,
+          "gcc_in_10": 3,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Agile in 1 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        }
+      ]
     }
   },
   "mobile_developer_services": {
@@ -1131,7 +1961,8 @@
       "median_min_years": 2,
       "label": "Typical: 2+ years",
       "sample_size": 4974
-    }
+    },
+    "dialect_divergence": null
   },
   "net_developer_gcc": {
     "top_companies": {
@@ -1185,6 +2016,52 @@
       "median_min_years": 3,
       "label": "Typical: 3+ years",
       "sample_size": 5334
+    },
+    "dialect_divergence": {
+      "services_n": 377,
+      "gcc_n": 56,
+      "skills": [
+        {
+          "skill": "ASP.NET",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention ASP.NET in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "C#",
+          "services_in_10": 5,
+          "gcc_in_10": 3,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention C# in 5 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": ".NET",
+          "services_in_10": 5,
+          "gcc_in_10": 3,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention .NET in 5 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "CSS",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CSS in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": ".NET Core",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention .NET Core in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        }
+      ]
     }
   },
   "net_developer_services": {
@@ -1239,6 +2116,52 @@
       "median_min_years": 3,
       "label": "Typical: 3+ years",
       "sample_size": 5334
+    },
+    "dialect_divergence": {
+      "services_n": 377,
+      "gcc_n": 56,
+      "skills": [
+        {
+          "skill": "ASP.NET",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention ASP.NET in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "C#",
+          "services_in_10": 5,
+          "gcc_in_10": 3,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention C# in 5 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": ".NET",
+          "services_in_10": 5,
+          "gcc_in_10": 3,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention .NET in 5 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "CSS",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CSS in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": ".NET Core",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention .NET Core in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        }
+      ]
     }
   },
   "network_sys_admin_services": {
@@ -1293,7 +2216,8 @@
       "median_min_years": 3,
       "label": "Typical: 3+ years",
       "sample_size": 421
-    }
+    },
+    "dialect_divergence": null
   },
   "product_manager_gcc": {
     "top_companies": {
@@ -1347,7 +2271,8 @@
       "median_min_years": 5,
       "label": "Typical: 5+ years",
       "sample_size": 618
-    }
+    },
+    "dialect_divergence": null
   },
   "qa_test_engineer_gcc": {
     "top_companies": {
@@ -1401,6 +2326,52 @@
       "median_min_years": 3,
       "label": "Typical: 3+ years",
       "sample_size": 4086
+    },
+    "dialect_divergence": {
+      "services_n": 374,
+      "gcc_n": 181,
+      "skills": [
+        {
+          "skill": "Automation Testing",
+          "services_in_10": 5,
+          "gcc_in_10": 2,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Automation Testing in 5 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Automation",
+          "services_in_10": 4,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Automation in 4 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Test Execution Reporting",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Test Execution Reporting in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "User Acceptance Testing",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention User Acceptance Testing in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Java",
+          "services_in_10": 2,
+          "gcc_in_10": 1,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Java in 2 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        }
+      ]
     }
   },
   "qa_test_engineer_services": {
@@ -1455,6 +2426,52 @@
       "median_min_years": 3,
       "label": "Typical: 3+ years",
       "sample_size": 4086
+    },
+    "dialect_divergence": {
+      "services_n": 374,
+      "gcc_n": 181,
+      "skills": [
+        {
+          "skill": "Automation Testing",
+          "services_in_10": 5,
+          "gcc_in_10": 2,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Automation Testing in 5 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Automation",
+          "services_in_10": 4,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Automation in 4 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Test Execution Reporting",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Test Execution Reporting in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "User Acceptance Testing",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention User Acceptance Testing in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Java",
+          "services_in_10": 2,
+          "gcc_in_10": 1,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Java in 2 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        }
+      ]
     }
   },
   "salesforce_developer_gcc": {
@@ -1509,6 +2526,52 @@
       "median_min_years": 4,
       "label": "Typical: 4+ years",
       "sample_size": 1616
+    },
+    "dialect_divergence": {
+      "services_n": 288,
+      "gcc_n": 26,
+      "skills": [
+        {
+          "skill": "Salesforce",
+          "services_in_10": 8,
+          "gcc_in_10": 2,
+          "diff_in_10": 6,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Salesforce in 8 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Salesforce Lightning",
+          "services_in_10": 6,
+          "gcc_in_10": 0,
+          "diff_in_10": 6,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Salesforce Lightning in 6 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Visualforce",
+          "services_in_10": 6,
+          "gcc_in_10": 0,
+          "diff_in_10": 6,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Visualforce in 6 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "REST",
+          "services_in_10": 5,
+          "gcc_in_10": 0,
+          "diff_in_10": 5,
+          "higher_side": "services",
+          "sentence": "Services job ads mention REST in 5 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "CSS",
+          "services_in_10": 4,
+          "gcc_in_10": 0,
+          "diff_in_10": 4,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CSS in 4 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "salesforce_developer_services": {
@@ -1563,6 +2626,52 @@
       "median_min_years": 4,
       "label": "Typical: 4+ years",
       "sample_size": 1616
+    },
+    "dialect_divergence": {
+      "services_n": 288,
+      "gcc_n": 26,
+      "skills": [
+        {
+          "skill": "Salesforce",
+          "services_in_10": 8,
+          "gcc_in_10": 2,
+          "diff_in_10": 6,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Salesforce in 8 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Salesforce Lightning",
+          "services_in_10": 6,
+          "gcc_in_10": 0,
+          "diff_in_10": 6,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Salesforce Lightning in 6 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Visualforce",
+          "services_in_10": 6,
+          "gcc_in_10": 0,
+          "diff_in_10": 6,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Visualforce in 6 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "REST",
+          "services_in_10": 5,
+          "gcc_in_10": 0,
+          "diff_in_10": 5,
+          "higher_side": "services",
+          "sentence": "Services job ads mention REST in 5 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "CSS",
+          "services_in_10": 4,
+          "gcc_in_10": 0,
+          "diff_in_10": 4,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CSS in 4 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "sap_consultant_gcc": {
@@ -1617,6 +2726,52 @@
       "median_min_years": 5,
       "label": "Typical: 5+ years",
       "sample_size": 7251
+    },
+    "dialect_divergence": {
+      "services_n": 2521,
+      "gcc_n": 56,
+      "skills": [
+        {
+          "skill": "SAP",
+          "services_in_10": 8,
+          "gcc_in_10": 5,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention SAP in 8 out of 10 postings. GCC job ads mention it in 5 out of 10."
+        },
+        {
+          "skill": "SAP HANA",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention SAP HANA in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "SAP Abap Development",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention SAP Abap Development in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "SAP Abap",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention SAP Abap in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Agile",
+          "services_in_10": 0,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Agile in 0 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        }
+      ]
     }
   },
   "sap_consultant_services": {
@@ -1671,6 +2826,52 @@
       "median_min_years": 5,
       "label": "Typical: 5+ years",
       "sample_size": 7251
+    },
+    "dialect_divergence": {
+      "services_n": 2521,
+      "gcc_n": 56,
+      "skills": [
+        {
+          "skill": "SAP",
+          "services_in_10": 8,
+          "gcc_in_10": 5,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention SAP in 8 out of 10 postings. GCC job ads mention it in 5 out of 10."
+        },
+        {
+          "skill": "SAP HANA",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention SAP HANA in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "SAP Abap Development",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention SAP Abap Development in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "SAP Abap",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention SAP Abap in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Agile",
+          "services_in_10": 0,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Agile in 0 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        }
+      ]
     }
   },
   "security_engineer_gcc": {
@@ -1725,6 +2926,52 @@
       "median_min_years": 4,
       "label": "Typical: 4+ years",
       "sample_size": 599
+    },
+    "dialect_divergence": {
+      "services_n": 101,
+      "gcc_n": 41,
+      "skills": [
+        {
+          "skill": "Automation",
+          "services_in_10": 0,
+          "gcc_in_10": 3,
+          "diff_in_10": 3,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Automation in 0 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "Security Assessment",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Security Assessment in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Risk Analysis",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Risk Analysis in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Root Cause Analysis",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Root Cause Analysis in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Security Operations",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Security Operations in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "security_engineer_services": {
@@ -1779,6 +3026,52 @@
       "median_min_years": 4,
       "label": "Typical: 4+ years",
       "sample_size": 599
+    },
+    "dialect_divergence": {
+      "services_n": 101,
+      "gcc_n": 41,
+      "skills": [
+        {
+          "skill": "Automation",
+          "services_in_10": 0,
+          "gcc_in_10": 3,
+          "diff_in_10": 3,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Automation in 0 out of 10 postings. GCC job ads mention it in 3 out of 10."
+        },
+        {
+          "skill": "Security Assessment",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Security Assessment in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Risk Analysis",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Risk Analysis in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Root Cause Analysis",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Root Cause Analysis in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Security Operations",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Security Operations in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "software_engineer_general_gcc": {
@@ -1833,6 +3126,52 @@
       "median_min_years": 3,
       "label": "Typical: 3+ years",
       "sample_size": 33969
+    },
+    "dialect_divergence": {
+      "services_n": 6874,
+      "gcc_n": 1670,
+      "skills": [
+        {
+          "skill": "CSS",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CSS in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "SAP",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention SAP in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Coding",
+          "services_in_10": 0,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Coding in 0 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Python",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Python in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Software Development",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Software Development in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        }
+      ]
     }
   },
   "software_engineer_general_services": {
@@ -1887,6 +3226,52 @@
       "median_min_years": 3,
       "label": "Typical: 3+ years",
       "sample_size": 33969
+    },
+    "dialect_divergence": {
+      "services_n": 6874,
+      "gcc_n": 1670,
+      "skills": [
+        {
+          "skill": "CSS",
+          "services_in_10": 3,
+          "gcc_in_10": 0,
+          "diff_in_10": 3,
+          "higher_side": "services",
+          "sentence": "Services job ads mention CSS in 3 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "SAP",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention SAP in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Coding",
+          "services_in_10": 0,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention Coding in 0 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Python",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Python in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Software Development",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Software Development in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        }
+      ]
     }
   },
   "solution_tech_architect_gcc": {
@@ -1941,6 +3326,52 @@
       "median_min_years": 10,
       "label": "Typical: 10+ years",
       "sample_size": 1202
+    },
+    "dialect_divergence": {
+      "services_n": 237,
+      "gcc_n": 62,
+      "skills": [
+        {
+          "skill": "ERP",
+          "services_in_10": 0,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention ERP in 0 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Python",
+          "services_in_10": 2,
+          "gcc_in_10": 1,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Python in 2 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Project Management",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Project Management in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Architectural Design",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Architectural Design in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Rfps",
+          "services_in_10": 1,
+          "gcc_in_10": 0,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Rfps in 1 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "solution_tech_architect_services": {
@@ -1995,6 +3426,52 @@
       "median_min_years": 10,
       "label": "Typical: 10+ years",
       "sample_size": 1202
+    },
+    "dialect_divergence": {
+      "services_n": 237,
+      "gcc_n": 62,
+      "skills": [
+        {
+          "skill": "ERP",
+          "services_in_10": 0,
+          "gcc_in_10": 2,
+          "diff_in_10": 2,
+          "higher_side": "gcc",
+          "sentence": "Services job ads mention ERP in 0 out of 10 postings. GCC job ads mention it in 2 out of 10."
+        },
+        {
+          "skill": "Python",
+          "services_in_10": 2,
+          "gcc_in_10": 1,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Python in 2 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Project Management",
+          "services_in_10": 3,
+          "gcc_in_10": 1,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Project Management in 3 out of 10 postings. GCC job ads mention it in 1 out of 10."
+        },
+        {
+          "skill": "Architectural Design",
+          "services_in_10": 2,
+          "gcc_in_10": 0,
+          "diff_in_10": 2,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Architectural Design in 2 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        },
+        {
+          "skill": "Rfps",
+          "services_in_10": 1,
+          "gcc_in_10": 0,
+          "diff_in_10": 1,
+          "higher_side": "services",
+          "sentence": "Services job ads mention Rfps in 1 out of 10 postings. GCC job ads mention it in 0 out of 10."
+        }
+      ]
     }
   },
   "ux_ui_designer_services": {
@@ -2049,6 +3526,7 @@
       "median_min_years": 3,
       "label": "Typical: 3+ years",
       "sample_size": 520
-    }
+    },
+    "dialect_divergence": null
   }
 }

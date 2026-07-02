@@ -1,7 +1,11 @@
 // ─── Plexus · src/components/TutorialTour.jsx ───────────────────────────────
-// Screen 3 onboarding tour. Centered popup → 8-step spotlight walkthrough.
-// The popup and every step except "click a node" are a fully blocking dimmed
-// overlay; "click a node" is click-through so the user can actually pin.
+// Screen 3 onboarding tour. Centered popup → spotlight walkthrough.
+// "Click a node" is a click-through banner, not a numbered step (see
+// isFirstStep) — the numbered count starts at "Reading the lines" and runs
+// up to 8, minus whichever route-conditional steps this route lacks data
+// for (dialects needs a GCC twin, compare-cv needs CV data).
+// The popup and every numbered step are a fully blocking dimmed overlay;
+// "click a node" is click-through so the user can actually pin.
 // `?tour=1` bypasses the localStorage seen-flag for testing.
 
 import { useState, useEffect, useRef, useCallback } from 'react'
@@ -17,7 +21,7 @@ const STEPS = [
   {
     key: 'legend',
     title: 'Reading the lines',
-    body: "Solid lines link roles with similar skills. Dashed lines link the same job title at two different kinds of employers — an outsourcing firm versus a company's own in-house team. A gold ring means the in-house version.",
+    body: "Solid lines link roles with similar skills. Dashed lines link the same job title at two different kinds of employers — an outsourcing firm (Services) versus a company's own in-house team (GCC). A gold ring means the in-house version.",
   },
   {
     key: 'doors',
@@ -40,7 +44,7 @@ const STEPS = [
   {
     key: 'dialects',
     title: 'Same title, different market',
-    body: 'This role exists at both Services firms and GCCs — and asks for genuinely different skills depending on which one is hiring.',
+    body: 'This role exists at both Services firms and GCCs — and asks for genuinely different skills depending on which one is hiring. The bars below show exactly how often each skill shows up in each market.',
     targetId: 'drawer-section-dialects',
   },
   {
@@ -55,10 +59,22 @@ const STEPS = [
     body: 'See exactly which skills you already have for any role, and which ones you’d still need.',
     targetId: 's3-cv-compare-btn',
   },
+  {
+    key: 'map-guide',
+    title: 'One more thing',
+    body: "The ⓘ Map guide button explains what this map actually is — how the roles and edges are built, what the scores mean, and why the same job title splits into two versions. Worth a look anytime you want the full picture.",
+    targetId: 's3-map-guide-btn',
+  },
 ]
 
-const DIALECTS_STEP = 5
-const CV_STEP        = 7
+// A step is route-conditional if it depends on data that isn't always present.
+// `click-node` is excluded from the numbered count entirely — it's a
+// click-through banner, not a numbered card (see isFirstStep render branch).
+function isStepVisible(step, hasTwin, hasCv) {
+  if (step.key === 'dialects' && !hasTwin) return false
+  if (step.key === 'compare-cv' && !hasCv) return false
+  return true
+}
 
 export default function TutorialTour({
   pinnedId,
@@ -146,19 +162,18 @@ export default function TutorialTour({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, stepIndex])
 
-  // Skip "same title, different market" if the pinned role has no GCC twin
+  // Skip any route-conditional step the current route doesn't have data for
+  // (dialects with no GCC twin, compare-cv with no CV). If skipping would run
+  // past the last step, end the tour instead of stepping past the array.
   useEffect(() => {
-    if (phase === 'stepping' && stepIndex === DIALECTS_STEP && !hasTwin) {
-      setStepIndex(DIALECTS_STEP + 1)
+    if (phase !== 'stepping') return
+    const step = STEPS[stepIndex]
+    if (!step) return
+    if (!isStepVisible(step, hasTwin, hasCv)) {
+      if (stepIndex >= STEPS.length - 1) exitTour()
+      else setStepIndex(i => i + 1)
     }
-  }, [phase, stepIndex, hasTwin])
-
-  // Skip "compare your CV" on the cold-graph route (no CV data)
-  useEffect(() => {
-    if (phase === 'stepping' && stepIndex === CV_STEP && !hasCv) {
-      exitTour()
-    }
-  }, [phase, stepIndex, hasCv, exitTour])
+  }, [phase, stepIndex, hasTwin, hasCv, exitTour])
 
   function advance() {
     if (stepIndex >= STEPS.length - 1) { exitTour(); return }
@@ -172,7 +187,7 @@ export default function TutorialTour({
   function goBack() {
     if (stepIndex <= 1) return
     let target = stepIndex - 1
-    if (target === DIALECTS_STEP && !hasTwin) target -= 1
+    while (target > 0 && !isStepVisible(STEPS[target], hasTwin, hasCv)) target -= 1
     setStepIndex(Math.max(target, 1))
   }
 
@@ -250,7 +265,7 @@ export default function TutorialTour({
         <div className="tour-popup">
           <div className="tour-popup-title">Want a quick tour?</div>
           <p className="tour-popup-body">
-            A 60-second walkthrough of doors, onward roles, and the services↔GCC divide.
+            A quick walkthrough of doors, onward roles, and the services↔GCC divide.
           </p>
           <div className="tour-popup-actions">
             <button className="tour-skip" onClick={exitTour}>Skip</button>
@@ -263,7 +278,14 @@ export default function TutorialTour({
 
   const step = STEPS[stepIndex]
   const isFirstStep = stepIndex === 0
-  const isLastStep  = stepIndex === STEPS.length - 1
+
+  // Numbered steps exclude the click-node banner and whichever route-conditional
+  // steps this route doesn't have — so the counter always reflects what the
+  // user will actually see (e.g. "1 / 8" on cold-graph, not a stale "9".
+  const numberedSteps = STEPS.filter(s => s.key !== 'click-node' && isStepVisible(s, hasTwin, hasCv))
+  const currentNumber = numberedSteps.findIndex(s => s.key === step.key) + 1
+  const totalSteps    = numberedSteps.length
+  const isLastStep    = currentNumber === totalSteps
 
   // Step 1 — click-through, no cutout, compact bar so it doesn't sit over the graph
   if (isFirstStep) {
@@ -289,15 +311,15 @@ export default function TutorialTour({
           style={{ top: rect.top, left: rect.left, width: rect.width, height: rect.height }}
         />
       )}
-      <div className={`tour-callout tour-callout--docked${isMobilePortrait ? ' tour-callout--docked-mobile' : ' tour-callout--docked-desktop'}`}>
-        <div className="tour-callout-step">{stepIndex + 1} / {STEPS.length}</div>
+      <div className={`tour-callout tour-callout--docked${isMobilePortrait ? ` tour-callout--docked-mobile${step.key === 'map-guide' ? ' tour-callout--docked-mobile-lower' : ''}` : ' tour-callout--docked-desktop'}`}>
+        <div className="tour-callout-step">{currentNumber} / {totalSteps}</div>
         <div className="tour-callout-title">{step.title}</div>
         <p className="tour-callout-body">{step.body}</p>
         <div className="tour-callout-actions">
           <button className="tour-skip" onClick={exitTour}>Skip</button>
           <div className="tour-callout-nav-buttons">
-            {stepIndex >= 2 && <button className="tour-prev" onClick={goBack}>Prev</button>}
-            <button className="tour-next" onClick={advance}>{isLastStep ? 'Done' : 'Next'}</button>
+            {stepIndex >= 2 && <button className="tour-prev" onClick={goBack}>← Prev</button>}
+            <button className="tour-next" onClick={advance}>{isLastStep ? 'Done' : 'Next →'}</button>
           </div>
         </div>
       </div>
