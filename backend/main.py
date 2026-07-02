@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
+from starlette.middleware.base import BaseHTTPMiddleware
 
 import backend.state as state
 from backend.routes.cv import router as cv_router
@@ -31,6 +32,27 @@ app.add_middleware(
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )
+
+
+class CacheControlMiddleware(BaseHTTPMiddleware):
+    """
+    Vite hashes /assets/*.js and /assets/*.css per build, so those are safe
+    to cache forever. index.html (and the SPA fallback for client routes)
+    is not hashed — without an explicit no-cache header, browsers/CDN can
+    hold a stale copy after a redeploy, which then references the PREVIOUS
+    build's now-deleted hashed asset filenames and fails silently until a
+    hard refresh forces revalidation.
+    """
+    async def dispatch(self, request, call_next):
+        response = await call_next(request)
+        if request.url.path.startswith("/assets/"):
+            response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+        else:
+            response.headers["Cache-Control"] = "no-cache"
+        return response
+
+
+app.add_middleware(CacheControlMiddleware)
 
 
 @app.on_event("startup")
