@@ -189,6 +189,16 @@
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.55);
 }
 
+/* Last step only: its target (the ⓘ Map guide button) lives in the top-left
+   nav row. Vertical centering can land close enough to the top on short
+   viewports (landscape mobile, small desktop windows) that the card
+   overlaps its own target — same problem as the mobile docking fix, same
+   solution: drop the centering and pin it below the nav row instead. */
+.tour-callout--docked-desktop-lower {
+  top: calc(var(--space-md) + 96px);
+  transform: none;
+}
+
 /* Mobile portrait: bottom sheet always covers the lower 45dvh — dock the
    callout above it, in the remaining top region. */
 .tour-callout--docked-mobile {

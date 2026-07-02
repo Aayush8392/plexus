@@ -339,7 +339,7 @@ export default function TutorialTour({
           style={{ top: rect.top, left: rect.left, width: rect.width, height: rect.height }}
         />
       )}
-      <div className={`tour-callout tour-callout--docked${isMobilePortrait ? ` tour-callout--docked-mobile${step.key === 'map-guide' ? ' tour-callout--docked-mobile-lower' : ''}` : ' tour-callout--docked-desktop'}`}>
+      <div className={`tour-callout tour-callout--docked${isMobilePortrait ? ` tour-callout--docked-mobile${step.key === 'map-guide' ? ' tour-callout--docked-mobile-lower' : ''}` : ` tour-callout--docked-desktop${step.key === 'map-guide' ? ' tour-callout--docked-desktop-lower' : ''}`}`}>
         <div className="tour-callout-step">{currentNumber} / {totalSteps}</div>
         <div className="tour-callout-title">{step.title}</div>
         <p className="tour-callout-body">{step.body}</p>
