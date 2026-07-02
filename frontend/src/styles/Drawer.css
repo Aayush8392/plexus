@@ -147,6 +147,11 @@
   flex-shrink: 0;
 }
 
+.drawer-tabs-buttons {
+  display: flex;
+  align-items: center;
+}
+
 .drawer-compare-btn {
   margin-left: auto;
   padding: 3px var(--space-sm);

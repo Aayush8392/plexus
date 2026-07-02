@@ -82,7 +82,7 @@ function SectionRoleHeader({ pf, seniorityProfiles, layoutNode }) {
               <span key={s} className="chip chip--sig">{s}</span>
             ))}
           </div>
-          <span className="drawer-sig-caption">Rare market-wide, common in this role</span>
+          <span className="drawer-sig-caption">What sets this role apart: skills rarely seen elsewhere, common here</span>
         </div>
       )}
 
@@ -184,7 +184,7 @@ function SectionSeniority({ drawerData }) {
     <Section>
       <div className="drawer-section-title">Seniority spread</div>
       <p className="drawer-section-subtitle">
-        How many job postings asked for each experience level. Shows whether this role skews junior, mid-level, or senior in practice.
+        Each bar is how many job postings asked for that many years of experience. Together they show whether this role tends to be junior-heavy, mid-level, or senior-skewed in practice.
       </p>
       <div className="drawer-seniority-chart">
         <ResponsiveContainer width="100%" height={110}>
@@ -533,14 +533,13 @@ function EdgeDetail({ pf, selectedEdge, onNavigate, onClearEdge }) {
 // Drawer — main component
 // ═══════════════════════════════════════════════════════════════════════════════
 
-export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate, selectedEdge, onSelectEdge, onCompare }) {
+export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate, selectedEdge, onSelectEdge, onCompare, activeTab, setActiveTab }) {
   const [pf, setPf]                       = useState(null)
   const [drawerData, setDrawerData]       = useState(null)
   const [allDrawerData, setAllDrawerData] = useState(null)
   const [seniorityProfiles, setSeniorityProfiles] = useState(null)
   const [loading, setLoading]             = useState(true)
   const [error, setError]                 = useState(null)
-  const [activeTab, setActiveTab]         = useState('pathfinder')
 
   useEffect(() => {
     if (!nodeId) return
@@ -635,18 +634,20 @@ export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate
 
           {/* Tab bar + compare button */}
           <div className="drawer-tabs">
-            <button
-              className={`drawer-tab${activeTab === 'pathfinder' ? ' drawer-tab--active' : ''}`}
-              onClick={() => setActiveTab('pathfinder')}
-            >
-              Pathfinder
-            </button>
-            <button
-              className={`drawer-tab${activeTab === 'profile' ? ' drawer-tab--active' : ''}`}
-              onClick={() => setActiveTab('profile')}
-            >
-              Profile
-            </button>
+            <div id="drawer-tabs-bar" className="drawer-tabs-buttons">
+              <button
+                className={`drawer-tab${activeTab === 'pathfinder' ? ' drawer-tab--active' : ''}`}
+                onClick={() => setActiveTab('pathfinder')}
+              >
+                Pathfinder
+              </button>
+              <button
+                className={`drawer-tab${activeTab === 'profile' ? ' drawer-tab--active' : ''}`}
+                onClick={() => setActiveTab('profile')}
+              >
+                Profile
+              </button>
+            </div>
             {onCompare && (
               <button id="drawer-compare-btn" className="drawer-compare-btn" onClick={onCompare} aria-label="Compare with another role">
                 Compare with…
@@ -662,8 +663,6 @@ export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate
               <SectionOnward pf={pf} onNavigate={handleNavigate} />
               {(pf.onward_region?.length > 0 || pf.is_hub) && <div className="divider" />}
               <SectionBridgeSkills pf={pf} />
-              {pf.self_twin_id && <div className="divider" />}
-              <SectionTwoDialects pf={pf} layoutNodes={layoutNodes} drawerData={drawerData} />
             </>
           )}
 
@@ -673,6 +672,8 @@ export default function Drawer({ nodeId, layoutData, cvData, onClose, onNavigate
               <SectionWhoHiring drawerData={drawerData} stratum={pf.stratum} />
               {drawerData && <div className="divider" />}
               <SectionSeniority drawerData={drawerData} />
+              {pf.self_twin_id && <div className="divider" />}
+              <SectionTwoDialects pf={pf} layoutNodes={layoutNodes} drawerData={drawerData} />
             </>
           )}
 

@@ -21,9 +21,9 @@ export default function Screen1({ nav }) {
         <p className="s0-argument">
           Built from <strong>130,757 actual job ads</strong> collected from Naukri
           across 2019–2026. Every role, every skill extracted from real employer
-          demand — not estimated, not synthesized. The market is a continuous
-          spectrum of 22 canonical roles connected by skill-overlap, stratified
-          by employer-type. Every node below is real. So is every edge.
+          demand — not estimated, not synthesized. The market connects 22 roles
+          through shared skills, split into two markets by employer type.
+          Every node below is real. So is every edge.
         </p>
       </div>
 
@@ -57,9 +57,9 @@ export default function Screen1({ nav }) {
             <div className="s0-path-body">
               <h3 className="s0-path-title">Upload CV</h3>
               <p className="s0-path-desc">
-                CV analysis runs on TF-IDF vectors built from the full 130k corpus.
-                Your position is computed from market reality — not approximated
-                from language model memory.
+                Your CV is matched against real skill patterns from 130,000+ actual
+                job postings. Where you land on the map comes from real market
+                data — not a guess from an AI's training memory.
               </p>
             </div>
           </div>
@@ -68,9 +68,9 @@ export default function Screen1({ nav }) {
             <div className="s0-path-body">
               <h3 className="s0-path-title">Explore Freely</h3>
               <p className="s0-path-desc">
-                Interactive MDS map of all 22 roles and their skill-overlap
-                connections. See how the same title diverges structurally
-                across Services and GCCs.
+                An interactive map of all 22 roles, connected by how much their
+                skills overlap. See how the same job title actually looks
+                different at a services firm versus a GCC.
               </p>
             </div>
           </div>
@@ -79,9 +79,9 @@ export default function Screen1({ nav }) {
             <div className="s0-path-body">
               <h3 className="s0-path-title">Decode a Job Ad</h3>
               <p className="s0-path-desc">
-                Paste any job description to classify its stratum and find
-                structurally similar roles — see where it sits on the map
-                before you apply.
+                Paste any job description and we'll tell you whether it's a
+                services or GCC role, plus find similar roles on the map —
+                so you know what you're applying to.
               </p>
             </div>
           </div>

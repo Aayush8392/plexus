@@ -691,6 +691,7 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
   const [compareId, setCompareId]             = useState(null)
   const [comparePickMode, setComparePickMode] = useState(false)
   const [legendOpen, setLegendOpen]           = useState(false)
+  const [drawerTab, setDrawerTab]             = useState('pathfinder')
   const [tourGateOpen, setTourGateOpen]       = useState(false) // CV auto-pin waits for the tour's popup decision
   const [tourReplayToken, setTourReplayToken] = useState(0)
   const [cvBtnOffset, setCvBtnOffset]         = useState(null) // mobile: tracks the legend's real top edge
@@ -994,6 +995,8 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
           selectedEdge={selectedEdge}
           onSelectEdge={setSelectedEdge}
           onCompare={() => setComparePickMode(true)}
+          activeTab={drawerTab}
+          setActiveTab={setDrawerTab}
         />
       )}
 
@@ -1016,6 +1019,8 @@ export default function Screen3({ nav, confirmedRole, cvData, entryScreen }) {
         legendOpen={legendOpen}
         setLegendOpen={setLegendOpen}
         legendTargetId="graph-legend-tour-target"
+        drawerTab={drawerTab}
+        setDrawerTab={setDrawerTab}
         drawerOpen={drawerOpen}
         onGateOpen={() => setTourGateOpen(true)}
         replayToken={tourReplayToken}

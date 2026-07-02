@@ -2,7 +2,7 @@
 // Screen 3 onboarding tour. Centered popup → spotlight walkthrough.
 // "Click a node" is a click-through banner, not a numbered step (see
 // isFirstStep) — the numbered count starts at "Reading the lines" and runs
-// up to 8, minus whichever route-conditional steps this route lacks data
+// up to 9, minus whichever route-conditional steps this route lacks data
 // for (dialects needs a GCC twin, compare-cv needs CV data).
 // The popup and every numbered step are a fully blocking dimmed overlay;
 // "click a node" is click-through so the user can actually pin.
@@ -24,6 +24,12 @@ const STEPS = [
     body: "Solid lines link roles with similar skills. Dashed lines link the same job title at two different kinds of employers — an outsourcing firm (Services) versus a company's own in-house team (GCC). A gold ring means the in-house version.",
   },
   {
+    key: 'tabs',
+    title: 'Two views on this role',
+    body: "Pathfinder shows where this role can go — your doors, where they lead towards, and the skills to bridge that gap. Profile shows what this role typically looks like — who's hiring, the experience levels typical for it, and how it differs by employer type.",
+    targetId: 'drawer-tabs-bar',
+  },
+  {
     key: 'doors',
     title: 'Your doors',
     body: 'These are the roles this one can realistically move into, ranked by shared skills. The proximity tag — strong, moderate, or a stretch — shows how big a leap each move is.',
@@ -32,7 +38,7 @@ const STEPS = [
   {
     key: 'onward',
     title: 'Where this opens toward',
-    body: "Two steps out — the roles that open up after taking one of your doors. Shown at equal weight; the data doesn't support ranking them.",
+    body: "This shows the roles that open up after taking one of your doors — ranked equally when there's a real next step, or a note that this one connects too broadly to narrow down.",
     targetId: 'drawer-section-onward',
   },
   {
@@ -83,6 +89,8 @@ export default function TutorialTour({
   legendOpen,
   setLegendOpen,
   legendTargetId,
+  drawerTab,
+  setDrawerTab,
   drawerOpen,
   onGateOpen,
   replayToken,
@@ -92,6 +100,7 @@ export default function TutorialTour({
   const [rect, setRect]           = useState(null)
   const [isMobilePortrait, setIsMobilePortrait] = useState(window.innerWidth <= 680)
   const prevLegendOpen = useRef(false)
+  const prevDrawerTab  = useRef('pathfinder')
   const gateOpenedRef  = useRef(false)
 
   const openGate = useCallback(() => {
@@ -131,13 +140,17 @@ export default function TutorialTour({
     localStorage.setItem(STORAGE_KEY, '1')
     setPhase(null)
     setLegendOpen(prevLegendOpen.current)
+    setDrawerTab(prevDrawerTab.current)
     openGate()
     // The tour scrolls the drawer through several sections — leave it as
     // found (top) rather than wherever the last step left it.
     document.querySelector('.drawer-content')?.scrollTo({ top: 0, behavior: 'auto' })
-  }, [setLegendOpen, openGate])
+  }, [setLegendOpen, setDrawerTab, openGate])
 
   function startTour() {
+    // Capture whatever tab the drawer happens to be on before the tour starts
+    // forcing it — same restore-on-exit pattern as prevLegendOpen.
+    prevDrawerTab.current = drawerTab
     // Use hasCv, not pinnedId — the CV-path pin only fires once openGate() runs
     // (below, same tick), so pinnedId is still null here even on the CV path.
     setStepIndex(hasCv ? 1 : 0)
@@ -161,6 +174,17 @@ export default function TutorialTour({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [phase, stepIndex])
+
+  // Force the drawer to whichever tab holds the current step's target —
+  // doors/onward/bridge live under Pathfinder, dialects lives under Profile.
+  // Same force-then-restore idea as the legend: restore happens in exitTour.
+  useEffect(() => {
+    if (phase !== 'stepping') return
+    const step = STEPS[stepIndex]
+    if (!step) return
+    if (step.key === 'dialects') setDrawerTab('profile')
+    else if (step.key === 'doors' || step.key === 'onward' || step.key === 'bridge') setDrawerTab('pathfinder')
+  }, [phase, stepIndex, setDrawerTab])
 
   // Skip any route-conditional step the current route doesn't have data for
   // (dialects with no GCC twin, compare-cv with no CV). If skipping would run
@@ -246,7 +270,11 @@ export default function TutorialTour({
     // legend in its pre-shift position. legendOpen is a dependency for the
     // same reason: forcing it open round-trips through the parent, so the
     // very first measurement can land before the panel actually expands.
-  }, [phase, stepIndex, legendTargetId, drawerOpen, legendOpen])
+    // drawerTab is a dependency for the same reason again — forcing a tab
+    // switch round-trips through Drawer's own state, so doors/onward/bridge
+    // (Pathfinder) or dialects (Profile) may not exist in the DOM yet on the
+    // very first measurement after the tab-forcing effect above fires.
+  }, [phase, stepIndex, legendTargetId, drawerOpen, legendOpen, drawerTab])
 
   // Esc = skip, while a step or the popup is showing
   useEffect(() => {
